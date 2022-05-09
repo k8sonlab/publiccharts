@@ -1,0 +1,141 @@
+backend:
+  replicaCount: 1
+  annotations: {}
+  image:
+    repository: reallibrephotos/librephotos
+  resources:
+    limits:
+      cpu: 4000m
+      memory: 8Gi
+    requests:
+      cpu: 10m
+      memory: 50Mi
+  env:
+    DEBUG: "0"
+    HEAVYWEIGHT_PROCESS: "2"
+    SKIP_PATTERNS: ""
+    WEB_CONCURRENCY: "4"
+    DB_BACKEND: "postgresql"
+    ALLOW_UPLOAD: "false"
+  envTemplates:
+    redisPort: "{{ .Values.redis.master.containerPorts.redis }}"
+    dbName: "{{ .Values.postgresql.auth.database }}"
+    dbPort: "{{ .Values.postgresql.containerPorts.postgresql }}"
+    dbUser: "{{ .Values.postgresql.auth.database }}"
+  healthchecks:
+    livenessProbe:
+      tcpSocket:
+        port: 8001
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    readinessProbe:
+      tcpSocket:
+        port: 8001
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    startupProbe:
+      tcpSocket:
+        port: 8001
+      initialDelaySeconds: 10
+      failureThreshold: 60
+      timeoutSeconds: 2
+      periodSeconds: 5
+frontend:
+  replicaCount: 1
+  annotations: {}
+  image:
+    repository: reallibrephotos/librephotos-frontend
+proxy:
+  replicaCount: 1
+  annotations: {}
+  image:
+    repository: reallibrephotos/librephotos-proxy
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+service:
+  backend:
+    type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: 8001
+        protocol: TCP
+        name: backend
+    annotations: {}
+  frontend:
+    type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: 3000
+        protocol: TCP
+        name: backend
+    annotations: {}
+  proxy:
+    type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: 80
+        protocol: TCP
+        name: backend
+    annotations: {}
+
+secret:
+  ADMIN_EMAIL: "admin@mydomain.com"
+  ADMIN_USERNAME: "admin"
+  ADMIN_PASSWORD: "password"
+  MAPBOX_API_KEY: ""
+
+nameOverride: ""
+fullnameOverride: ""
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    add: []
+    drop: []
+  privileged: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hostname: ""
+
+dataVolume:
+  size: 100Gi
+  accessModes: 
+   - "ReadWriteOnce"
+volumes:
+  - name: shared
+    emptyDir:
+      {}
+  - name: temp
+    emptyDir:
+      medium: Memory
+  - name: varlogs
+    emptyDir:
+      {}
+
+extraVolumes:
+
+extraVolumeMounts:
+
+# Postgresql
+postgresql:
+  auth:
+    username: librephotos
+    database: librephotos
+redis:
+  architecture: standalone
+  master:
+    disableCommands:
+      - FLUSHALL

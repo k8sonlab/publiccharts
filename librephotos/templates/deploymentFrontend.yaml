@@ -1,0 +1,43 @@
+{{ $resourceName := .Release.Name }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $resourceName }}-frontend
+  labels:
+    {{- include "labels" .| nindent 4 }}
+  annotations:
+    {{- toYaml .Values.frontend.annotations | nindent 4 }}
+spec:
+  revisionHistoryLimit: 3
+  replicas: {{ .Values.frontend.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: frontend
+      {{- include "labels.selectorLabels" .| nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- toYaml .Values.frontend.annotations | nindent 8 }}
+      labels:
+        app.kubernetes.io/app: frontend
+        {{- include "labels.selectorLabels" .| nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: frontend
+          image: "{{ .Values.frontend.image.repository }}:{{ default .Chart.AppVersion .Values.frontend.image.tag }}"
+          imagePullPolicy: {{ default "IfNotPresent" .Values.frontend.image.pullPolicy }}
+          tty: false
+          stdin: false
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: frontend
+              containerPort: 3000
+              protocol: TCP
+          {{- if .Values.frontend.resources }}
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
+          {{- end }}

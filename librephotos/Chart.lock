@@ -1,0 +1,9 @@
+dependencies:
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 11.1.28
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.9.0
+digest: sha256:ab475d787cd92f2a13a22e401e46832b40886d999baed1e8bc0236258c33931c
+generated: "2022-05-08T22:30:20.716104+02:00"

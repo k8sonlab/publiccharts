@@ -1,0 +1,115 @@
+{{- $resourceName := .Release.Name }}
+{{- $selectorLabels := include "labels.selectorLabels" . }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $resourceName }}-backend
+  labels:
+    app.kubernetes.io/app: backend
+    {{- include "labels" .| nindent 4 }}
+  annotations:
+    {{- toYaml .Values.backend.annotations | nindent 4 }}
+spec:
+  revisionHistoryLimit: 3
+  replicas: {{ .Values.backend.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: backend
+      {{-  $selectorLabels | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- toYaml .Values.backend.annotations | nindent 8 }}
+      labels:
+        app.kubernetes.io/app: backend
+        {{-  $selectorLabels | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: photos-librephotos
+          image: "{{ .Values.backend.image.repository }}:{{ default .Chart.AppVersion .Values.backend.image.tag }}"
+          imagePullPolicy: {{ default "IfNotPresent" .Values.backend.image.pullPolicy }}
+          tty: false
+          stdin: false
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          env:
+            - name: "BACKEND_HOST"
+              value: "{{ $resourceName }}-backend"
+            {{- range $k, $v := .Values.backend.env }}
+            - name: "{{ $k }}"
+              value: "{{ $v }}"
+            {{- end }}
+            - name: "REDIS_PORT"
+              value: {{ tpl .Values.backend.envTemplates.redisPort . | quote }}
+            - name: "DB_NAME"
+              value: {{ tpl .Values.backend.envTemplates.dbName . }}
+            - name: "DB_PORT"
+              value: {{ tpl .Values.backend.envTemplates.dbPort . | quote }}
+            - name: "DB_USER"
+              value: {{ tpl .Values.backend.envTemplates.dbUser . }}
+            - name: DB_HOST
+              value: {{ $resourceName }}-postgresql
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $resourceName }}-postgresql
+                  key: "password"
+            - name: REDIS_HOST
+              value: {{ $resourceName }}-redis-master
+            - name: REDIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $resourceName }}-redis
+                  key: "redis-password"
+          envFrom:
+            - secretRef:
+                name: "{{ $resourceName }}-secrets"
+            - secretRef:
+                name: "{{ $resourceName }}-creds"
+          ports:
+            - name: backend
+              containerPort: 8001
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /root/.cache
+              name: data
+              subPath: cache
+            - mountPath: /etc/nginx/nginx.conf
+              name: config
+              readOnly: true
+              subPath: nginx-config
+            - mountPath: /logs
+              name: data
+              subPath: logs
+            - mountPath: /data
+              name: data
+              subPath: data
+            - mountPath: /protected_media
+              name: data
+              subPath: protected-media
+            - mountPath: /shared
+              name: data
+              subPath: shared
+            - mountPath: /tmp
+              name: temp
+            - mountPath: /var/logs
+              name: varlogs
+            {{- if .Values.extraVolumeMounts }}{{- toYaml .Values.extraVolumeMounts | nindent 12 }}{{- end }}
+          {{- toYaml .Values.backend.healthchecks | nindent 10 }}
+          {{- if .Values.backend.resources }}
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+          {{- end }}
+      volumes:
+        {{- toYaml .Values.volumes | nindent 8 }}
+        - name: config
+          configMap:
+            defaultMode: 420
+            name: {{ $resourceName }}-nginx-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ $resourceName }}
+        {{- if .Values.extraVolumes }}{{- toYaml .Values.extraVolumes | nindent 8 }}{{- end}}

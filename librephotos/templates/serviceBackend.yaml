@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-backend
+  labels:
+    {{- include "labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.service.backend.annotations | nindent 4 }}
+spec:
+  type: {{ .Values.service.backend.type }}
+  ports:
+  {{- toYaml .Values.service.backend.ports | nindent 4 }}
+  selector:
+    app.kubernetes.io/app: backend
+    {{- include "labels.selectorLabels" . | nindent 4 }}
