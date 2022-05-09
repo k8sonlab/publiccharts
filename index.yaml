@@ -1,0 +1,20 @@
+apiVersion: v1
+entries:
+  librephotos:
+  - apiVersion: v2
+    appVersion: 2022w15
+    created: "2022-05-09T09:10:00.8589621Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: => 11.0.0
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: => 16.0.0
+    description: LibrePhotos Chart
+    digest: 08894fd14d2e0896ecfdb11f7cd0547217276ab2016aa1b9b384be9394f90fcb
+    name: librephotos
+    urls:
+    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.2.3/librephotos-0.2.3.tgz
+    version: 0.2.3
+generated: "2022-05-09T09:10:00.858975101Z"
