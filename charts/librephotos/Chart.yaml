@@ -10,7 +10,8 @@ keywords:
 - photos
 - librephotos
 maintainers:
-- name: varet
+- name: Vassilis Aretakis
+  e-mail: v.aretakis@gmail.com
   url: https://github.com/varet80
 sources:
  - https://github.com/LibrePhotos/librephotos
