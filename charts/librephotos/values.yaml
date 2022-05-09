@@ -1,7 +1,11 @@
+# -- Configurationf or the Backend services
 backend:
+  # -- Replica counts
   replicaCount: 1
+  # -- Annotations
   annotations: {}
   image:
+    # -- Repository and image name
     repository: reallibrephotos/librephotos
   resources:
     limits:
@@ -18,9 +22,13 @@ backend:
     DB_BACKEND: "postgresql"
     ALLOW_UPLOAD: "false"
   envTemplates:
+    # -- redis port retrieved by parent helm chart
     redisPort: "{{ .Values.redis.master.containerPorts.redis }}"
+    # -- Postgresql DB Name
     dbName: "{{ .Values.postgresql.auth.database }}"
+    # -- Postgresql DB port
     dbPort: "{{ .Values.postgresql.containerPorts.postgresql }}"
+    # -- Postgresql DB password
     dbUser: "{{ .Values.postgresql.auth.database }}"
   healthchecks:
     livenessProbe:
@@ -44,6 +52,7 @@ backend:
       failureThreshold: 60
       timeoutSeconds: 2
       periodSeconds: 5
+
 frontend:
   replicaCount: 1
   annotations: {}
@@ -105,36 +114,51 @@ securityContext:
   runAsNonRoot: false
 
 ingress:
+  # -- enable ingress 
   enabled: false
-  className: ""
   annotations: {}
+  # -- currently only hotsname is needed for ingress
   hostname: ""
 
 dataVolume:
+  # -- Size of the volume to be created (data)
   size: 100Gi
+  # -- Access mode of volume
   accessModes: 
    - "ReadWriteOnce"
+  # -- Storage class of data volume
+  stroageClass: ""
+# to be refactored
 volumes:
+  # -- Shared volume, as emptyDir
   - name: shared
     emptyDir:
       {}
+  # -- temporary folder in Memory
   - name: temp
     emptyDir:
       medium: Memory
+  # -- logs in emptyDir
   - name: varlogs
     emptyDir:
       {}
 
+# -- You can define extra volumes, in the typical K8s syntax (Only in backend)
 extraVolumes:
 
+# -- You can define extra volume mounts, in the typical K8s syntax (Only in backend)
 extraVolumeMounts:
 
 # Postgresql
 postgresql:
+  # -- install bitnami postgresql
+  enabled: true
   auth:
     username: librephotos
     database: librephotos
 redis:
+  # -- install bitnami redis
+  enabled: true
   architecture: standalone
   master:
     disableCommands:
