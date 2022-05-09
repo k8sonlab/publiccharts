@@ -10,7 +10,7 @@ Helmchart used to install Librephotos in a microservice manner
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Varet80 |  | <https://github.com/varet80> |
+| varet |  | <https://github.com/varet80> |
 
 ## Source Code
 
