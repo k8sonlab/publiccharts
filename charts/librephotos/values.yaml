@@ -156,8 +156,10 @@ cronjob:
     failedJobsHistoryLimit: 10
     # -- keep 5 successful jobs for log parsing.
     successfulJobHistoryLimit: 5
-    image: IfNotPresent
-    kubernetesVersion: "1.22.6"
+    image:
+      imagePullPolicy: IfNotPresent
+      # -- Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags
+      kubernetesVersion: "1.22.6"
 
 nameOverride: ""
 fullnameOverride: ""

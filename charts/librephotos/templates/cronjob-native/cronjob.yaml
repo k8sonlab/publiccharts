@@ -1,19 +1,20 @@
-{{- if eq .cronjob.type "native" }}
+{{- if eq .Values.cronjob.type "native" }}
+{{ $localTree := .Values.cronjob.native }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "names.name" }}-scan-cron
+  name: {{ include "names.name" . }}-scan-cron
   labels:
     app.kubernetes.io/app: scan-cron
     {{- include "names.name" . | nindent 4 }}
   annotations:
-    {{- toYaml .Values.cronjob.native.annotations | indent 4 }}
+    {{- toYaml $localTree.annotations | indent 4 }}
 spec:
-  schedule: "{{ .Values.cronjob.native.schedule }}"
-  concurrencyPolicy: {{ .Values.cronjob.native.concurrencyPolicy }}
-  suspend: {{ .Values.cronjob.native.suspend }}
-  failedJobsHistoryLimit: {{ .Values.cronjob.native.failedJobsHistoryLimit }}
-  successfulJobsHistoryLimit: {{ .Values.cronjob.native.successfulJobsHistoryLimit }}
+  schedule: "{{ $localTree.schedule }}"
+  concurrencyPolicy: {{ $localTree.concurrencyPolicy }}
+  suspend: {{ $localTree.suspend }}
+  failedJobsHistoryLimit: {{ $localTree.failedJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ $localTree.successfulJobsHistoryLimit }}
   jobTemplate:
     metadata:
       labels:
@@ -29,8 +30,8 @@ spec:
           restartPolicy: Never
           containers:
             - name: {{ .Chart.Name }}
-              image: alpine/k8s:{{ .Values.cronjob.native.image.kubernetesVersion }}
-              imagePullPolicy: {{ .Values.cronjob.native.image.pullPolicy }}
+              image: alpine/k8s:{{ $localTree.image.kubernetesVersion }}
+              imagePullPolicy: {{ $localTree.image.pullPolicy }}
               volumeMounts:
               - name: backend-cj-script
                 mountPath: /opt
