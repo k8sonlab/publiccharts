@@ -4,6 +4,7 @@ backend:
   replicaCount: 1
   # -- Annotations
   annotations: {}
+  strategyType: Recreate
   image:
     # -- Repository and image name
     repository: reallibrephotos/librephotos
@@ -54,6 +55,7 @@ backend:
 
 frontend:
   replicaCount: 1
+  strategyType: RollingUpdate
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-frontend
@@ -81,29 +83,27 @@ frontend:
       periodSeconds: 5
 proxy:
   replicaCount: 1
+  strategyType: RollingUpdate
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-proxy
   healthchecks:
     livenessProbe:
-      httpGet:
-        path: /protected_media/
+      tcpSocket:
         port: 80 
       initialDelaySeconds: 10
       failureThreshold: 5
       timeoutSeconds: 5
       periodSeconds: 60
     readinessProbe:
-      httpGet:
-        path: /protected_media/
+      tcpSocker:
         port: 80 
       initialDelaySeconds: 10
       failureThreshold: 5
       timeoutSeconds: 5
       periodSeconds: 60
     startupProbe:
-      httpGet:
-        path: /protected_media/
+      tcpSocket:
         port: 80 
       initialDelaySeconds: 10
       failureThreshold: 60
