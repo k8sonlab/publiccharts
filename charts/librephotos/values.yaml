@@ -4,7 +4,7 @@ backend:
   replicaCount: 1
   # -- Annotations
   annotations: {}
-  strategyType: Recreate
+  updateStrategy: Recreate
   image:
     # -- Repository and image name
     repository: reallibrephotos/librephotos
@@ -55,7 +55,7 @@ backend:
 
 frontend:
   replicaCount: 1
-  strategyType: RollingUpdate
+  updateStrategy: RollingUpdate
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-frontend
@@ -83,7 +83,7 @@ frontend:
       periodSeconds: 5
 proxy:
   replicaCount: 1
-  strategyType: RollingUpdate
+  updateStrategy: RollingUpdate
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-proxy
