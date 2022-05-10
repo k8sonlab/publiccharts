@@ -1,5 +1,5 @@
 {{ $resourceName := .Release.Name }}
-{{ localTree := .Values.proxy }}
+{{ $localTree := .Values.proxy }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -12,7 +12,7 @@ spec:
   revisionHistoryLimit: 3
   replicas: {{ $localTree.replicaCount }}
   strategy:
-    type: {{ $localValues.updateStrategyType }}
+    type: {{ $localTree.updateStrategyType }}
   selector:
     matchLabels:
       app.kubernetes.io/app: proxy
