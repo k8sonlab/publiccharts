@@ -6,9 +6,9 @@ metadata:
   name: {{ include "names.name" . }}-scan-cron
   labels:
     app.kubernetes.io/app: scan-cron
-    {{- include "names.name" . | nindent 4 }}
+    {{- include "labels" . | nindent 4 }}
   annotations:
-    {{- toYaml $localTree.annotations | indent 4 }}
+    {{ toYaml $localTree.annotations | indent 4 }}
 spec:
   schedule: "{{ $localTree.schedule }}"
   concurrencyPolicy: {{ $localTree.concurrencyPolicy }}
@@ -19,13 +19,13 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/app: scan-cron
-        {{- include "names.name" . | nindent 8 }}
+        {{- include "labels.selectorLabels" . | nindent 8 }}
     spec:
       template:
         metadata:
           labels:
             app.kubernetes.io/app: scan-cron
-            {{- include "names.name" . | nindent 12 }}
+            {{- include "labels.selectorLabels" . | nindent 12 }}
         spec:
           restartPolicy: Never
           containers:
