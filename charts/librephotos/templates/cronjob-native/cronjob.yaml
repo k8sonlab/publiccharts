@@ -36,7 +36,7 @@ spec:
               - name: backend-cj-script
                 mountPath: /opt
               command:  [ "/bin/sh", "/opt/cronjob.sh"]
-          serviceAccountName: nextcloud-cron
+          serviceAccountName: {{ .Release.Name }}-scan-cron
           volumes:
           - name: backend-cj-script
             configMap:
