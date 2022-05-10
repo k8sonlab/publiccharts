@@ -1,0 +1,43 @@
+{{- if eq .cronjob.type "native" }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "names.name" }}-scan-cron
+  labels:
+    app.kubernetes.io/app: scan-cron
+    {{- include "names.name" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.cronjob.native.annotations | indent 4 }}
+spec:
+  schedule: "{{ .Values.cronjob.native.schedule }}"
+  concurrencyPolicy: {{ .Values.cronjob.native.concurrencyPolicy }}
+  suspend: {{ .Values.cronjob.native.suspend }}
+  failedJobsHistoryLimit: {{ .Values.cronjob.native.failedJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ .Values.cronjob.native.successfulJobsHistoryLimit }}
+  jobTemplate:
+    metadata:
+      labels:
+        app.kubernetes.io/app: scan-cron
+        {{- include "names.name" . | nindent 8 }}
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/app: scan-cron
+            {{- include "names.name" . | nindent 12 }}
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: {{ .Chart.Name }}
+              image: alpine/k8s:{{ .Values.cronjob.native.image.kubernetesVersion }}
+              imagePullPolicy: {{ .Values.cronjob.native.image.pullPolicy }}
+              volumeMounts:
+              - name: backend-cj-script
+                mountPath: /opt
+              command:  [ "/bin/sh", "/opt/cronjob.sh"]
+          serviceAccountName: nextcloud-cron
+          volumes:
+          - name: backend-cj-script
+            configMap:
+              name: {{ .Release.Name }}-scan-cron
+{{- end }}

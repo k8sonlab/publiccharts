@@ -1,0 +1,10 @@
+{{- if eq .cronjob.type "native" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "names.name" }}-scan-cron
+data:
+  cronjob.sh: |
+    POD=$(kubectl get pods -n nextcloud -l app.kubernetes.io/name={{ include "names.name" . }},app.kubernetes.io/instance={{ .Release.Name }},app.kubernetes.io/app=backend --no-headers -o custom-columns=NAME:.metadata.name |head)
+    kubectl exec $POD -ti -- /bin/sh -c "cd /code; python3 manage.py scan"
+{{- end }}

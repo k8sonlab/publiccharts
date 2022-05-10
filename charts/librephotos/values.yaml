@@ -9,7 +9,6 @@ backend:
     repository: reallibrephotos/librephotos
   resources:
     limits:
-      cpu: 4000m
       memory: 8Gi
     requests:
       cpu: 10m
@@ -58,16 +57,58 @@ frontend:
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-frontend
+  healthchecks:
+    livenessProbe:
+      tcpSocket:
+        port: 3000
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    readinessProbe:
+      tcpSocket:
+        port: 3000
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    startupProbe:
+      tcpSocket:
+        port: 3000
+      initialDelaySeconds: 10
+      failureThreshold: 60
+      timeoutSeconds: 2
+      periodSeconds: 5
 proxy:
   replicaCount: 1
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-proxy
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  healthchecks:
+    livenessProbe:
+      httpGet:
+        path: /protected_media/
+        port: 80 
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 60
+    readinessProbe:
+      httpGet:
+        path: /protected_media/
+        port: 80 
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 60
+    startupProbe:
+      httpGet:
+        path: /protected_media/
+        port: 80 
+      initialDelaySeconds: 10
+      failureThreshold: 60
+      timeoutSeconds: 2
+      periodSeconds: 5
 
 service:
   backend:
@@ -100,6 +141,23 @@ secret:
   ADMIN_USERNAME: "admin"
   ADMIN_PASSWORD: "password"
   MAPBOX_API_KEY: ""
+
+cronjob:
+  # -- Create a native kubernetes cronjob, using roles to access kubernetes exec and execute the python through a third party container. This is an Antipattern! but the only way, till another exists
+  type: native
+  native:
+    # -- Cronjob schedule
+    schedule: "0 * * * *"
+    # -- concurrency policy, Forbid as default, to avoid running two scans
+    concurrencyPolicy: Forbid
+    # -- suspension is enabled, to avoid scheduling waiting jobs while scan takes hours!
+    suspend: true
+    # -- keep 10 jobs for log parsing (if they fail
+    failedJobsHistoryLimit: 10
+    # -- keep 5 successful jobs for log parsing.
+    successfulJobHistoryLimit: 5
+    image: IfNotPresent
+    kubernetesVersion: "1.22.6"
 
 nameOverride: ""
 fullnameOverride: ""
