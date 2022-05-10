@@ -1,4 +1,5 @@
 {{ $resourceName := .Release.Name }}
+{{ $localTree := .Values.frontend }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,12 +7,12 @@ metadata:
   labels:
     {{- include "labels" .| nindent 4 }}
   annotations:
-    {{- toYaml .Values.frontend.annotations | nindent 4 }}
+    {{- toYaml $localTree.annotations | nindent 4 }}
 spec:
   revisionHistoryLimit: 3
-  replicas: {{ .Values.frontend.replicaCount }}
+  replicas: {{ $localTree.replicaCount }}
   strategy:
-    type: Recreate
+    type: {{ $localTree.updateStrategyType }}
   selector:
     matchLabels:
       app.kubernetes.io/app: frontend
@@ -19,7 +20,7 @@ spec:
   template:
     metadata:
       annotations:
-        {{- toYaml .Values.frontend.annotations | nindent 8 }}
+        {{- toYaml $localTree.annotations | nindent 8 }}
       labels:
         app.kubernetes.io/app: frontend
         {{- include "labels.selectorLabels" .| nindent 8 }}
@@ -27,17 +28,18 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: frontend
-          image: "{{ .Values.frontend.image.repository }}:{{ default .Chart.AppVersion .Values.frontend.image.tag }}"
-          imagePullPolicy: {{ default "IfNotPresent" .Values.frontend.image.pullPolicy }}
+          image: "{{ $localTree.image.repository }}:{{ default .Chart.AppVersion $localTree.image.tag }}"
+          imagePullPolicy: {{ default "IfNotPresent" $localTree.image.pullPolicy }}
           tty: false
           stdin: false
+          {{- toYaml $localTree.healthchecks | nindent 10 }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           ports:
             - name: frontend
               containerPort: 3000
               protocol: TCP
-          {{- if .Values.frontend.resources }}
+          {{- if $localTree.resources }}
           resources:
-            {{- toYaml .Values.frontend.resources | nindent 12 }}
+            {{- toYaml $localTree.resources | nindent 12 }}
           {{- end }}
