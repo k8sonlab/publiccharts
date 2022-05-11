@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202215.2](https://img.shields.io/badge/Version-0.202215.2-informational?style=flat-square) ![AppVersion: 2022w15](https://img.shields.io/badge/AppVersion-2022w15-informational?style=flat-square)
+![Version: 0.202215.3](https://img.shields.io/badge/Version-0.202215.3-informational?style=flat-square) ![AppVersion: 2022w15](https://img.shields.io/badge/AppVersion-2022w15-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
