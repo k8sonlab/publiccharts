@@ -85,9 +85,10 @@ Kubernetes: `>=1.21.0-0`
 | proxy.healthchecks.livenessProbe.tcpSocket.port | int | `80` |  |
 | proxy.healthchecks.livenessProbe.timeoutSeconds | int | `5` |  |
 | proxy.healthchecks.readinessProbe.failureThreshold | int | `5` |  |
+| proxy.healthchecks.readinessProbe.httpGet.path | string | `"/"` |  |
+| proxy.healthchecks.readinessProbe.httpGet.port | int | `80` |  |
 | proxy.healthchecks.readinessProbe.initialDelaySeconds | int | `10` |  |
 | proxy.healthchecks.readinessProbe.periodSeconds | int | `60` |  |
-| proxy.healthchecks.readinessProbe.tcpSocket.port | int | `80` |  |
 | proxy.healthchecks.readinessProbe.timeoutSeconds | int | `5` |  |
 | proxy.healthchecks.startupProbe.failureThreshold | int | `60` |  |
 | proxy.healthchecks.startupProbe.initialDelaySeconds | int | `10` |  |
