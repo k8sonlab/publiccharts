@@ -4,7 +4,7 @@ backend:
   replicaCount: 1
   # -- Annotations
   annotations: {}
-  updateStrategy: Recreate
+  updateStrategyType: Recreate
   image:
     # -- Repository and image name
     repository: reallibrephotos/librephotos
@@ -55,7 +55,7 @@ backend:
 
 frontend:
   replicaCount: 1
-  updateStrategy: RollingUpdate
+  updateStrategyType: RollingUpdate
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-frontend
@@ -83,7 +83,7 @@ frontend:
       periodSeconds: 5
 proxy:
   replicaCount: 1
-  updateStrategy: RollingUpdate
+  updateStrategyType: RollingUpdate
   annotations: {}
   image:
     repository: reallibrephotos/librephotos-proxy
@@ -96,7 +96,8 @@ proxy:
       timeoutSeconds: 5
       periodSeconds: 60
     readinessProbe:
-      tcpSocket:
+      httpGet:
+        path: /
         port: 80 
       initialDelaySeconds: 10
       failureThreshold: 5
@@ -152,8 +153,6 @@ cronjob:
     schedule: "0 * * * *"
     # -- concurrency policy, Forbid as default, to avoid running two scans
     concurrencyPolicy: Forbid
-    # -- suspension is enabled, to avoid scheduling waiting jobs while scan takes hours!
-    suspend: true
     # -- keep 10 jobs for log parsing (if they fail
     failedJobsHistoryLimit: 10
     # -- keep 5 successful jobs for log parsing.

@@ -28,6 +28,14 @@ spec:
         {{-  $selectorLabels | nindent 8 }}
     spec:
       terminationGracePeriodSeconds: 30
+      {{- if .Values.postgresql.enabled }}
+      initContainers:
+      - name: check-postgres-ready
+        image: postgres:9.6.5
+        command: ['sh', '-c', 
+          'until pg_isready -h {{ $resourceName }}-postgresql -p 5432; 
+          do echo waiting for database; sleep 2; done;']
+      {{- end }}
       containers:
         - name: photos-librephotos
           image: "{{ $localTree.image.repository }}:{{ default .Chart.AppVersion $localTree.image.tag }}"

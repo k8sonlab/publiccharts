@@ -12,7 +12,6 @@ metadata:
 spec:
   schedule: "{{ $localTree.schedule }}"
   concurrencyPolicy: {{ $localTree.concurrencyPolicy }}
-  suspend: {{ $localTree.suspend }}
   failedJobsHistoryLimit: {{ $localTree.failedJobsHistoryLimit }}
   successfulJobsHistoryLimit: {{ $localTree.successfulJobsHistoryLimit }}
   jobTemplate:
