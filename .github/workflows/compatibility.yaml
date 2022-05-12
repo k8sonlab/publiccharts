@@ -36,5 +36,6 @@ jobs:
         run: |
           for chart in $(ls -b charts/); do
             helm dependency update charts/${chart}
-            helm template charts/${chart} | pluto detect --ignore-deprecations --target-versions k8s=v1.23.0 -
+            helm template charts/${chart} | pluto detect --target-versions k8s=v1.23.0 -
+            #helm template charts/${chart} | pluto detect --ignore-deprecations --target-versions k8s=v1.23.0 -
           done
