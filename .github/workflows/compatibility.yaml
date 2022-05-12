@@ -1,0 +1,40 @@
+name: Release Charts
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+
+      - name: Download Pluto
+        uses: FairwindsOps/pluto/github-action@master
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.8.1
+
+      - name: Add repos
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+
+      - name: Check compatibility
+        run: |
+          for chart in $(ls -b charts/); do
+            helm dependency upddate charts/${chart}
+            helm template charts/${chart} | pluto detect --ignore-deprecations --target-versions k8s=v1.16.0 -
+          done
