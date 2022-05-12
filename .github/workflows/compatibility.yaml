@@ -1,7 +1,6 @@
-name: Release Charts
+name: Compatibility
 
 on:
-  push:
   pull_request:
     branches:
       - main
