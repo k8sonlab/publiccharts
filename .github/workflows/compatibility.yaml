@@ -35,6 +35,6 @@ jobs:
       - name: Check compatibility
         run: |
           for chart in $(ls -b charts/); do
-            helm dependency upddate charts/${chart}
+            helm dependency update charts/${chart}
             helm template charts/${chart} | pluto detect --ignore-deprecations --target-versions k8s=v1.16.0 -
           done
