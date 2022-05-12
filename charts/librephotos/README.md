@@ -30,14 +30,38 @@ Kubernetes: `>=1.21.0-0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| backend | object | `{"annotations":{},"env":{"ALLOW_UPLOAD":"false","DB_BACKEND":"postgresql","DEBUG":"0","HEAVYWEIGHT_PROCESS":"2","SKIP_PATTERNS":"","WEB_CONCURRENCY":"4"},"envTemplates":{"dbName":"{{ .Values.postgresql.auth.database }}","dbPort":"{{ .Values.postgresql.containerPorts.postgresql }}","dbUser":"{{ .Values.postgresql.auth.database }}","redisPort":"{{ .Values.redis.master.containerPorts.redis }}"},"healthchecks":{"livenessProbe":{"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":120,"tcpSocket":{"port":8001},"timeoutSeconds":5},"readinessProbe":{"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":120,"tcpSocket":{"port":8001},"timeoutSeconds":5},"startupProbe":{"failureThreshold":60,"initialDelaySeconds":10,"periodSeconds":5,"tcpSocket":{"port":8001},"timeoutSeconds":2}},"image":{"repository":"reallibrephotos/librephotos"},"replicaCount":1,"resources":{"limits":{"memory":"8Gi"},"requests":{"cpu":"10m","memory":"50Mi"}},"updateStrategyType":"Recreate"}` | Configurationf or the Backend services |
 | backend.annotations | object | `{}` | Annotations |
+| backend.env.ALLOW_UPLOAD | string | `"false"` |  |
+| backend.env.DB_BACKEND | string | `"postgresql"` |  |
+| backend.env.DEBUG | string | `"0"` |  |
+| backend.env.HEAVYWEIGHT_PROCESS | string | `"2"` |  |
+| backend.env.SKIP_PATTERNS | string | `""` |  |
+| backend.env.WEB_CONCURRENCY | string | `"4"` |  |
 | backend.envTemplates.dbName | string | `"{{ .Values.postgresql.auth.database }}"` | Postgresql DB Name |
 | backend.envTemplates.dbPort | string | `"{{ .Values.postgresql.containerPorts.postgresql }}"` | Postgresql DB port |
 | backend.envTemplates.dbUser | string | `"{{ .Values.postgresql.auth.database }}"` | Postgresql DB password |
 | backend.envTemplates.redisPort | string | `"{{ .Values.redis.master.containerPorts.redis }}"` | redis port retrieved by parent helm chart |
+| backend.healthchecks.livenessProbe.failureThreshold | int | `5` |  |
+| backend.healthchecks.livenessProbe.initialDelaySeconds | int | `10` |  |
+| backend.healthchecks.livenessProbe.periodSeconds | int | `120` |  |
+| backend.healthchecks.livenessProbe.tcpSocket.port | int | `8001` |  |
+| backend.healthchecks.livenessProbe.timeoutSeconds | int | `5` |  |
+| backend.healthchecks.readinessProbe.failureThreshold | int | `5` |  |
+| backend.healthchecks.readinessProbe.initialDelaySeconds | int | `10` |  |
+| backend.healthchecks.readinessProbe.periodSeconds | int | `120` |  |
+| backend.healthchecks.readinessProbe.tcpSocket.port | int | `8001` |  |
+| backend.healthchecks.readinessProbe.timeoutSeconds | int | `5` |  |
+| backend.healthchecks.startupProbe.failureThreshold | int | `60` |  |
+| backend.healthchecks.startupProbe.initialDelaySeconds | int | `10` |  |
+| backend.healthchecks.startupProbe.periodSeconds | int | `5` |  |
+| backend.healthchecks.startupProbe.tcpSocket.port | int | `8001` |  |
+| backend.healthchecks.startupProbe.timeoutSeconds | int | `2` |  |
 | backend.image.repository | string | `"reallibrephotos/librephotos"` | Repository and image name |
 | backend.replicaCount | int | `1` | Replica counts |
+| backend.resources.limits.memory | string | `"8Gi"` |  |
+| backend.resources.requests.cpu | string | `"10m"` |  |
+| backend.resources.requests.memory | string | `"50Mi"` |  |
+| backend.updateStrategyType | string | `"Recreate"` | Using recreate strategy, as this helps to run only one container at a time |
 | cronjob.native.annotations | object | `{}` | Annotations for the cronjog |
 | cronjob.native.concurrencyPolicy | string | `"Forbid"` | concurrency policy, Forbid as default, to avoid running two scans |
 | cronjob.native.failedJobsHistoryLimit | int | `10` | keep 10 jobs for log parsing (if they fail |

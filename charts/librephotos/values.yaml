@@ -1,9 +1,9 @@
-# -- Configurationf or the Backend services
 backend:
   # -- Replica counts
   replicaCount: 1
   # -- Annotations
   annotations: {}
+  # -- Using recreate strategy, as this helps to run only one container at a time
   updateStrategyType: Recreate
   image:
     # -- Repository and image name
