@@ -53,6 +53,7 @@ spec:
             - mountPath: /protected_media
               name: data
               subPath: protected-media
+            {{- if .Values.extraVolumeMounts }}{{- toYaml .Values.extraVolumeMounts | nindent 12 }}{{- end }}
           {{- if $localTree.resources }}
           resources:
             {{- toYaml $localTree.resources | nindent 12 }}
@@ -65,3 +66,4 @@ spec:
           configMap:
             defaultMode: 420
             name: {{ $resourceName }}-nginx-config
+        {{- if .Values.extraVolumes }}{{- toYaml .Values.extraVolumes | nindent 8 }}{{- end}}
