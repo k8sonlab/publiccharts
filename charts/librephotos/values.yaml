@@ -180,6 +180,11 @@ ingress:
   annotations: {}
   # -- currently only hotsname is needed for ingress
   hostname: ""
+  # -- Configure TLS for the ingress. Both secretName and hosts can process a Helm template.
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 dataVolume:
   # -- Size of the volume to be created (data)
