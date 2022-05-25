@@ -19,7 +19,6 @@ backend:
     HEAVYWEIGHT_PROCESS: "2"
     SKIP_PATTERNS: ""
     WEB_CONCURRENCY: "4"
-    DB_BACKEND: "postgresql"
     ALLOW_UPLOAD: "false"
   envTemplates:
     # -- redis port retrieved by parent helm chart
@@ -30,6 +29,12 @@ backend:
     dbPort: "{{ .Values.postgresql.containerPorts.postgresql }}"
     # -- Postgresql DB password
     dbUser: "{{ .Values.postgresql.auth.database }}"
+    # -- Database Backend type, supporting postgresql
+    dbBackend: "postgresql"
+  # -- List of external secrets to be used as Environment Variable sources
+  externalSecrets: []
+  # -- List of external secrets to be used as Environment Variable sources
+  externalConfigMaps: []
   healthchecks:
     livenessProbe:
       tcpSocket:
