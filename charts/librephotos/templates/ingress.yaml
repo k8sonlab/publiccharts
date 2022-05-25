@@ -8,6 +8,18 @@ metadata:
     {{- include "labels" . | nindent 4 }}
   name: {{ .Release.Name}}
 spec:
+  {{- if $values.tls }}
+  tls:
+    {{- range $values.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ tpl . $ | quote }}
+        {{- end }}
+      {{- if .secretName }}
+      secretName: {{ tpl .secretName $ | quote}}
+      {{- end }}
+    {{- end }}
+  {{- end }}
   rules:
   - host: {{ .Values.ingress.hostname }}
     http:
