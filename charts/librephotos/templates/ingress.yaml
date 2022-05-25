@@ -1,9 +1,10 @@
 {{- if .Values.ingress.enabled }}
+{{ $values := .Values.ingress }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+    {{- toYaml $values.annotations | nindent 4 }}
   labels:
     {{- include "labels" . | nindent 4 }}
   name: {{ .Release.Name}}
@@ -21,7 +22,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-  - host: {{ .Values.ingress.hostname }}
+  - host: {{ $values.hostname }}
     http:
       paths:
       - backend:
