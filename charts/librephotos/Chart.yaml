@@ -1,10 +1,10 @@
 apiVersion: v2
 name: librephotos
 description: Helmchart used to install Librephotos in a microservice manner
-version: 0.202219.2
-appVersion: 2022w19
+version: 0.202221.0
+appVersion: 2022w21
 home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
-kubeVersion: '>=1.21.0-0'
+kubeVersion: '>=1.16.0-0'
 keywords:
 - photolibrary
 - photos

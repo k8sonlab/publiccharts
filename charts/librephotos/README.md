@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202219.2](https://img.shields.io/badge/Version-0.202219.2-informational?style=flat-square) ![AppVersion: 2022w19](https://img.shields.io/badge/AppVersion-2022w19-informational?style=flat-square)
+![Version: 0.202221.0](https://img.shields.io/badge/Version-0.202221.0-informational?style=flat-square) ![AppVersion: 2022w21](https://img.shields.io/badge/AppVersion-2022w21-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -19,7 +19,7 @@ Helmchart used to install Librephotos in a microservice manner
 
 ## Requirements
 
-Kubernetes: `>=1.21.0-0`
+Kubernetes: `>=1.16.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
@@ -98,6 +98,7 @@ Kubernetes: `>=1.21.0-0`
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` | enable ingress  |
 | ingress.hostname | string | `""` | currently only hotsname is needed for ingress |
+| ingress.tls | list | `[]` | Configure TLS for the ingress. Both secretName and hosts can process a Helm template. |
 | nameOverride | string | `""` |  |
 | postgresql.auth.database | string | `"librephotos"` |  |
 | postgresql.auth.username | string | `"librephotos"` |  |
