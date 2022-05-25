@@ -45,14 +45,13 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           env:
-            - name: "BACKEND_HOST"
-              value: "{{ $resourceName }}-backend"
             {{- range $k, $v := $localTree.env }}
             - name: "{{ $k }}"
               value: "{{ $v }}"
             {{- end }}
-            - name: "REDIS_PORT"
-              value: {{ tpl $localTree.envTemplates.redisPort . | quote }}
+            {{- if .Values.postgresql.enabled }}
+            - name: "DB_BACKEND"
+              value: {{ tpl $localTree.envTemplates.dbBackend . }}
             - name: "DB_NAME"
               value: {{ tpl $localTree.envTemplates.dbName . }}
             - name: "DB_PORT"
@@ -66,6 +65,12 @@ spec:
                 secretKeyRef:
                   name: {{ $resourceName }}-postgresql
                   key: "password"
+            {{- end }}
+            {{- if .Values.redis.enabled }}
+            - name: "REDIS_PORT"
+              value: {{ tpl $localTree.envTemplates.redisPort . | quote }}
+            - name: "BACKEND_HOST"
+              value: "{{ $resourceName }}-backend"
             - name: REDIS_HOST
               value: {{ $resourceName }}-redis-master
             - name: REDIS_PASS
@@ -73,11 +78,20 @@ spec:
                 secretKeyRef:
                   name: {{ $resourceName }}-redis
                   key: "redis-password"
+            {{- end }}
           envFrom:
             - secretRef:
                 name: "{{ $resourceName }}-secrets"
             - secretRef:
                 name: "{{ $resourceName }}-creds"
+          {{- range $secretName := $localTree.externalSecrets }}
+            - secretRef:
+                name: {{ $secretName | quote }}
+          {{- end }}
+          {{- range $cmName := $localTree.externalConfigMaps }}
+            - configMapRef:
+                name: {{ $cmName | quote }}
+          {{- end }}
           ports:
             - name: backend
               containerPort: 8001
