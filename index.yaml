@@ -3,6 +3,36 @@ entries:
   librephotos:
   - apiVersion: v2
     appVersion: 2022w21
+    created: "2022-05-25T18:22:49.044697007Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: => 11.0.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: => 16.0.0
+    description: Helmchart used to install Librephotos in a microservice manner
+    digest: ca5a05bb8993f108e8207fdf9a146353f37fc9949fbbdacf7b09e47ffccf3a49
+    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    keywords:
+    - photolibrary
+    - photos
+    - librephotos
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: librephotos
+    sources:
+    - https://github.com/LibrePhotos/librephotos
+    - https://hub.docker.com/r/reallibrephotos
+    urls:
+    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202221.2/librephotos-0.202221.2.tgz
+    version: 0.202221.2
+  - apiVersion: v2
+    appVersion: 2022w21
     created: "2022-05-25T07:09:37.520940384Z"
     dependencies:
     - condition: postgresql.enabled
@@ -285,4 +315,4 @@ entries:
     urls:
     - https://github.com/varet80/publiccharts/releases/download/librephotos-0.2.3/librephotos-0.2.3.tgz
     version: 0.2.3
-generated: "2022-05-25T07:09:37.521002384Z"
+generated: "2022-05-25T18:22:49.044785011Z"
