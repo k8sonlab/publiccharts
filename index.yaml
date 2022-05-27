@@ -15,7 +15,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: ca5a05bb8993f108e8207fdf9a146353f37fc9949fbbdacf7b09e47ffccf3a49
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -29,7 +29,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202221.2/librephotos-0.202221.2.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202221.2/librephotos-0.202221.2.tgz
     version: 0.202221.2
   - apiVersion: v2
     appVersion: 2022w21
@@ -45,7 +45,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: 1cfd50492cd69f67329856d19387e14954a9ea439e315888ac4e39cda54ff0fc
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -59,7 +59,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202221.1/librephotos-0.202221.1.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202221.1/librephotos-0.202221.1.tgz
     version: 0.202221.1
   - apiVersion: v2
     appVersion: 2022w21
@@ -75,7 +75,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: 2d125345dd4f83d9b81fe5cbce42ade685a0da9f51b1b6d83fa9943b97ff327f
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -89,7 +89,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202221.0/librephotos-0.202221.0.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202221.0/librephotos-0.202221.0.tgz
     version: 0.202221.0
   - apiVersion: v2
     appVersion: 2022w19
@@ -105,7 +105,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: d07ef0129b7d796a34e0e9ff74fa6353de3a2339bde141c6d499518b65b0b283
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -119,7 +119,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202219.2/librephotos-0.202219.2.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202219.2/librephotos-0.202219.2.tgz
     version: 0.202219.2
   - apiVersion: v2
     appVersion: 2022w19
@@ -135,7 +135,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: 36ad56f6b67fd54950391eedd0c85ff0ebd21950e4dac865ba2c4d2eb1926dcb
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -149,7 +149,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202219.1/librephotos-0.202219.1.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202219.1/librephotos-0.202219.1.tgz
     version: 0.202219.1
   - apiVersion: v2
     appVersion: 2022w19
@@ -165,7 +165,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: df6ecf0017d02b205a33026e8eebafd0cb68c47c0839a7a4907689490d5bb1a1
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -179,7 +179,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202219.0/librephotos-0.202219.0.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202219.0/librephotos-0.202219.0.tgz
     version: 0.202219.0
   - apiVersion: v2
     appVersion: 2022w15
@@ -195,7 +195,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: a81fc33519a07989bd2e26ef2d932c2e823e1fed74eb50069971562a47a7e1b2
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -209,7 +209,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202215.3/librephotos-0.202215.3.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202215.3/librephotos-0.202215.3.tgz
     version: 0.202215.3
   - apiVersion: v2
     appVersion: 2022w15
@@ -225,7 +225,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: 8f31da0ae1017df2f8dafe29d848541987b074c0a76819a9b96019cc805c2ede
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -239,7 +239,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202215.2/librephotos-0.202215.2.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202215.2/librephotos-0.202215.2.tgz
     version: 0.202215.2
   - apiVersion: v2
     appVersion: 2022w15
@@ -255,7 +255,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: 5ca0075e93a210e0ffed429a9f7b60a983b8ae40698ff9de051c0fefe6aa734e
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -269,7 +269,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202215.1/librephotos-0.202215.1.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202215.1/librephotos-0.202215.1.tgz
     version: 0.202215.1
   - apiVersion: v2
     appVersion: 2022w15
@@ -283,7 +283,7 @@ entries:
       version: => 16.0.0
     description: Helmchart used to install Librephotos in a microservice manner
     digest: 3d185508b56127d37a19b904ed91b4b470f7bc63ce38770026069d209cf5c621
-    home: https://github.com/varet80/publiccharts/tree/main/charts/librephotos
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
     keywords:
     - photolibrary
     - photos
@@ -297,7 +297,7 @@ entries:
     - https://github.com/LibrePhotos/librephotos
     - https://hub.docker.com/r/reallibrephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.202215.0/librephotos-0.202215.0.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202215.0/librephotos-0.202215.0.tgz
     version: 0.202215.0
   - apiVersion: v2
     appVersion: 2022w15
@@ -313,6 +313,6 @@ entries:
     digest: 08894fd14d2e0896ecfdb11f7cd0547217276ab2016aa1b9b384be9394f90fcb
     name: librephotos
     urls:
-    - https://github.com/varet80/publiccharts/releases/download/librephotos-0.2.3/librephotos-0.2.3.tgz
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.2.3/librephotos-0.2.3.tgz
     version: 0.2.3
 generated: "2022-05-25T18:22:49.044785011Z"
