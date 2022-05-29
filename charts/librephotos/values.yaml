@@ -147,8 +147,10 @@ secret:
   ADMIN_USERNAME: "admin"
   ADMIN_PASSWORD: "password"
   MAPBOX_API_KEY: ""
-  existingSecret: false
-  # instead use an existingSecret: "librephotos-creds"
+
+# instead use an existingSecret: "librephotos-creds"
+existingSecret: false
+
 cronjob:
   # -- Create a native kubernetes cronjob, using roles to access kubernetes exec and execute the python through a third party container. This is an Antipattern! but the only way, till another exists
   type: native
