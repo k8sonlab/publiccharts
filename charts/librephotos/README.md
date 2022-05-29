@@ -125,6 +125,7 @@ Kubernetes: `>=1.16.0-0`
 | secret.ADMIN_USERNAME | string | `"admin"` |  |
 | secret.ADMIN_PASSWORD | string | `"password"` |  |
 | secret.MAPBOX_API_KEY | string | `""` |  |
+| existingSecret | bool | `false` | instead of creating and using the default secret. Name a secret in this variable |
 | cronjob.type | string | `"native"` | Create a native kubernetes cronjob, using roles to access kubernetes exec and execute the python through a third party container. This is an Antipattern! but the only way, till another exists |
 | cronjob.native.annotations | object | `{}` | Annotations for the cronjog |
 | cronjob.native.schedule | string | `"0 * * * *"` | Cronjob schedule |
