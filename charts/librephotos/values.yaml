@@ -148,7 +148,7 @@ secret:
   ADMIN_PASSWORD: "password"
   MAPBOX_API_KEY: ""
 
-# instead use an existingSecret: "librephotos-creds"
+# -- instead of creating and using the default secret. Name a secret in this variable
 existingSecret: false
 
 cronjob:
