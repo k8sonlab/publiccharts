@@ -82,7 +82,8 @@ spec:
           envFrom:
             - secretRef:
                 name: "{{ $resourceName }}-secrets"
-          {{- if .Values.existingSecret }}
+            - secretRef:
+               name: {{ if .Values.existingSecret -}} {{ .Values.existingSecret | quote }} {{- else }} "{{ $resourceName }}-creds" {{- end }}
             - secretRef:
                 name: "{{ .Values.existingSecret }}"
           {{ else }}
