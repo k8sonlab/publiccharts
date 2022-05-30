@@ -1,2 +1,3 @@
 # publiccharts
-My Public Charts Monorepo
+A personal approach on helm charts. 
+We welcome all contributions
