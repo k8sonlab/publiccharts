@@ -9,6 +9,12 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "Do something with this ${changed_file}."
+          done
       - name: Checkout
         uses: actions/checkout@v1
         with:
