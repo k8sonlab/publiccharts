@@ -21,7 +21,18 @@ jobs:
           chmod 755 yq
       - name: PR data
         run: |
-          echo ${{ github.event.pull_request.title }}
+          case ${{ github.event.pull_request.title }} in
+            fix:*)
+            RELEASE_TYPE=minor
+            ;;
+            release:*)
+            RELEASE_TYPE=major
+            ;;
+            *)
+            RELEASE_TYPE=patch
+            ;;
+          esac
+          echo $RELEASE_TYPE
           #echo $(curl -q $(jq --raw-output .pull_request._links.html.href "$GITHUB_EVENT_PATH") | jq .title)
       - name: bumper
         run: |
