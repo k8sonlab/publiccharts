@@ -1,4 +1,4 @@
-name: Release Charts
+name: Version Bumper
 
 on:
   pull_request:
@@ -59,7 +59,7 @@ jobs:
             then
               echo "Release ${chart}-$(yq '.version' charts/${chart}/Chart.yaml) already exists"
               echo "changing version on $RELEASE_TYPE"
-              helm release --bump=${RELEASE_TYPE} --source helm -s charts/${chart} --print-computed-version
+              helm release --bump=${RELEASE_TYPE} --source helm -s charts/${chart}
             else
               echo "Unique release number for this chart (${chart}), skipping"
             fi
