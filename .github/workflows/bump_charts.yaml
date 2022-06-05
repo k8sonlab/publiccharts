@@ -19,8 +19,7 @@ jobs:
             if [ -z "${file##*$reqsubstr*}" ] ;then
               chartName=$(echo $file | awk -F "/" '{print $2}')
               echo $chartName
-              if [ ! $changed =~ $chartName ]; then
-                changed=$changed $chartName
+              [[ ! $changed =~ $chartName ]] && changed=$changed $chartName
               fi
             fi
           done
