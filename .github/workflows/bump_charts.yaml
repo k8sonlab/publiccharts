@@ -12,7 +12,12 @@ jobs:
 
       - id: files
         uses: jitterbit/get-changed-files@v1
-      - run: |
+      - name: prepate yq
+        run: |
+          curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
+          chmod 755 yq
+      - id: bumper
+        run: |
           changed=""
           reqsubstr="charts/"
           for file in ${{ steps.files.outputs.all }}; do
