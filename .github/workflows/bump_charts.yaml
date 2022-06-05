@@ -13,5 +13,15 @@ jobs:
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: |
-          echo ${{ steps.files.outputs.all }} | grep charts
-          
+          changed=""
+          reqsubstr="charts/"
+          for file in ${{ steps.files.outputs.all }}; do
+            if [ -z "${file##*$reqsubstr*}" ] ;then
+              chartName=$(echo $file | awk -F "/" '{print $2}')
+              echo $chartName
+              if [ ! $changed =~ $chartName ]; then
+                changed=$changed $chartName
+              fi
+            fi
+          done
+          echo $changed
