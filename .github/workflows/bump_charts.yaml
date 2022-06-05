@@ -9,7 +9,9 @@ jobs:
    check_release:
     runs-on: ubuntu-latest
     steps:
-
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - id: files
         uses: jitterbit/get-changed-files@v1
       - name: prepate yq
@@ -24,14 +26,12 @@ jobs:
             if [ -z "${file##*$reqsubstr*}" ] ;
             then
               chartName=$(echo $file | awk -F "/" '{print $2}')
-              echo $chartName
               if [[ ! $changed =~ $chartName ]];
               then
                 changed="$changed $chartName"
               fi
             fi
           done
-          echo $changed
           ls -l
           for chart in $changed; do
             echo Chart tag is $chart-$(yq '.version' charts/${chart}/Chart.yaml)
