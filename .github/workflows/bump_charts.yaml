@@ -9,8 +9,11 @@ jobs:
    check_release:
     runs-on: ubuntu-latest
     steps:
+
       - id: files
         uses: jitterbit/get-changed-files@v1
+      - name: setup-yq
+        uses: chrisdickinson/setup-yq@v1.0.0
       - run: |
-          echo ${{ steps.files.outputs.all }}
+          echo ${{ steps.files.outputs.all }} | grep charts
           
