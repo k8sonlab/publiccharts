@@ -21,7 +21,7 @@ jobs:
           chmod 755 yq
       - name: PR data
         run: |
-          jq "$GITHUB_EVENT_PATH"
+          jq --raw-output . "$GITHUB_EVENT_PATH"
       - name: bumper
         run: |
           changed=""
