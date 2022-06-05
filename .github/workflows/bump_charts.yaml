@@ -13,13 +13,20 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.8.1
       - id: files
         uses: jitterbit/get-changed-files@v1
       - name: prepate yq
         run: |
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
-      - name: PR data
+      - name: install helm plugins
+        run: |
+          helm plugin install https://github.com/sstarcher/helm-release
+      - name: bumper
         run: |
           case "${{ github.event.pull_request.title }}" in
             fix:*)
@@ -34,8 +41,6 @@ jobs:
           esac
           echo $RELEASE_TYPE
           #echo $(curl -q $(jq --raw-output .pull_request._links.html.href "$GITHUB_EVENT_PATH") | jq .title)
-      - name: bumper
-        run: |
           changed=""
           reqsubstr="charts/"
           for file in ${{ steps.files.outputs.all }}; do
@@ -54,6 +59,7 @@ jobs:
             then
               echo "Release ${chart}-$(yq '.version' charts/${chart}/Chart.yaml) already exists"
               echo "changing version on $RELEASE_TYPE"
+              helm release --bump=${RELEASE_TYPE} --source helm -s charts/${chart} --print-computed-version
             else
               echo "Unique release number for this chart (${chart}), skipping"
             fi
