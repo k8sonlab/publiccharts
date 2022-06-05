@@ -64,3 +64,7 @@ jobs:
               echo "Unique release number for this chart (${chart}), skipping"
             fi
           done
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+            message: 'Commited new chart versions'
