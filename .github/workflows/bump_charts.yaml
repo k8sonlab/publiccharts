@@ -18,7 +18,7 @@ jobs:
         run: |
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
-      - id: bumper
+      - name: bumper
         run: |
           changed=""
           reqsubstr="charts/"
@@ -34,5 +34,5 @@ jobs:
           done
           ls -l
           for chart in $changed; do
-            git rev-parse $chart-$(yq '.version' charts/${chart}/Chart.yaml)
+            git rev-parse "ref/tags/$chart-$(yq '.version' charts/${chart}/Chart.yaml)""
           done
