@@ -1,29 +1,27 @@
 apiVersion: v2
-name: librephotos
-description: Helmchart used to install Librephotos in a microservice manner
-version: 0.202222.0
 appVersion: 2022w22
+dependencies:
+- condition: postgresql.enabled
+  name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: => 11.5.0
+- condition: redis.enabled
+  name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: => 16.10.0
+description: Helmchart used to install Librephotos in a microservice manner
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
-kubeVersion: '>=1.16.0-0'
 keywords:
 - photolibrary
 - photos
 - librephotos
+kubeVersion: '>=1.16.0-0'
 maintainers:
-- name: Vassilis Aretakis
-  e-mail: v.aretakis@gmail.com
+- e-mail: v.aretakis@gmail.com
+  name: Vassilis Aretakis
   url: https://github.com/varet80
-
+name: librephotos
 sources:
- - https://github.com/LibrePhotos/librephotos
- - https://hub.docker.com/r/reallibrephotos
-
-dependencies:
-- name: postgresql
-  version: "=> 11.5.0"
-  repository: "https://charts.bitnami.com/bitnami"
-  condition: postgresql.enabled
-- name: redis
-  version: "=> 16.10.0"
-  repository: "https://charts.bitnami.com/bitnami"
-  condition: redis.enabled
+- https://github.com/LibrePhotos/librephotos
+- https://hub.docker.com/r/reallibrephotos
+version: 0.202222.1
