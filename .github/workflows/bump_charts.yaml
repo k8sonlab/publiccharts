@@ -34,5 +34,5 @@ jobs:
           done
           ls -l
           for chart in $changed; do
-            git rev-parse "ref/tags/$chart-$(yq '.version' charts/${chart}/Chart.yaml)""
+            git rev-parse "ref/tags/$chart-$(yq '.version' charts/${chart}/Chart.yaml)"
           done
