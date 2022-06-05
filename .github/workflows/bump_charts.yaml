@@ -19,6 +19,9 @@ jobs:
         run: |
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
+      - name: PR data
+        run: |
+          echo $GITHUB_EVENT_PATH
       - name: bumper
         run: |
           changed=""
