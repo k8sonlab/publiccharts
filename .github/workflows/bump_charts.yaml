@@ -20,7 +20,6 @@ jobs:
               chartName=$(echo $file | awk -F "/" '{print $2}')
               echo $chartName
               [[ ! $changed =~ $chartName ]] && changed=$changed $chartName
-              fi
             fi
           done
           echo $changed
