@@ -16,10 +16,14 @@ jobs:
           changed=""
           reqsubstr="charts/"
           for file in ${{ steps.files.outputs.all }}; do
-            if [ -z "${file##*$reqsubstr*}" ] ;then
+            if [ -z "${file##*$reqsubstr*}" ] ;
+            then
               chartName=$(echo $file | awk -F "/" '{print $2}')
               echo $chartName
-              [[ ! $changed =~ $chartName ]] && changed=$changed $chartName
+              if [[ ! $changed =~ $chartName ]];
+              then
+                changed="$changed $chartName"
+              fi
             fi
           done
           echo $changed
