@@ -32,3 +32,6 @@ jobs:
             fi
           done
           echo $changed
+          for chart in $changed; do
+            echo Chart tag is $chart-$(yq '.version' charts/${chart}/Chart.yaml)
+          done
