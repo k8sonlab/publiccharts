@@ -1,0 +1,15 @@
+name: Release Charts
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+   check_release:
+    steps:
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          echo ${{ steps.files.outputs.all }}
+          
