@@ -13,9 +13,11 @@ maintainers:
 - name: Vassilis Aretakis
   e-mail: v.aretakis@gmail.com
   url: https://github.com/varet80
+
 sources:
  - https://github.com/LibrePhotos/librephotos
  - https://hub.docker.com/r/reallibrephotos
+
 dependencies:
 - name: postgresql
   version: "=> 11.5.0"
