@@ -53,6 +53,7 @@ jobs:
               fi
             fi
           done
+          echo Changed Charts are: $changed
           for chart in $changed; do
             if git rev-parse "${chart}-$(yq '.version' charts/${chart}/Chart.yaml)" >/dev/null 2>&1;
             then
