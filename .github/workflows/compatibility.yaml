@@ -1,4 +1,4 @@
-name: Compatibility Checker
+name: Helm PR Flow
 
 on:
   pull_request:
@@ -71,6 +71,7 @@ jobs:
             message: 'Commited new chart versions'
   update_readme:
     runs-on: ubuntu-latest
+    name: Readme Updater
     needs: check_helm_versions
     steps:
       - uses: actions/checkout@v2
@@ -88,6 +89,7 @@ jobs:
             message: 'Regenerate chart README.md'
   helmcheck:
     runs-on: ubuntu-latest
+    name: Perform Helm Compatibility Checks
     needs: update_readme
     steps:
       - name: Checkout
