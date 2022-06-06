@@ -40,8 +40,7 @@ jobs:
             RELEASE_TYPE=patch
             ;;
           esac
-          echo $RELEASE_TYPE
-          #echo $(curl -q $(jq --raw-output .pull_request._links.html.href "$GITHUB_EVENT_PATH") | jq .title)
+          echo Release type is $RELEASE_TYPE
           changed=""
           reqsubstr="charts/"
           for file in ${{ steps.files.outputs.all }}; do
@@ -54,7 +53,6 @@ jobs:
               fi
             fi
           done
-          ls -l
           for chart in $changed; do
             if git rev-parse "${chart}-$(yq '.version' charts/${chart}/Chart.yaml)" >/dev/null 2>&1;
             then
