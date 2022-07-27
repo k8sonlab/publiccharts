@@ -59,6 +59,9 @@ backend:
       periodSeconds: 5
 
 frontend:
+  podAffinity:
+    # -- Force pods to deploy on same node as backend
+    enabled: true
   replicaCount: 1
   updateStrategyType: RollingUpdate
   annotations: {}
@@ -87,6 +90,9 @@ frontend:
       timeoutSeconds: 2
       periodSeconds: 5
 proxy:
+  podAffinity:
+    # -- Force pods to deploy on same node as backend
+    enabled: true
   replicaCount: 1
   updateStrategyType: RollingUpdate
   annotations: {}

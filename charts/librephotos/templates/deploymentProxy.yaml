@@ -25,6 +25,18 @@ spec:
         app.kubernetes.io/app: proxy
         {{- include "labels.selectorLabels" .| nindent 8 }}
     spec:
+      {{ if $localTree.podAffinity.enabled }}
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: "app.kubernetes.io/instance"
+                operator: In
+                values:
+                - {{ .Release.Name }}
+            topologyKey: "kubernetes.io/hostname"
+      {{ end }}
       terminationGracePeriodSeconds: 30
       containers:
         - name: proxy
