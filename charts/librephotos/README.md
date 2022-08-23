@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202222.1](https://img.shields.io/badge/Version-0.202222.1-informational?style=flat-square) ![AppVersion: 2022w27](https://img.shields.io/badge/AppVersion-2022w27-informational?style=flat-square)
+![Version: 0.202229.1](https://img.shields.io/badge/Version-0.202229.1-informational?style=flat-square) ![AppVersion: 2022w31](https://img.shields.io/badge/AppVersion-2022w31-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -64,10 +64,10 @@ Kubernetes: `>=1.16.0-0`
 | backend.resources.requests.cpu | string | `"10m"` |  |
 | backend.resources.requests.memory | string | `"50Mi"` |  |
 | backend.updateStrategyType | string | `"Recreate"` | Using recreate strategy, as this helps to run only one container at a time |
+| cronjob | object | `{"native":{"annotations":{},"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":10,"image":{"imagePullPolicy":"IfNotPresent","kubernetesVersion":"1.22.6"},"schedule":"0 * * * *","successfulJobHistoryLimit":5},"type":"native"}` | instead of creating and using the default secret. Name a secret in this variable existingSecret: <secret> |
 | cronjob.native.annotations | object | `{}` | Annotations for the cronjog |
 | cronjob.native.concurrencyPolicy | string | `"Forbid"` | concurrency policy, Forbid as default, to avoid running two scans |
 | cronjob.native.failedJobsHistoryLimit | int | `10` | keep 10 jobs for log parsing (if they fail |
-| cronjob.native.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | cronjob.native.image.kubernetesVersion | string | `"1.22.6"` | Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags |
 | cronjob.native.schedule | string | `"0 * * * *"` | Cronjob schedule |
 | cronjob.native.successfulJobHistoryLimit | int | `5` | keep 5 successful jobs for log parsing. |
@@ -75,7 +75,6 @@ Kubernetes: `>=1.16.0-0`
 | dataVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode of volume |
 | dataVolume.size | string | `"100Gi"` | Size of the volume to be created (data) |
 | dataVolume.stroageClass | string | `""` | Storage class of data volume |
-| existingSecret | bool | `false` | instead of creating and using the default secret. Name a secret in this variable |
 | extraVolumeMounts | string | `nil` | You can define extra volume mounts, in the typical K8s syntax (Only in backend) |
 | extraVolumes | string | `nil` | You can define extra volumes, in the typical K8s syntax (Only in backend) |
 | frontend.annotations | object | `{}` |  |
@@ -95,6 +94,7 @@ Kubernetes: `>=1.16.0-0`
 | frontend.healthchecks.startupProbe.tcpSocket.port | int | `3000` |  |
 | frontend.healthchecks.startupProbe.timeoutSeconds | int | `2` |  |
 | frontend.image.repository | string | `"reallibrephotos/librephotos-frontend"` |  |
+| frontend.podAffinity.enabled | bool | `true` | Force pods to deploy on same node as backend |
 | frontend.replicaCount | int | `1` |  |
 | frontend.updateStrategyType | string | `"RollingUpdate"` |  |
 | fullnameOverride | string | `""` |  |
@@ -124,6 +124,7 @@ Kubernetes: `>=1.16.0-0`
 | proxy.healthchecks.startupProbe.tcpSocket.port | int | `80` |  |
 | proxy.healthchecks.startupProbe.timeoutSeconds | int | `2` |  |
 | proxy.image.repository | string | `"reallibrephotos/librephotos-proxy"` |  |
+| proxy.podAffinity.enabled | bool | `true` | Force pods to deploy on same node as backend |
 | proxy.replicaCount | int | `1` |  |
 | proxy.updateStrategyType | string | `"RollingUpdate"` |  |
 | redis.architecture | string | `"standalone"` |  |
