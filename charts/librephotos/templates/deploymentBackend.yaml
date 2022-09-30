@@ -94,8 +94,6 @@ spec:
                 name: "{{ $resourceName }}-secrets"
             - secretRef:
                name: {{ if .Values.existingSecret -}} {{ .Values.existingSecret | quote }} {{- else }} "{{ $resourceName }}-creds" {{- end }}
-            - secretRef:
-                name: "{{ $resourceName }}-creds"
           {{- range $secretName := $localTree.externalSecrets }}
             - secretRef:
                 name: {{ $secretName | quote }}
