@@ -63,8 +63,13 @@ spec:
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
+                  {{- if .Values.postgresql.auth.existingSecret }}
+                  name: {{ .Values.postgresql.auth.existingSecret }}
+                  key:  {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
+                  {{- else }}
                   name: {{ $resourceName }}-postgresql
                   key: "password"
+                  {{- end }}
             {{- end }}
             {{- if .Values.redis.enabled }}
             - name: "REDIS_PORT"
@@ -76,8 +81,13 @@ spec:
             - name: REDIS_PASS
               valueFrom:
                 secretKeyRef:
+                  {{- if .Values.redis.auth.existingSecret }}
+                  name: {{ .Values.redis.auth.existingSecret }}
+                  key: {{ .Values.redis.auth.existingSecretPasswordKey }}
+                  {{- else }}
                   name: {{ $resourceName }}-redis
                   key: "redis-password"
+                  {{- end }}
             {{- end }}
           envFrom:
             - secretRef:
