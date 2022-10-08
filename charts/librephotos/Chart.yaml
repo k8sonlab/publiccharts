@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 2022w36
+appVersion: 2022w39
 dependencies:
 - condition: postgresql.enabled
   name: postgresql
@@ -24,4 +24,4 @@ name: librephotos
 sources:
 - https://github.com/LibrePhotos/librephotos
 - https://hub.docker.com/r/reallibrephotos
-version: 0.202236.0
+version: 0.202239.0
