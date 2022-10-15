@@ -9,6 +9,9 @@ metadata:
     {{- include "labels" . | nindent 4 }}
   name: {{ .Release.Name}}
 spec:
+  {{- if .Values.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  {{- end }}
   {{- if $values.tls }}
   tls:
     {{- range $values.tls }}
