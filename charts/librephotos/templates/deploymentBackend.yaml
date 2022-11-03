@@ -67,7 +67,7 @@ spec:
                   name: {{ .Values.postgresql.auth.existingSecret }}
                   key:  {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
                   {{- else }}
-                  name: {{ $resourceName }}-postgresql
+                  name: {{ tpl $localTree.envTemplates.dbHost . | quote }}
                   key: "password"
                   {{- end }}
             {{- end }}

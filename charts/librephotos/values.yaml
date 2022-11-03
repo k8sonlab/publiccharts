@@ -29,6 +29,8 @@ backend:
     dbPort: "{{ .Values.postgresql.containerPorts.postgresql }}"
     # -- Postgresql DB password
     dbUser: "{{ .Values.postgresql.auth.database }}"
+    # -- Postgresql db host
+    dbHost: "{{ $resourceName }}-postgresql"
     # -- Database Backend type, supporting postgresql
     dbBackend: "postgresql"
   # -- List of external secrets to be used as Environment Variable sources
