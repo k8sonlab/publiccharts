@@ -59,7 +59,7 @@ spec:
             - name: "DB_USER"
               value: {{ tpl $localTree.envTemplates.dbUser . }}
             - name: DB_HOST
-              value: {{ $resourceName }}-postgresql
+              value: {{ default (printf "%s-postgresql" $resourceName) .Values.pg.override.host }}
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
@@ -67,7 +67,7 @@ spec:
                   name: {{ .Values.postgresql.auth.existingSecret }}
                   key:  {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
                   {{- else }}
-                  name: {{ tpl $localTree.envTemplates.dbHost . | quote }}
+                  name: {{ $resourceName }}-postgresql
                   key: "password"
                   {{- end }}
             {{- end }}

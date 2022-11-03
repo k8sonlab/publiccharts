@@ -24,13 +24,11 @@ backend:
     # -- redis port retrieved by parent helm chart
     redisPort: "{{ .Values.redis.master.containerPorts.redis }}"
     # -- Postgresql DB Name
-    dbName: "{{ .Values.postgresql.auth.database }}"
+    dbName: "{{ default .Values.postgresql.auth.database .Values.pg.override.database }}"
     # -- Postgresql DB port
-    dbPort: "{{ .Values.postgresql.containerPorts.postgresql }}"
+    dbPort: "{{ default .Values.postgresql.containerPorts.postgresql .Values.pg.override.port }}"
     # -- Postgresql DB password
-    dbUser: "{{ .Values.postgresql.auth.database }}"
-    # -- Postgresql db host
-    dbHost: "{{ $resourceName }}-postgresql"
+    dbUser: "{{ default .Values.postgresql.auth.database .Values.pg.override.user }}"
     # -- Database Backend type, supporting postgresql
     dbBackend: "postgresql"
   # -- List of external secrets to be used as Environment Variable sources
@@ -231,6 +229,8 @@ extraVolumes:
 # -- You can define extra volume mounts, in the typical K8s syntax (Only in backend)
 extraVolumeMounts:
 
+pg:
+  override: {}
 # Postgresql
 postgresql:
   # -- install bitnami postgresql
