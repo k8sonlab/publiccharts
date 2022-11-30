@@ -26,6 +26,7 @@ data:
           proxy_intercept_errors on;
           proxy_set_header Host $host;
           proxy_pass http://{{ $resourceName }}-frontend/;
+          proxy_cookie_path / "/; secure; HttpOnly; SameSite=None";
         }
         location ~ ^/(api|media)/ {
           proxy_set_header X-Forwarded-Proto $scheme;
@@ -33,6 +34,7 @@ data:
           proxy_set_header Host {{ $resourceName }}-backend;
           include uwsgi_params;
           proxy_pass http://{{ $resourceName }}-backend;
+          proxy_cookie_path / "/; secure; HttpOnly; SameSite=None";
         }
         # Django media
         location /protected_media  {
