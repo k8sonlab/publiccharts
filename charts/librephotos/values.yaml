@@ -175,6 +175,11 @@ cronjob:
       imagePullPolicy: IfNotPresent
       # -- Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags
       kubernetesVersion: "1.22.6"
+  scan:
+    # -- Enable scanning filesystem (Folder scanning)
+    filesystem: true
+    # -- Support scanning Nextcloud 
+    nextcloud: false
 
 nameOverride: ""
 fullnameOverride: ""

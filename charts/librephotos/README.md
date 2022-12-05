@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202245.1](https://img.shields.io/badge/Version-0.202245.1-informational?style=flat-square) ![AppVersion: 2022w45](https://img.shields.io/badge/AppVersion-2022w45-informational?style=flat-square)
+![Version: 0.202245.2](https://img.shields.io/badge/Version-0.202245.2-informational?style=flat-square) ![AppVersion: 2022w45](https://img.shields.io/badge/AppVersion-2022w45-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -23,8 +23,8 @@ Kubernetes: `>=1.16.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | => 11.5.0 |
-| https://charts.bitnami.com/bitnami | redis | => 16.10.0 |
+| https://charts.bitnami.com/bitnami | postgresql | => 12.1.2 |
+| https://charts.bitnami.com/bitnami | redis | => 17.3.11 |
 
 ## Values
 
@@ -64,13 +64,15 @@ Kubernetes: `>=1.16.0-0`
 | backend.resources.requests.cpu | string | `"10m"` |  |
 | backend.resources.requests.memory | string | `"50Mi"` |  |
 | backend.updateStrategyType | string | `"Recreate"` | Using recreate strategy, as this helps to run only one container at a time |
-| cronjob | object | `{"native":{"annotations":{},"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":10,"image":{"imagePullPolicy":"IfNotPresent","kubernetesVersion":"1.22.6"},"schedule":"0 * * * *","successfulJobHistoryLimit":5},"type":"native"}` | instead of creating and using the default secret. Name a secret in this variable existingSecret: <secret> |
+| cronjob | object | `{"native":{"annotations":{},"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":10,"image":{"imagePullPolicy":"IfNotPresent","kubernetesVersion":"1.22.6"},"schedule":"0 * * * *","successfulJobHistoryLimit":5},"scan":{"filesystem":true,"nextcloud":false},"type":"native"}` | instead of creating and using the default secret. Name a secret in this variable existingSecret: <secret> |
 | cronjob.native.annotations | object | `{}` | Annotations for the cronjog |
 | cronjob.native.concurrencyPolicy | string | `"Forbid"` | concurrency policy, Forbid as default, to avoid running two scans |
 | cronjob.native.failedJobsHistoryLimit | int | `10` | keep 10 jobs for log parsing (if they fail |
 | cronjob.native.image.kubernetesVersion | string | `"1.22.6"` | Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags |
 | cronjob.native.schedule | string | `"0 * * * *"` | Cronjob schedule |
 | cronjob.native.successfulJobHistoryLimit | int | `5` | keep 5 successful jobs for log parsing. |
+| cronjob.scan.filesystem | bool | `true` | Enable scanning filesystem (Folder scanning) |
+| cronjob.scan.nextcloud | bool | `false` | Support scanning Nextcloud  |
 | cronjob.type | string | `"native"` | Create a native kubernetes cronjob, using roles to access kubernetes exec and execute the python through a third party container. This is an Antipattern! but the only way, till another exists |
 | dataVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode of volume |
 | dataVolume.size | string | `"100Gi"` | Size of the volume to be created (data) |
