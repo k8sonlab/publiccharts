@@ -70,6 +70,27 @@ spec:
                   name: {{ $resourceName }}-postgresql
                   key: "password"
                   {{- end }}
+            {{- else if .Values.externalDB.enabled }}
+            - name: "DB_BACKEND"
+              value: {{ .Values.externalDB.type }}
+            - name: "DB_NAME"
+              value: {{ .Values.externalDB.name }}
+            - name: "DB_PORT"
+              value: {{ .Values.externalDB.port }}
+            - name: "DB_USER"
+              value: {{ .Values.externalDB.user }}
+            - name: DB_HOST
+              value: {{ .Values.externalDB.host }}
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  {{- if .Values.postgresql.auth.existingSecret }}
+                  name: {{ .Values.postgresql.auth.existingSecret }}
+                  key:  {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
+                  {{- else }}
+                  name: {{ .Values.externalDB.pass }}
+                  key: "password"
+                  {{- end }}           
             {{- end }}
             {{- if .Values.redis.enabled }}
             - name: "REDIS_PORT"
