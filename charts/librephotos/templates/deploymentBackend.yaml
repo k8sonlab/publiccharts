@@ -84,9 +84,9 @@ spec:
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  {{- if .Values.postgresql.auth.existingSecret }}
-                  name: {{ .Values.postgresql.auth.existingSecret }}
-                  key:  {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
+                  {{- if .Values.externalDB.existingSecret }}
+                  name: {{ .Values.externalDB.existingSecret }}
+                  key:  {{ .Values.externalDB.secretKeys.userPasswordKey }}
                   {{- else }}
                   name: {{ .Values.externalDB.pass }}
                   key: "password"
