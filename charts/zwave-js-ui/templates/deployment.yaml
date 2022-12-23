@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "zwave-js-ui.fullname" . }}
+  labels:
+    {{- include "zwave-js-ui.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "zwave-js-ui.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "zwave-js-ui.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .strategy }}
+      strategy:
+        {{ toYaml | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "zwave-js-ui.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.environment }}
+          env:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: {{ .Values.ports.ui.name }}
+              containerPort: {{ .Values.ports.ui.port}}
+              protocol: {{ .Values.ports.ui.protocol }}
+            - name: {{ .Values.ports.websocket.name }}
+              containerPort: {{ .Values.ports.websocket.port}}
+              protocol: {{ .Values.ports.websocket.protocol }}
+          {{- with .Values.health.livenessProbe }}
+          livenessProbe:
+            httpGet:
+              path: {{ .path }}
+              port: {{ $.Values.ports.ui.name }}
+              initialDelaySeconds: {{ .initialDelaySeconds }}
+              periodSeconds: {{ .periodSeconds }}
+          {{- end }}
+          {{- with .Values.health.readinessProbe }}
+          readinessProbe:
+            httpGet:
+              path: {{ .path }}
+              port: {{ $.Values.ports.ui.name }}
+              initialDelaySeconds: {{ .initialDelaySeconds }}
+              periodSeconds: {{ .periodSeconds }}
+          {{- end }}
+          {{- with .Values.health.readinessProbe }}
+          startupProbe:
+            httpGet:
+              path: {{ .path }}
+              port: {{ $.Values.ports.ui.name }}
+              initialDelaySeconds: {{ .initialDelaySeconds }}
+              periodSeconds: {{ .periodSeconds }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: store
+              mountPath: {{ .Values.persistence.mountPath }}
+      volumes:
+        - name: store
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "zwave-js-ui.fullname" . }}-store{{- end }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
