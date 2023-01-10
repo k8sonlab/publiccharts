@@ -111,8 +111,10 @@ spec:
                   {{- end }}
             {{- end }}
           envFrom:
+            {{- if not .Values.externalSecretKey }}
             - secretRef:
                 name: "{{ $resourceName }}-secrets"
+            {{- end }}
             - secretRef:
                name: {{ if .Values.existingSecret -}} {{ .Values.existingSecret | quote }} {{- else }} "{{ $resourceName }}-creds" {{- end }}
           {{- range $secretName := $localTree.externalSecrets }}

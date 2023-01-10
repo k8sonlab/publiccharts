@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202250.0](https://img.shields.io/badge/Version-0.202250.0-informational?style=flat-square) ![AppVersion: 2022w50](https://img.shields.io/badge/AppVersion-2022w50-informational?style=flat-square)
+![Version: 0.202250.1](https://img.shields.io/badge/Version-0.202250.1-informational?style=flat-square) ![AppVersion: 2022w50](https://img.shields.io/badge/AppVersion-2022w50-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -64,10 +64,10 @@ Kubernetes: `>=1.16.0-0`
 | backend.resources.requests.cpu | string | `"10m"` |  |
 | backend.resources.requests.memory | string | `"50Mi"` |  |
 | backend.updateStrategyType | string | `"Recreate"` | Using recreate strategy, as this helps to run only one container at a time |
-| cronjob | object | `{"native":{"annotations":{},"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":10,"image":{"imagePullPolicy":"IfNotPresent","kubernetesVersion":"1.22.6"},"schedule":"0 * * * *","successfulJobHistoryLimit":5},"scan":{"filesystem":true,"nextcloud":false},"type":"native"}` | instead of creating and using the default secret. Name a secret in this variable existingSecret: <secret> |
 | cronjob.native.annotations | object | `{}` | Annotations for the cronjog |
 | cronjob.native.concurrencyPolicy | string | `"Forbid"` | concurrency policy, Forbid as default, to avoid running two scans |
 | cronjob.native.failedJobsHistoryLimit | int | `10` | keep 10 jobs for log parsing (if they fail |
+| cronjob.native.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | cronjob.native.image.kubernetesVersion | string | `"1.22.6"` | Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags |
 | cronjob.native.schedule | string | `"0 * * * *"` | Cronjob schedule |
 | cronjob.native.successfulJobHistoryLimit | int | `5` | keep 5 successful jobs for log parsing. |
@@ -77,6 +77,7 @@ Kubernetes: `>=1.16.0-0`
 | dataVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode of volume |
 | dataVolume.size | string | `"100Gi"` | Size of the volume to be created (data) |
 | dataVolume.stroageClass | string | `""` | Storage class of data volume |
+| externalSecretKey | bool | `false` | Enable if you want to completely ignore management of external Secret Key secret creation |
 | extraVolumeMounts | string | `nil` | You can define extra volume mounts, in the typical K8s syntax (Only in backend) |
 | extraVolumes | string | `nil` | You can define extra volumes, in the typical K8s syntax (Only in backend) |
 | frontend.annotations | object | `{}` |  |
