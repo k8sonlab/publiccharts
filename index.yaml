@@ -3,6 +3,36 @@ entries:
   librephotos:
   - apiVersion: v2
     appVersion: 2022w50
+    created: "2023-02-07T18:27:17.030684009Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: => 12.1.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: => 17.3.11
+    description: Helmchart used to install Librephotos in a microservice manner
+    digest: 5980331c62451feeb25841345d9387b3a570b64550d852ce713be92b6c90b4f3
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
+    keywords:
+    - photolibrary
+    - photos
+    - librephotos
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: librephotos
+    sources:
+    - https://github.com/LibrePhotos/librephotos
+    - https://hub.docker.com/r/reallibrephotos
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202250.2/librephotos-0.202250.2.tgz
+    version: 0.202250.2
+  - apiVersion: v2
+    appVersion: 2022w50
     created: "2023-01-10T13:27:21.414380103Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1035,4 +1065,26 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.2.3/librephotos-0.2.3.tgz
     version: 0.2.3
-generated: "2023-01-10T13:27:21.414717902Z"
+  unifi:
+  - apiVersion: v2
+    appVersion: 7.3.76
+    created: "2023-02-07T18:27:17.229555347Z"
+    description: Unifi chart for Kubernetes
+    digest: e78f657bddfaf36cb674122a2ce6f6fd44b4d7b83bcca873e77b3155ce8e02c8
+    name: unifi
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.0/unifi-0.1.0.tgz
+    version: 0.1.0
+  zwave-js-ui:
+  - apiVersion: v2
+    appVersion: 8.6.2
+    created: "2023-02-07T18:27:17.408380883Z"
+    description: Helmchart for zwave-js-ui
+    digest: 20f7d5b767fb2ad1c18c0816c860d989ca81e551a6d4ff82665c746cd2b79dc9
+    name: zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-02-07T18:27:17.408843338Z"
