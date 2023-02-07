@@ -15,9 +15,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
       - name: Install Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
         with:
-          version: v3.8.1
+          version: v3.10.0
       - id: files
         uses: jitterbit/get-changed-files@v1
       - name: prepate yq
@@ -73,12 +73,12 @@ jobs:
     name: Readme Updater
     needs: check_helm_versions
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: Run helm-docs
         run: |
-          GOBIN=$PWD GO111MODULE=on go get github.com/norwoodj/helm-docs/cmd/helm-docs
+          GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
           ./helm-docs --sort-values-order file
           rm helm-docs
 
@@ -105,9 +105,9 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
         with:
-          version: v3.8.1
+          version: v3.11.0
 
       - name: Add repos
         run: |

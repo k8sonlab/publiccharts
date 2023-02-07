@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "zwave-js-ui.fullname" . }}
+  labels:
+    {{- include "zwave-js-ui.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    {{- with .Values.ports.ui }}
+    - port: {{ .servicePort }}
+      targetPort: {{ .containerPort }}
+      protocol: {{ .protocol }}
+      name: {{ .name }}
+   {{- end }}
+    {{- with .Values.ports.websocket }}
+    - port: {{ .servicePort }}
+      targetPort: {{ .containerPort }}
+      protocol: {{ .protocol }}
+      name: {{ .name }}
+   {{- end }}
+  selector:
+    {{- include "zwave-js-ui.selectorLabels" . | nindent 4 }}

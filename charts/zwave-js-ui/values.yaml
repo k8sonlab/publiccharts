@@ -1,0 +1,119 @@
+# Default values for zwave-js-ui.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: zwavejs/zwave-js-ui
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# -- configure Probes
+health:
+  livenessProbe:
+    path: /health
+    initialDelaySeconds: 15
+    periodSeconds: 30
+  readinessProbe:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 30
+  startupProbe:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 30
+
+# -- ui and websocet ports
+ports:
+  ui:
+    name: http_ui
+    containerPort: 8091
+    servicePort: 80
+    protocol: TCP
+  websocket:
+    name: http_websocket
+    containerPort: 3000
+    servicePort: 3000
+    protocl: TCP
+
+service:
+  type: ClusterIP
+  
+
+# -- Setting default strategy, to avoid running 2 containers with one stick
+strategy:
+  type: Recreate
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- add your env variables here, following standard syntax
+env:
+  - name: ZWAVE_JS_EXTERNAL_CONFIG
+    value: /usr/src/app/store/.config-db
+
+# -- you can add secrets and configmaps. this way you support external secrets for secure variables
+envFrom: []
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+persistence:
+  # -- enable persistent volume, otherwise use empty dir
+  enabled: false
+  # existingClaim: my-claim
+  # -- change the path of store. Just in case you use different env variable.
+  mountPath: /usr/src/app/store
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- Initial resources, based on a 40node network
+resources:
+  limits:
+    cpu: 300m
+    memory: 256Mi
+  requests:
+    cpu: 200m
+    memory: 192Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

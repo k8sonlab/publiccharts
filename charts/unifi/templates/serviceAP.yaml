@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "unifi.fullname" . }}-ap
+  labels:
+    {{- include "unifi.labels" . | nindent 4 }}
+  {{- with .Values.serviceAP.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.serviceAP.type }}
+  {{- with .Values.serviceAP.ports }}
+  ports:
+    {{- range $name, $values := . }}
+    - port: {{ $values.number }}
+      targetPort: {{ $name }}
+      protocol: {{ $values.protocol }}
+      name: {{ $name }}
+    {{- end }}
+  {{- end }}
+  selector:
+    {{- include "unifi.selectorLabels" . | nindent 4 }}

@@ -1,0 +1,139 @@
+# Default values for unifi.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  # -- set image: use the truecharts image
+  repository: tccr.io/truecharts/unifi
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# -- Setup liveness probes for deployment
+healthchecks:
+  livenessProbe:
+    httpGet:
+      path: /manage/account/login
+      port: 8443
+      scheme: HTTPS
+    initialDelaySeconds: 45
+    failureThreshold: 5
+    successThreshold: 1
+    timeoutSeconds: 2
+    periodSeconds: 15
+  readinessProbe:
+    httpGet:
+      path: /manage/account/login
+      port: 8443
+      scheme: HTTPS
+    initialDelaySeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+    timeoutSeconds: 2
+    periodSeconds: 15
+  startupProbe:
+    httpGet:
+      path: /manage/account/login
+      port: 8443
+      scheme: HTTPS
+    initialDelaySeconds: 45
+    failureThreshold: 20
+    successThreshold: 1
+    timeoutSeconds: 2
+    periodSeconds: 5
+
+# -- the main Service (used for ingress)
+service:
+  type: ClusterIP
+  port: 8443
+
+# -- Requires load balancer, to expose the Unifi stun and discovery
+serviceAP:
+  type: LoadBalancer
+  annotations: {}
+  ports:
+    controller: 
+      number: 8080
+      protocol: TCP
+    discovery: 
+      number: 10001
+      protocol: TCP
+    stun: 
+      number: 3478
+      protocol: UDP
+
+# -- Ingress
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts: []
+  # - paths: 
+  #   - path: /
+  #     pathType: Prefix
+  #   host: chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- proposed resources set under this config
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 300m
+  #   memory: 2Gi
+  # requests:
+  #   cpu: 100m
+  #   memory: 1Gi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# -- deployment environment vars (key,value style)
+environmentVars:
+  UMASK: "2"
+  UMASK_SET: "2"
+  S6_READ_ONLY_ROOT: "1"
+  TZ: "UTC"
+
+# -- configVolume
+configVolume:
+  # -- Access mode for volumes
+  accessModes:
+  - "ReadWriteOnce"
+  # -- Size of volume
+  size: 10Gi
+  storageClassName: ""
