@@ -70,6 +70,7 @@ service:
 
 serviceAP:
   type: LoadBalancer
+  annotations: {}
   ports:
     controller: 
       number: 8080

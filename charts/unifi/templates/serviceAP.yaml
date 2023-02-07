@@ -4,6 +4,10 @@ metadata:
   name: {{ include "unifi.fullname" . }}-ap
   labels:
     {{- include "unifi.labels" . | nindent 4 }}
+  {{- with .Values.serviceAP.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.serviceAP.type }}
   {{- with .Values.serviceAP.ports }}
