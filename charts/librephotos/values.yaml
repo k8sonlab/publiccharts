@@ -157,6 +157,9 @@ secret:
 # -- instead of creating and using the default secret. Name a secret in this variable
 # existingSecret: <secret>
 
+# -- Enable if you want to completely ignore management of external Secret Key secret creation
+externalSecretKey: false
+
 cronjob:
   # -- Create a native kubernetes cronjob, using roles to access kubernetes exec and execute the python through a third party container. This is an Antipattern! but the only way, till another exists
   type: native
