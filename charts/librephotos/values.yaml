@@ -215,7 +215,7 @@ dataVolume:
   accessModes: 
    - "ReadWriteOnce"
   # -- Storage class of data volume
-  stroageClass: ""
+  storageClassName: ""
 # to be refactored
 volumes:
   # -- Shared volume, as emptyDir

@@ -1,9 +1,6 @@
 apiVersion: v2
-name: unifi
+appVersion: 7.3.76
 description: Unifi chart for Kubernetes
-
+name: unifi
 type: application
-
-version: 0.1.1
-
-appVersion: "7.3.76"
+version: 0.1.2

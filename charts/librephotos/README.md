@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202250.3](https://img.shields.io/badge/Version-0.202250.3-informational?style=flat-square) ![AppVersion: 2022w50](https://img.shields.io/badge/AppVersion-2022w50-informational?style=flat-square)
+![Version: 0.202250.4](https://img.shields.io/badge/Version-0.202250.4-informational?style=flat-square) ![AppVersion: 2022w50](https://img.shields.io/badge/AppVersion-2022w50-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -152,7 +152,7 @@ Kubernetes: `>=1.16.0-0`
 | ingress.tls | list | `[]` | Configure TLS for the ingress. Both secretName and hosts can process a Helm template. |
 | dataVolume.size | string | `"100Gi"` | Size of the volume to be created (data) |
 | dataVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode of volume |
-| dataVolume.stroageClass | string | `""` | Storage class of data volume |
+| dataVolume.storageClassName | string | `""` | Storage class of data volume |
 | volumes[0] | object | `{"emptyDir":{},"name":"shared"}` | Shared volume, as emptyDir |
 | volumes[1] | object | `{"emptyDir":{"medium":"Memory"},"name":"temp"}` | temporary folder in Memory |
 | volumes[2] | object | `{"emptyDir":{},"name":"varlogs"}` | logs in emptyDir |
