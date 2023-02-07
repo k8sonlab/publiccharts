@@ -7,6 +7,7 @@ metadata:
 spec:
   accessModes:
     {{- toYaml .Values.dataVolume.accessModes | nindent 4 }}
+  storageClassName: {{ .Values.dataVolume.storageClassName }}
   resources:
     requests:
       storage: "{{ .Values.dataVolume.size }}"

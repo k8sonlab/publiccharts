@@ -9,6 +9,8 @@ spec:
   selector:
     matchLabels:
       {{- include "unifi.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: {{ .Values.upgradeStrategy }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
