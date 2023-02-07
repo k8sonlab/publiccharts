@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202250.3](https://img.shields.io/badge/Version-0.202250.3-informational?style=flat-square) ![AppVersion: 2022w50](https://img.shields.io/badge/AppVersion-2022w50-informational?style=flat-square)
+![Version: 0.202250.4](https://img.shields.io/badge/Version-0.202250.4-informational?style=flat-square) ![AppVersion: 2022w50](https://img.shields.io/badge/AppVersion-2022w50-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -76,7 +76,7 @@ Kubernetes: `>=1.16.0-0`
 | cronjob.type | string | `"native"` | Create a native kubernetes cronjob, using roles to access kubernetes exec and execute the python through a third party container. This is an Antipattern! but the only way, till another exists |
 | dataVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode of volume |
 | dataVolume.size | string | `"100Gi"` | Size of the volume to be created (data) |
-| dataVolume.stroageClass | string | `""` | Storage class of data volume |
+| dataVolume.storageClassName | string | `""` | Storage class of data volume |
 | externalSecretKey | bool | `false` | Enable if you want to completely ignore management of external Secret Key secret creation |
 | extraVolumeMounts | string | `nil` | You can define extra volume mounts, in the typical K8s syntax (Only in backend) |
 | extraVolumes | string | `nil` | You can define extra volumes, in the typical K8s syntax (Only in backend) |
