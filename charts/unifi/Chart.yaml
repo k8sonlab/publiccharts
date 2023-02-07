@@ -1,11 +1,7 @@
 apiVersion: v2
-appVersion: 7.3.76
 description: Unifi chart for Kubernetes
 name: unifi
 type: application
-<<<<<<< HEAD
-
-version: 0.1.1
 
 appVersion: "7.3.76"
 
@@ -14,6 +10,4 @@ keywords:
   - ubiquiti
   - unifi
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
-=======
 version: 0.1.2
->>>>>>> 8fe6b6403f6bdfe2fd4ae1451b4231459ced4058
