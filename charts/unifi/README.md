@@ -22,6 +22,11 @@ Unifi chart for Kubernetes
 | ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
+| fullnameOverride | string | `""` |  |
+| upgradeStrategy | string | `"Recreate"` | Upgrade strategy set to recreate (no support for multiple pods) |
+| serviceAccount.create | bool | `true` |  |
+| serviceAccount.annotations | object | `{}` |  |
+| serviceAccount.name | string | `""` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `1` |  |
