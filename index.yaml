@@ -3,6 +3,36 @@ entries:
   librephotos:
   - apiVersion: v2
     appVersion: 2022w50
+    created: "2023-02-07T19:09:34.540831327Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: => 12.1.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: => 17.3.11
+    description: Helmchart used to install Librephotos in a microservice manner
+    digest: e13ab7af7a87a5217f97660c333ea1c57a9d4071fc4222feabb944f5bfc95ccc
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
+    keywords:
+    - photolibrary
+    - photos
+    - librephotos
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: librephotos
+    sources:
+    - https://github.com/LibrePhotos/librephotos
+    - https://hub.docker.com/r/reallibrephotos
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.202250.5/librephotos-0.202250.5.tgz
+    version: 0.202250.5
+  - apiVersion: v2
+    appVersion: 2022w50
     created: "2023-02-07T18:46:01.963221836Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1128,6 +1158,21 @@ entries:
   unifi:
   - apiVersion: v2
     appVersion: 7.3.76
+    created: "2023-02-07T19:09:34.63285933Z"
+    description: Unifi chart for Kubernetes
+    digest: 1b79ab6f71d9f0a8c5fbb65345cb513ea2a0c1f99c87b2881d813b95d8b63951
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
+    icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
+    keywords:
+    - ubiquiti
+    - unifi
+    name: unifi
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.3/unifi-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 7.3.76
     created: "2023-02-07T18:46:02.142026178Z"
     description: Unifi chart for Kubernetes
     digest: 9b04535d3f41fd4a864ac0a55920959814828810d64e5f43c556505c37f2f893
@@ -1159,6 +1204,16 @@ entries:
   zwave-js-ui:
   - apiVersion: v2
     appVersion: 8.6.2
+    created: "2023-02-07T19:09:34.749578525Z"
+    description: Helmchart for zwave-js-ui
+    digest: a946c6560c2ffd469f27c42a29033ced979d536eb27a43ef32e91ce06aa0c607
+    name: zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.3/zwave-js-ui-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 8.6.2
     created: "2023-02-07T18:46:02.299037945Z"
     description: Helmchart for zwave-js-ui
     digest: 73b52ba91e0f8a062e97d04343b0106e62867a6f5d0caef693544723ff82a6a7
@@ -1187,4 +1242,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-07T18:46:02.299538349Z"
+generated: "2023-02-07T19:09:34.750163339Z"
