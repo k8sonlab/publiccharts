@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "unifi.fullname" . }}
+  labels:
+    {{- include "unifi.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "unifi.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "unifi.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "unifi.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.environmentVars }}
+          env:
+          {{- range $k, $v := . }}
+          - name: {{ $k }}
+            value: {{ $v | quote }}
+          {{- end }}
+          {{- end }}
+          ports:
+          - name: main
+            containerPort: 8443
+            protocol: TCP
+          - name: controller
+            containerPort: 8080
+            protocol: TCP
+          - name: stun
+            containerPort: 3478
+            protocol: UDP
+          - name: discovery
+            containerPort: 10001
+            protocol: TCP
+          {{- toYaml .Values.healthchecks | nindent 10 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - mountPath: /unifi
+            name: config
+          - mountPath: /shared
+            name: shared
+          - mountPath: /dev/shm
+            name: shm
+          - mountPath: /tmp
+            name: temp
+          - mountPath: /var/logs
+            name: varlogs
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ include "unifi.fullname" . }}-config
+      - emptyDir: {}
+        name: shared
+      - emptyDir:
+          medium: Memory
+        name: shm
+      - emptyDir: {}
+        name: temp
+      - emptyDir: {}
+        name: varlogs

@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "unifi.fullname" . }}-config
+  labels:
+{{- include "unifi.labels" .| nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .Values.configVolume.accessModes | nindent 4 }}
+  storageClassName: {{ .Values.configVolume.storageClassName }}
+  resources:
+    requests:
+      storage: "{{ .Values.configVolume.size }}"
