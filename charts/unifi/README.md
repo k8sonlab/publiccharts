@@ -1,6 +1,6 @@
 # unifi
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 7.3.76](https://img.shields.io/badge/AppVersion-7.3.76-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 7.3.76](https://img.shields.io/badge/AppVersion-7.3.76-informational?style=flat-square)
 
 Unifi chart for Kubernetes
 
@@ -8,20 +8,12 @@ Unifi chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | object | `{}` |  |
-| configVolume | object | `{"accessModes":["ReadWriteOnce"],"size":"10Gi","storageClassName":""}` | configVolume |
-| configVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode for volumes |
-| configVolume.size | string | `"10Gi"` | Size of volume |
-| environmentVars | object | `{"S6_READ_ONLY_ROOT":"1","TZ":"UTC","UMASK":"2","UMASK_SET":"2"}` | deployment environment vars (key,value style) |
-| fullnameOverride | string | `""` |  |
-| healthchecks | object | `{"livenessProbe":{"failureThreshold":5,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":45,"periodSeconds":15,"successThreshold":1,"timeoutSeconds":2},"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":10,"periodSeconds":15,"successThreshold":1,"timeoutSeconds":2},"startupProbe":{"failureThreshold":20,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":45,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":2}}` | Setup liveness probes for deployment |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
+| replicaCount | int | `1` |  |
 | image.repository | string | `"tccr.io/truecharts/unifi"` | set image: use the truecharts image |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` |  |
-| ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress |
 | nameOverride | string | `""` |  |
-| nodeSelector | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | upgradeStrategy | string | `"Recreate"` | Upgrade strategy set to recreate (no support for multiple pods) |
 | serviceAccount.create | bool | `true` |  |
@@ -29,16 +21,17 @@ Unifi chart for Kubernetes
 | serviceAccount.name | string | `""` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
-| replicaCount | int | `1` |  |
-| resources | object | `{}` | proposed resources set under this config |
 | securityContext | object | `{}` |  |
+| healthchecks | object | `{"livenessProbe":{"failureThreshold":5,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":45,"periodSeconds":15,"successThreshold":1,"timeoutSeconds":2},"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":10,"periodSeconds":15,"successThreshold":1,"timeoutSeconds":2},"startupProbe":{"failureThreshold":20,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":45,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":2}}` | Setup liveness probes for deployment |
 | service | object | `{"port":8443,"type":"ClusterIP"}` | the main Service (used for ingress) |
 | serviceAP | object | `{"annotations":{},"ports":{"controller":{"number":8080,"protocol":"TCP"},"discovery":{"number":10001,"protocol":"TCP"},"stun":{"number":3478,"protocol":"UDP"}},"type":"LoadBalancer"}` | Requires load balancer, to expose the Unifi stun and discovery |
-| serviceAccount.annotations | object | `{}` |  |
-| serviceAccount.create | bool | `true` |  |
-| serviceAccount.name | string | `""` |  |
+| ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress |
+| resources | object | `{}` | proposed resources set under this config |
+| nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
-| upgradeStrategy | string | `"Recreate"` | Upgrade strategy set to recreate (no support for multiple pods) |
+| affinity | object | `{}` |  |
+| environmentVars | object | `{"S6_READ_ONLY_ROOT":"1","TZ":"UTC","UMASK":"2","UMASK_SET":"2"}` | deployment environment vars (key,value style) |
+| configVolume | object | `{"accessModes":["ReadWriteOnce"],"size":"10Gi","storageClassName":""}` | configVolume |
+| configVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode for volumes |
+| configVolume.size | string | `"10Gi"` | Size of volume |
 
-----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
