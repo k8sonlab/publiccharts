@@ -5,9 +5,10 @@
 replicaCount: 1
 
 image:
+  # -- set image: use the truecharts image
   repository: tccr.io/truecharts/unifi
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
+  # -- Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 imagePullSecrets: []
@@ -32,6 +33,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+# -- Setup liveness probes for deployment
 healthchecks:
   livenessProbe:
     httpGet:
@@ -64,10 +66,12 @@ healthchecks:
     timeoutSeconds: 2
     periodSeconds: 5
 
+# -- the main Service (used for ingress)
 service:
   type: ClusterIP
   port: 8443
 
+# -- Requires load balancer, to expose the Unifi stun and discovery
 serviceAP:
   type: LoadBalancer
   annotations: {}
@@ -82,6 +86,7 @@ serviceAP:
       number: 3478
       protocol: UDP
 
+# -- Ingress
 ingress:
   enabled: false
   className: ""
@@ -98,13 +103,14 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+# -- proposed resources set under this config
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
-  #   cpu: 300mi
+  #   cpu: 300m
   #   memory: 2Gi
   # requests:
   #   cpu: 100m
@@ -116,18 +122,18 @@ tolerations: []
 
 affinity: {}
 
-#-- deployment environment vars (key,value style)
+# -- deployment environment vars (key,value style)
 environmentVars:
   UMASK: "2"
   UMASK_SET: "2"
   S6_READ_ONLY_ROOT: "1"
   TZ: "UTC"
 
-#-- configVolume
+# -- configVolume
 configVolume:
-  #-- Access mode for volumes
+  # -- Access mode for volumes
   accessModes:
   - "ReadWriteOnce"
-  #-- Size of volume
+  # -- Size of volume
   size: 10Gi
   storageClassName: ""
