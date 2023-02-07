@@ -1,6 +1,6 @@
 # unifi
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 7.3.76](https://img.shields.io/badge/AppVersion-7.3.76-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 7.3.76](https://img.shields.io/badge/AppVersion-7.3.76-informational?style=flat-square)
 
 Unifi chart for Kubernetes
 
@@ -15,6 +15,7 @@ Unifi chart for Kubernetes
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | fullnameOverride | string | `""` |  |
+| upgradeStrategy | string | `"Recreate"` | Upgrade strategy set to recreate (no support for multiple pods) |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.name | string | `""` |  |
