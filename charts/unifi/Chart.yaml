@@ -7,3 +7,9 @@ type: application
 version: 0.1.1
 
 appVersion: "7.3.76"
+
+icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
+keywords:
+  - ubiquiti
+  - unifi
+home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
