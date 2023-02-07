@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 yq
 **/*.swp
->>>>>>> main
 charts/**/charts
 charts/**/Chart.lock
