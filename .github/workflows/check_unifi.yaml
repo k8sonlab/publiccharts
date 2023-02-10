@@ -1,7 +1,10 @@
 name: Check Latest UNIFI
 on:
   schedule:
-    - cron:  '0 9 * * *'  
+    - cron:  '0 9 * * *'
+  push:
+    branches:
+      - main
 env:
   imagePath: 'jacobalberty/unifi'
   containerRepo: 'jacobalberty/unifi'
