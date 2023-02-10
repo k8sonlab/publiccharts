@@ -72,15 +72,12 @@ jobs:
       - name: Run helm-docs
         run: |
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
-          find . -name helm-docs
-          pwd
-          whereis helm-docs
-          ./helm-docs --sort-values-order file -c charts/unifi
+          ./helm-docs --sort-values-order file -c ${chartPath}
           rm helm-docs
       - name: bump chart version
         id: bump-chart
         run: |
-          helm release --bump=${releaseType} --source helm -s $chartPath -c ${chartPath}
+          helm release --bump=${releaseType} --source helm -s $chartPath
       - name: Commit latest release version
         run: |
           git config --global user.name 'Workflow-V'
