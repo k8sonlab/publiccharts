@@ -48,10 +48,8 @@ jobs:
         id: check-changes
         run: |
           echo "Current version is $CURRENTVER and found '${FOUNDVER}'"
-          if [ "$FOUNDVER" != "$CURRENTVER" ]; 
-            ./yq -i "${versionKey} = \"$FOUNDVER\"" ${chartPath}/Chart.yaml
-            echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
-          fi
+          ./yq -i "${versionKey} = \"$FOUNDVER\"" ${chartPath}/Chart.yaml
+          echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
       - name: bump chart version
         if: env.FoundVER != ''
         id: bump-chart
