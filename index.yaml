@@ -1187,6 +1187,21 @@ entries:
     version: 0.2.3
   unifi:
   - apiVersion: v2
+    appVersion: v7.3.83
+    created: "2023-02-10T15:43:27.076579633Z"
+    description: Unifi chart for Kubernetes
+    digest: b54f6e12801c2600a1058c46be3777d69c7f29fd553fa2f5d6732295730eb62e
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
+    icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
+    keywords:
+    - ubiquiti
+    - unifi
+    name: unifi
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.6/unifi-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
     appVersion: 7.3.76
     created: "2023-02-07T19:12:50.203554633Z"
     description: Unifi chart for Kubernetes
@@ -1287,4 +1302,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-09T10:33:43.845506755Z"
+generated: "2023-02-10T15:43:27.076761529Z"
