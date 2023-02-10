@@ -33,6 +33,7 @@ jobs:
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
       - name: Find Latest stable version
+        id: check-changes
         run: |
           # Get Token from github registry
           NOOP=`curl ${registryAuth}/token\?service=registry.docker.io\&scope\="repository:${containerRepo}:pull" | jq -r '.token'`
@@ -41,6 +42,7 @@ jobs:
           # register latest found
           FOUNDVER=$( curl -H "Authorization: Bearer $NOOP" ${registryIndex}/v2/${containerRepo}/tags/list\?last\="$LAST" |\
            jq -r '.tags[] | select(test("^v[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
+          echo $FOUNDVER
           echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
           echo "Current version is $LAST and found '${FOUNDVER}'"
   patch-helm:
