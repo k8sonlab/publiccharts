@@ -2,9 +2,6 @@ name: Check Latest UNIFI
 on:
   schedule:
     - cron:  '0 9 * * *'
-  push:
-    branches:
-      - main
 env:
   imagePath: 'jacobalberty/unifi'
   containerRepo: 'jacobalberty/unifi'
@@ -42,9 +39,8 @@ jobs:
           # register latest found
           FOUNDVER=$( curl -H "Authorization: Bearer $NOOP" ${registryIndex}/v2/${containerRepo}/tags/list\?last\="$LAST" |\
            jq -r '.tags[] | select(test("^v[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
-          echo $FOUNDVER
           echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
-          echo "Current version is $LAST and found '${FOUNDVER}'"
+          echo "Current version is ${LAST} and found '${FOUNDVER}'"
   patch-helm:
     runs-on: ubuntu-latest
     name: Patch Helm Chart
@@ -59,7 +55,6 @@ jobs:
         #  token: ${{ secrets.READ_TOKEN }}
       - name: prepare yq
         run: |
-          pwd
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
       - name: install helm plugins
@@ -67,7 +62,6 @@ jobs:
           helm plugin install https://github.com/sstarcher/helm-release
       - name: compare found version to current
         run: |
-          pwd
           ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
       - name: Run helm-docs
         run: |
@@ -86,35 +80,3 @@ jobs:
           git pull
           git commit -am "New version for $chartPath with version $NEWVERSION"
           git push
-  patch:
-    runs-on: ubuntu-latest
-    name: Patch Helm Values
-    needs: patch-helm
-    if: needs.version-check.outputs.discoveredversion != ''
-    env:
-      NEWVERSION: ${{ needs.version-check.outputs.discoveredversion }}
-    steps:
-    - name: checkout project
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.READ_TOKEN }}
-        repository: billiaz/argo
-        ref: main
-    - name: prepare commit
-      run: |
-        git config --global user.name 'Workflow-V'
-        git config --global user.email 'actions@aretakis.eus'
-        curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | \
-          grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
-        chmod 755 yq
-    - name: update appVersion in helm
-      run: |
-        ./yq eval '.appVersion = "${{ env.NEWVERSION }}"' ${helmPath}/Chart.yaml
-        ./yq eval '.appVersion = "${{ env.NEWVERSION }}"' ${helmPath}/Chart.yaml -i
-    - name: cleanup
-      run: |
-        rm -rf release-versions
-        rm yq
-        git pull
-        git diff --quiet && git diff --staged --quiet || git commit -am "update version  to ${{ env.NEWVERSION }}"
-        git push
