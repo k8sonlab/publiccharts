@@ -63,7 +63,6 @@ jobs:
         run: |
           helm plugin install https://github.com/sstarcher/helm-release
       - name: compare found version to current
-        id: check if version Changed
         run: |
           ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
       - name: Run helm-docs
