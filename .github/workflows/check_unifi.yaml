@@ -1,0 +1,101 @@
+name: Check Latest UNIFI
+on:
+  schedule:
+    - cron:  '0 9 * * *'  
+env:
+  imagePath: 'jacobalberty/unifi'
+  containerRepo: 'jacobalberty/unifi'
+  registryIndex: 'https://index.docker.io'
+  registryAuth: 'https://auth.docker.io'
+  chartPath: 'charts/unifi'
+  versionKey: '.appVersion'
+  releaseType: 'patch'
+jobs:
+  version-check:
+    runs-on: self-hosted
+    name: Check and release new version
+    outputs:
+      discoveredversion: ${{ steps.check-changes.outputs.newversion }}
+    steps:
+      - name: checkout project
+        uses: actions/checkout@v3
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.10.0
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - name: prepate yq
+        run: |
+          curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
+          chmod 755 yq
+      - name: install helm plugins
+        run: |
+          helm plugin install https://github.com/sstarcher/helm-release
+      - name: Find Latest stable version
+        run: |
+          # Get Token from github registry
+          NOOP=`curl ${registryAuth}/token\?service=registry.docker.io\&scope\="repository:${containerRepo}:pull" | jq -r '.token'`
+          # cut version and use it as Last
+          LAST=$(./yq eval "${versionKey}" ${chartPath}/Chart.yaml)
+          # register latest found
+          FOUNDVER=$( curl -H "Authorization: Bearer $NOOP" ${registryIndex}/v2/${containerRepo}/tags/list\?last\="$LAST" |\
+           jq -r '.tags[] | select(test("^v[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
+          echo "FOUNDVER=$FOUNDVER" >> $GITHUB_ENV
+          echo "CURRENTVER=$LAST" >> $GITHUB_ENV
+      - name: compare found version to current
+        if: env.FOUNDVER != ''
+        id: check-changes
+        run: |
+          echo "Current version is $CURRENTVER and found '${FOUNDVER}'"
+          if [ "$FOUNDVER" != "$CURRENTVER" ]; 
+            ./yq -i "${versionKey} = \"$FOUNDVER\"" ${chartPath}/Chart.yaml
+            echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
+          fi
+      - name: bump chart version
+        if: env.FoundVER != ''
+        id: bump-chart
+        run: |
+          helm release --bump=${releaseType} --source helm -s $chartPath -c ${chartPath}
+      - name: Commit latest release version
+        if: env.FOUNDVER != ''
+        #if: env.modified == 'true'
+        run: |
+          git config --global user.name 'Workflow-V'
+          git config --global user.email 'actions@aretakis.eu'
+          git add -A
+          git pull
+          git commit -am "New version for $chartPath with version $FOUNDVER"
+          git push
+  patch:
+    runs-on: self-hosted
+    name: Patch Values
+    needs: version-check
+    if: needs.version-check.outputs.discoveredversion != ''
+    env:
+      NEWVERSION: ${{ needs.version-check.outputs.discoveredversion }}
+    steps:
+    - name: checkout project
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.READ_TOKEN }}
+        repository: billiaz/argo
+        ref: main
+    - name: prepare commit
+      run: |
+        git config --global user.name 'Workflow-V'
+        git config --global user.email 'actions@aretakis.eus'
+        curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | \
+          grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
+        chmod 755 yq
+    - name: update appVersion in helm
+      run: |
+        ./yq eval '.appVersion = "${{ env.NEWVERSION }}"' ${helmPath}/Chart.yaml
+        ./yq eval '.appVersion = "${{ env.NEWVERSION }}"' ${helmPath}/Chart.yaml -i
+    - name: cleanup
+      run: |
+        rm -rf release-versions
+        rm yq
+        git pull
+        git diff --quiet && git diff --staged --quiet || git commit -am "update version  to ${{ env.NEWVERSION }}"
+        git push
