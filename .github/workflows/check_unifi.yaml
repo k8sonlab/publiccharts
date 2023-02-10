@@ -12,7 +12,7 @@ env:
   releaseType: 'patch'
 jobs:
   version-check:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Check and release new version
     outputs:
       discoveredversion: ${{ steps.check-changes.outputs.newversion }}
@@ -68,7 +68,7 @@ jobs:
           git commit -am "New version for $chartPath with version $FOUNDVER"
           git push
   patch:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Patch Values
     needs: version-check
     if: needs.version-check.outputs.discoveredversion != ''
