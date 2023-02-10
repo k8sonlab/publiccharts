@@ -32,9 +32,6 @@ jobs:
         run: |
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
-      - name: install helm plugins
-        run: |
-          helm plugin install https://github.com/sstarcher/helm-release
       - name: Find Latest stable version
         run: |
           # Get Token from github registry
@@ -44,34 +41,53 @@ jobs:
           # register latest found
           FOUNDVER=$( curl -H "Authorization: Bearer $NOOP" ${registryIndex}/v2/${containerRepo}/tags/list\?last\="$LAST" |\
            jq -r '.tags[] | select(test("^v[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
-          echo "FOUNDVER=$FOUNDVER" >> $GITHUB_ENV
-          echo "CURRENTVER=$LAST" >> $GITHUB_ENV
-      - name: compare found version to current
-        if: env.FOUNDVER != ''
-        id: check-changes
-        run: |
-          echo "Current version is $CURRENTVER and found '${FOUNDVER}'"
-          ./yq -i "${versionKey} = \"$FOUNDVER\"" ${chartPath}/Chart.yaml
           echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
+          echo "Current version is $LAST and found '${FOUNDVER}'"
+  patch-helm:
+    runs-on: ubuntu-latest
+    name: Patch Helm Chart
+    env:
+      NEWVERSION: ${{ needs.version-check.outputs.discoveredversion }}
+    needs: version-check
+    if: needs.version-check.outputs.discoveredversion != ''
+    jobs:
+      - name: checkout project
+        uses: actions/checkout@v3
+        #with:
+        #  token: ${{ secrets.READ_TOKEN }}
+      - name: prepare yq
+        run: |
+          curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
+          chmod 755 yq
+      - name: install helm plugins
+        run: |
+          helm plugin install https://github.com/sstarcher/helm-release
+      - name: compare found version to current
+        id: check if version Changed
+        run: |
+          ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
+      - name: Run helm-docs
+        run: |
+          GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
+          cd ${chartPath}
+          ./helm-docs --sort-values-order file
+          rm helm-docs
       - name: bump chart version
-        if: env.FoundVER != ''
         id: bump-chart
         run: |
           helm release --bump=${releaseType} --source helm -s $chartPath -c ${chartPath}
       - name: Commit latest release version
-        if: env.FOUNDVER != ''
-        #if: env.modified == 'true'
         run: |
           git config --global user.name 'Workflow-V'
           git config --global user.email 'actions@aretakis.eu'
           git add -A
           git pull
-          git commit -am "New version for $chartPath with version $FOUNDVER"
+          git commit -am "New version for $chartPath with version $NEWVERSION"
           git push
   patch:
     runs-on: ubuntu-latest
-    name: Patch Values
-    needs: version-check
+    name: Patch Helm Values
+    needs: patch-helm
     if: needs.version-check.outputs.discoveredversion != ''
     env:
       NEWVERSION: ${{ needs.version-check.outputs.discoveredversion }}
