@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   # -- set image: use the truecharts image
-  repository: tccr.io/truecharts/unifi
+  repository: jacobalberty/unifi
   pullPolicy: IfNotPresent
   # -- Overrides the image tag whose default is the chart appVersion.
   tag: ""
