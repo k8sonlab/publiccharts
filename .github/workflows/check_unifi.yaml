@@ -72,8 +72,10 @@ jobs:
       - name: Run helm-docs
         run: |
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
-          cd ${chartPath}
-          ./helm-docs --sort-values-order file
+          find . -name helm-docs
+          pwd
+          whereis helm-docs
+          ./helm-docs --sort-values-order file -c charts/unifi
           rm helm-docs
       - name: bump chart version
         id: bump-chart
