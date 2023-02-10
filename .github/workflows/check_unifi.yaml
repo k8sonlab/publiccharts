@@ -50,7 +50,7 @@ jobs:
       NEWVERSION: ${{ needs.version-check.outputs.discoveredversion }}
     needs: version-check
     if: needs.version-check.outputs.discoveredversion != ''
-    jobs:
+    steps:
       - name: checkout project
         uses: actions/checkout@v3
         #with:
