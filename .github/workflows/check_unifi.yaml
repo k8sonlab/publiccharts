@@ -23,8 +23,6 @@ jobs:
         uses: azure/setup-helm@v3
         with:
           version: v3.10.0
-      - id: files
-        uses: jitterbit/get-changed-files@v1
       - name: prepate yq
         run: |
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
