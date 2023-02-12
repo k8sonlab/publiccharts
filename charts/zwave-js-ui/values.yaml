@@ -20,14 +20,23 @@ health:
     path: /health
     initialDelaySeconds: 15
     periodSeconds: 30
+    httpHeaders:
+    - name: Accept
+      value: "text/plain"
   readinessProbe:
     path: /health
     initialDelaySeconds: 5
     periodSeconds: 30
+    httpHeaders:
+    - name: Accept
+      value: "text/plain"
   startupProbe:
     path: /health
     initialDelaySeconds: 5
     periodSeconds: 30
+    httpHeaders:
+    - name: Accept
+      value: "text/plain"
 
 # -- ui and websocet ports
 ports:
