@@ -1,5 +1,0 @@
-fullnameOverride: zwave-js-ui
-
-persistence:
-  enabled: true
-  existingClaim: zwave-js
