@@ -3,4 +3,4 @@ appVersion: 8.8.5
 description: Helmchart for zwave-js-ui
 name: zwave-js-ui
 type: application
-version: 0.1.6
+version: 0.1.7

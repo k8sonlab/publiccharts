@@ -41,7 +41,7 @@ health:
 # -- ui and websocet ports
 ports:
   ui:
-    name: http_ui
+    name: http-ui
     containerPort: 8091
     servicePort: 80
     protocol: TCP
