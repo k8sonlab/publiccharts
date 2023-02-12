@@ -53,7 +53,7 @@ ports:
 
 service:
   type: ClusterIP
-  
+  port: 8091  
 
 # -- Setting default strategy, to avoid running 2 containers with one stick
 strategy:

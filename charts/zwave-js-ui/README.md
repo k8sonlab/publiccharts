@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.1.10](https://img.shields.io/badge/Version-0.1.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.8.5](https://img.shields.io/badge/AppVersion-8.8.5-informational?style=flat-square)
+![Version: 0.1.11](https://img.shields.io/badge/Version-0.1.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.8.5](https://img.shields.io/badge/AppVersion-8.8.5-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -47,6 +47,7 @@ Helmchart for zwave-js-ui
 | replicaCount | int | `1` |  |
 | resources | object | `{"limits":{"cpu":"300m","memory":"256Mi"},"requests":{"cpu":"200m","memory":"192Mi"}}` | Initial resources, based on a 40node network |
 | securityContext | object | `{}` |  |
+| service.port | int | `8091` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
