@@ -1,6 +1,6 @@
 apiVersion: v2
-appVersion: 8.6.2
+appVersion: 8.8.5
 description: Helmchart for zwave-js-ui
 name: zwave-js-ui
 type: application
-version: 0.1.3
+version: 0.1.4
