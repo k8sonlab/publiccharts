@@ -126,3 +126,14 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# -- Support Prometheus ServiceMonitor
+serviceMonitor:
+  # -- enable Service Monitor
+  enabled: false
+  # -- add Custom labels, for prometheus Service Monitor
+  labels: {}
+  # -- interval
+  interval: 30s
+  # -- namespace selector
+  namespaceSelector: {}
