@@ -43,12 +43,16 @@ spec:
             {{ toYaml . | nindent 12 }}
           {{- end }}
           ports:
-            - name: {{ .Values.ports.ui.name }}
-              containerPort: {{ .Values.ports.ui.port}}
-              protocol: {{ .Values.ports.ui.protocol }}
-            - name: {{ .Values.ports.websocket.name }}
-              containerPort: {{ .Values.ports.websocket.port}}
-              protocol: {{ .Values.ports.websocket.protocol }}
+            {{- with .Values.ports.ui }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort}}
+              protocol: {{ .protocol }}
+            {{- end }}
+            {{- with .Values.ports.websocket }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              protocol: {{ .protocol }}
+            {{- end }}
           {{- with .Values.health.livenessProbe }}
           livenessProbe:
             httpGet:
