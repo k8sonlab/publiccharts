@@ -5,7 +5,7 @@ home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
 icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
 name: zwave-js-ui
 type: application
-version: 0.1.9
+version: 0.1.10
 
 maintainers:
   - name: varet80

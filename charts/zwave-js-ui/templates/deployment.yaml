@@ -58,24 +58,24 @@ spec:
             httpGet:
               path: {{ .path }}
               port: {{ $.Values.ports.ui.name }}
-              initialDelaySeconds: {{ .initialDelaySeconds }}
-              periodSeconds: {{ .periodSeconds }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
           {{- end }}
           {{- with .Values.health.readinessProbe }}
           readinessProbe:
             httpGet:
               path: {{ .path }}
               port: {{ $.Values.ports.ui.name }}
-              initialDelaySeconds: {{ .initialDelaySeconds }}
-              periodSeconds: {{ .periodSeconds }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
           {{- end }}
           {{- with .Values.health.readinessProbe }}
           startupProbe:
             httpGet:
               path: {{ .path }}
               port: {{ $.Values.ports.ui.name }}
-              initialDelaySeconds: {{ .initialDelaySeconds }}
-              periodSeconds: {{ .periodSeconds }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
