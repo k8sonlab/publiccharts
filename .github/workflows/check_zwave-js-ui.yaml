@@ -1,0 +1,80 @@
+name: Check Latest ZWAVE-JS-UI
+on:
+  schedule:
+    - cron:  '0 7 * * *'
+env:
+  imagePath: 'zwavejs/zwave-js-ui'
+  containerRepo: 'zwavejs/zwave-js-ui'
+  registryIndex: 'https://index.docker.io'
+  registryAuth: 'https://auth.docker.io'
+  chartPath: 'charts/zwave-js-ui'
+  versionKey: '.appVersion'
+  releaseType: 'patch'
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    name: Check and release new version
+    outputs:
+      discoveredversion: ${{ steps.check-changes.outputs.newversion }}
+    steps:
+      - name: checkout project
+        uses: actions/checkout@v3
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.10.0
+      - name: prepate yq
+        run: |
+          curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
+          chmod 755 yq
+      - name: Find Latest stable version
+        id: check-changes
+        run: |
+          # Get Token from github registry
+          NOOP=`curl ${registryAuth}/token\?service=registry.docker.io\&scope\="repository:${containerRepo}:pull" | jq -r '.token'`
+          # cut version and use it as Last
+          LAST=$(./yq eval "${versionKey}" ${chartPath}/Chart.yaml)
+          # register latest found
+          FOUNDVER=$( curl -H "Authorization: Bearer $NOOP" ${registryIndex}/v2/${containerRepo}/tags/list\?last\="$LAST" |\
+           jq -r '.tags[] | select(test("^[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
+          echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
+          echo "Current version is ${LAST} and found '${FOUNDVER}'"
+  patch-helm:
+    runs-on: ubuntu-latest
+    name: Patch Helm Chart
+    env:
+      NEWVERSION: ${{ needs.version-check.outputs.discoveredversion }}
+    needs: version-check
+    if: needs.version-check.outputs.discoveredversion != ''
+    steps:
+      - name: checkout project
+        uses: actions/checkout@v3
+        #with:
+        #  token: ${{ secrets.READ_TOKEN }}
+      - name: prepare yq
+        run: |
+          curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
+          chmod 755 yq
+      - name: install helm plugins
+        run: |
+          helm plugin install https://github.com/sstarcher/helm-release
+      - name: compare found version to current
+        run: |
+          ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
+      - name: Run helm-docs
+        run: |
+          GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
+          ./helm-docs --sort-values-order file -c ${chartPath}
+          rm helm-docs
+      - name: bump chart version
+        id: bump-chart
+        run: |
+          helm release --bump=${releaseType} --source helm -s $chartPath
+      - name: Commit latest release version
+        run: |
+          git config --global user.name 'Workflow-V'
+          git config --global user.email 'actions@aretakis.eu'
+          git add -A
+          git pull
+          git commit -am "New version for $chartPath with version $NEWVERSION"
+          git push
