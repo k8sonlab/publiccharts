@@ -1,8 +1,21 @@
 # zwave-js-ui
 
-![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.6.2](https://img.shields.io/badge/AppVersion-8.6.2-informational?style=flat-square)
+![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.8.5](https://img.shields.io/badge/AppVersion-8.8.5-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
+
+**Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| varet80 |  |  |
+
+## Source Code
+
+* <https://github.com/zwave-js/zwave-js-ui>
+* <https://github.com/zwave-js/node-zwave-js>
 
 ## Values
 
@@ -12,7 +25,7 @@ Helmchart for zwave-js-ui
 | env | list | `[{"name":"ZWAVE_JS_EXTERNAL_CONFIG","value":"/usr/src/app/store/.config-db"}]` | add your env variables here, following standard syntax |
 | envFrom | list | `[]` | you can add secrets and configmaps. this way you support external secrets for secure variables |
 | fullnameOverride | string | `""` |  |
-| health | object | `{"livenessProbe":{"initialDelaySeconds":15,"path":"/health","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/health","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/health","periodSeconds":30}}` | configure Probes |
+| health | object | `{"livenessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":15,"path":"/health","periodSeconds":30},"readinessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30},"startupProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30}}` | configure Probes |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"zwavejs/zwave-js-ui"` |  |
 | image.tag | string | `""` |  |
@@ -30,7 +43,7 @@ Helmchart for zwave-js-ui
 | persistence.mountPath | string | `"/usr/src/app/store"` | change the path of store. Just in case you use different env variable. |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
-| ports | object | `{"ui":{"containerPort":8091,"name":"http_ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http_websocket","protocl":"TCP","servicePort":3000}}` | ui and websocet ports |
+| ports | object | `{"ui":{"containerPort":8091,"name":"http-ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http-websocket","protocol":"TCP","servicePort":3000}}` | ui and websocet ports |
 | replicaCount | int | `1` |  |
 | resources | object | `{"limits":{"cpu":"300m","memory":"256Mi"},"requests":{"cpu":"200m","memory":"192Mi"}}` | Initial resources, based on a 40node network |
 | securityContext | object | `{}` |  |
