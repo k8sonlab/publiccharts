@@ -1,0 +1,657 @@
+# Default values for thanos.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: quay.io/thanos/thanos
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+commonLabels: {}
+
+serviceMonitor:
+  enabled: false
+  additionalLabels: {}
+  endpointConfig: {}
+  interval:
+
+objstoreConfig:
+  create: true
+  name: ""
+  key: "config"
+  value: |-
+    type: FILESYSTEM
+    config:
+      directory: /var/thanos/store/s3
+
+logLevel: info
+logFormat: logfmt
+
+additionalEndpoints: []
+additionalReplicaLabels: []
+
+compact:
+  enabled: false
+
+  serviceAccount:
+    create: true
+    labels: {}
+    annotations: {}
+    name: ""
+    automountToken: false
+
+  service:
+    annotations: {}
+
+  updateStrategy: {}
+
+  podLabels: {}
+
+  podAnnotations: {}
+
+  podSecurityContext:
+    fsGroup: 65534
+    runAsUser: 65534
+
+  securityContext: {}
+
+  priorityClassName: ""
+
+  terminationGracePeriodSeconds:
+
+  extraEnv: []
+
+  extraArgs: []
+
+  livenessProbe:
+    httpGet:
+      path: /-/healthy
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 30
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 4
+
+  readinessProbe:
+    httpGet:
+      path: /-/ready
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 20
+
+  resources: {}
+
+  persistence:
+    enabled: false
+    existingClaim: ""
+    annotations: {}
+    accessMode: ReadWriteOnce
+    storageClass: standard
+    size: 8Gi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: {}
+
+query:
+  serviceAccount:
+    create: true
+    labels: {}
+    annotations: {}
+    name: ""
+    automountToken: false
+
+  service:
+    annotations: {}
+
+  replicas: 1
+
+  updateStrategy: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage:
+
+  podDisruptionBudget:
+    enabled: false
+    minAvailable:
+    maxUnavailable:
+
+  podLabels: {}
+
+  podAnnotations: {}
+
+  podSecurityContext:
+    fsGroup: 65534
+    runAsUser: 65534
+
+  securityContext: {}
+
+  priorityClassName: ""
+
+  terminationGracePeriodSeconds:
+
+  extraEnv: []
+
+  replicaLabels: []
+  additionalStores: []
+
+  extraArgs: []
+
+  livenessProbe:
+    httpGet:
+      path: /-/healthy
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 30
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 4
+
+  readinessProbe:
+    httpGet:
+      path: /-/ready
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 20
+
+  ingress:
+    enabled: false
+    annotations: {}
+    ingressClassName: ""
+    path: /
+    hosts: []
+    #   - chart-example.local
+    tls: []
+    #   - hosts:
+    #       - chart-example.local
+    #     secretName: chart-example-tls
+
+  resources: {}
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: {}
+
+queryFrontend:
+  enabled: false
+
+  serviceAccount:
+    create: true
+    labels: {}
+    annotations: {}
+    name: ""
+    automountToken: false
+
+  service:
+    annotations: {}
+
+  replicas: 1
+
+  updateStrategy: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage:
+
+  podDisruptionBudget:
+    enabled: false
+    minAvailable:
+    maxUnavailable:
+
+  podLabels: {}
+
+  podAnnotations: {}
+
+  podSecurityContext:
+    fsGroup: 65534
+    runAsUser: 65534
+
+  securityContext: {}
+
+  priorityClassName: ""
+
+  terminationGracePeriodSeconds:
+
+  extraEnv: []
+
+  extraArgs: []
+
+  livenessProbe:
+    httpGet:
+      path: /-/healthy
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 30
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 4
+
+  readinessProbe:
+    httpGet:
+      path: /-/ready
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 20
+
+  ingress:
+    enabled: false
+    annotations: {}
+    ingressClassName: ""
+    path: /
+    hosts: []
+    #   - chart-example.local
+    tls: []
+    #   - hosts:
+    #       - chart-example.local
+    #     secretName: chart-example-tls
+
+  resources: {}
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: {}
+
+receive:
+  enabled: false
+
+  replicationFactor: 1
+  retention: 48h
+
+  ingestor:
+    serviceAccount:
+      create: true
+      labels: {}
+      annotations: {}
+      name: ""
+      automountToken: false
+
+    service:
+      annotations: {}
+
+    replicas: 1
+
+    updateStrategy: {}
+
+    podDisruptionBudget:
+      enabled: false
+      minAvailable:
+      maxUnavailable:
+
+    podLabels: {}
+
+    podAnnotations: {}
+
+    podSecurityContext:
+      fsGroup: 65534
+      runAsUser: 65534
+
+    securityContext: {}
+
+    priorityClassName: ""
+
+    terminationGracePeriodSeconds:
+
+    extraEnv: []
+
+    extraArgs: []
+
+    livenessProbe:
+      httpGet:
+        path: /-/healthy
+        port: http
+        scheme: HTTP
+      initialDelaySeconds: 0
+      periodSeconds: 30
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 8
+
+    readinessProbe:
+      httpGet:
+        path: /-/ready
+        port: http
+        scheme: HTTP
+      initialDelaySeconds: 0
+      periodSeconds: 5
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 20
+
+    resources: {}
+
+    persistence:
+      enabled: false
+      existingClaim: ""
+      annotations: {}
+      accessMode: ReadWriteOnce
+      storageClass: standard
+      size: 8Gi
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+    topologySpreadConstraints: {}
+
+  router:
+    enabled: true
+    serviceAccount:
+      create: true
+      labels: {}
+      annotations: {}
+      name: ""
+      automountToken: false
+
+    service:
+      annotations: {}
+
+    replicas: 1
+
+    updateStrategy: {}
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage:
+
+    podDisruptionBudget:
+      enabled: false
+      minAvailable:
+      maxUnavailable:
+
+    podLabels: {}
+
+    podAnnotations: {}
+
+    podSecurityContext:
+      fsGroup: 65534
+      runAsUser: 65534
+
+    securityContext: {}
+
+    priorityClassName: ""
+
+    terminationGracePeriodSeconds:
+
+    extraEnv: []
+
+    extraArgs: []
+
+    livenessProbe:
+      httpGet:
+        path: /-/healthy
+        port: http
+        scheme: HTTP
+      initialDelaySeconds: 0
+      periodSeconds: 30
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 4
+
+    readinessProbe:
+      httpGet:
+        path: /-/ready
+        port: http
+        scheme: HTTP
+      initialDelaySeconds: 0
+      periodSeconds: 5
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 20
+
+    ingress:
+      enabled: false
+      annotations: {}
+      ingressClassName: ""
+      path: /
+      hosts: []
+      #   - chart-example.local
+      tls: []
+      #   - hosts:
+      #       - chart-example.local
+      #     secretName: chart-example-tls
+
+    resources: {}
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+    topologySpreadConstraints: {}
+
+rule:
+  enabled: false
+
+  serviceAccount:
+    create: true
+    labels: {}
+    annotations: {}
+    name: ""
+    automountToken: false
+
+  service:
+    annotations: {}
+
+  replicas: 1
+
+  updateStrategy: {}
+
+  podDisruptionBudget:
+    enabled: false
+    minAvailable:
+    maxUnavailable:
+
+  podLabels: {}
+
+  podAnnotations: {}
+
+  podSecurityContext:
+    fsGroup: 65534
+    runAsUser: 65534
+
+  securityContext: {}
+
+  priorityClassName: ""
+
+  terminationGracePeriodSeconds:
+
+  extraEnv: []
+
+  retention: 48h
+  blockDuration: 2h
+  evalInterval: 1m
+
+  extraArgs: []
+
+  livenessProbe:
+    httpGet:
+      path: /-/healthy
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 30
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 8
+
+  readinessProbe:
+    httpGet:
+      path: /-/ready
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 20
+
+  ingress:
+    enabled: false
+    annotations: {}
+    ingressClassName: ""
+    path: /
+    hosts: []
+    #   - chart-example.local
+    tls: []
+    #   - hosts:
+    #       - chart-example.local
+    #     secretName: chart-example-tls
+
+  resources: {}
+
+  persistence:
+    enabled: false
+    existingClaim: ""
+    annotations: {}
+    accessMode: ReadWriteOnce
+    storageClass: standard
+    size: 8Gi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: {}
+
+  configReloader:
+    enabled: true
+    resources: {}
+
+  alertmanagersConfig:
+    create: true
+    name: ""
+    key: "config"
+    value: |-
+      alertmanagers: []
+
+  rules:
+    create: true
+    name: ""
+    value: |-
+
+storeGateway:
+  serviceAccount:
+    create: true
+    labels: {}
+    annotations: {}
+    name: ""
+    automountToken: false
+
+  service:
+    annotations: {}
+
+  replicas: 1
+
+  updateStrategy: {}
+
+  podDisruptionBudget:
+    enabled: false
+    minAvailable:
+    maxUnavailable:
+
+  podLabels: {}
+
+  podAnnotations: {}
+
+  podSecurityContext:
+    fsGroup: 65534
+    runAsUser: 65534
+
+  securityContext: {}
+
+  priorityClassName: ""
+
+  terminationGracePeriodSeconds:
+
+  extraEnv: []
+
+  extraArgs: []
+
+  livenessProbe:
+    httpGet:
+      path: /-/healthy
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 30
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 8
+
+  readinessProbe:
+    httpGet:
+      path: /-/ready
+      port: http
+      scheme: HTTP
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 20
+
+  resources: {}
+
+  persistence:
+    enabled: false
+    existingClaim: ""
+    annotations: {}
+    accessMode: ReadWriteOnce
+    storageClass: standard
+    size: 8Gi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: {}

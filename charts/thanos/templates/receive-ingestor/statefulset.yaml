@@ -1,0 +1,160 @@
+{{- if .Values.receive.enabled -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "thanos.receiveIngestor.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "thanos.receiveIngestor.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ printf "%s-headless" (include "thanos.receiveIngestor.fullname" .) }}
+  replicas: {{ .Values.receive.ingestor.replicas }}
+  {{- with .Values.receive.ingestor.updateStrategy }}
+  updateStrategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "thanos.receiveIngestor.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "thanos.receiveIngestor.selectorLabels" . | nindent 8 }}
+      {{- with .Values.receive.ingestor.podLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if or .Values.objstoreConfig.create (gt (len .Values.receive.ingestor.podAnnotations) 0) }}
+      annotations:
+      {{- if .Values.objstoreConfig.create }}
+        checksum/config: {{ .Values.objstoreConfig.value | sha256sum }}
+      {{- end }}
+      {{- with .Values.receive.ingestor.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "thanos.receiveIngestor.serviceAccountName" . }}
+      {{- with .Values.receive.ingestor.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.receive.ingestor.priorityClassName }}
+      priorityClassName: {{ . | quote }}
+      {{- end }}
+      {{- with .Values.receive.ingestor.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ . }}
+      {{- end }}
+      containers:
+        - name: thanos-receive-ingestor
+          {{- with .Values.receive.ingestor.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: {{ include "thanos.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: HOST_IP_ADDRESS
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+          {{- with .Values.receive.ingestor.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          args:
+            - receive
+            - --log.level={{ .Values.logLevel }}
+            - --log.format={{ .Values.logFormat }}
+            - --grpc-address=0.0.0.0:10901
+            - --http-address=0.0.0.0:10902
+            - --remote-write.address=0.0.0.0:19291
+            - --objstore.config-file=/etc/thanos/objstore.yaml
+            - --tsdb.path=/var/thanos/receive
+            - --tsdb.retention={{ .Values.receive.retention }}
+            - --label=receive_replica="$(NAME)"
+            - {{ printf "--receive.local-endpoint=$(NAME).%s.%s-headless.svc.cluster.local:10901" (include "thanos.receiveIngestor.fullname" .) .Release.Namespace }}
+          {{- with .Values.receive.ingestor.extraArgs }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: grpc
+              protocol: TCP
+              containerPort: 10901
+            - name: http
+              protocol: TCP
+              containerPort: 10902
+            - name: http-rem-write
+              protocol: TCP
+              containerPort: 19291
+          livenessProbe:
+            {{- toYaml .Values.receive.ingestor.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.receive.ingestor.readinessProbe | nindent 12 }}
+          volumeMounts:
+            - name: objstore-config
+              mountPath: /etc/thanos/objstore.yaml
+              subPath: {{ .Values.objstoreConfig.key }}
+              readOnly: true
+            - name: data
+              mountPath: /var/thanos/receive
+              readOnly: false
+          {{- with .Values.receive.ingestor.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: objstore-config
+          secret:
+            secretName: {{ include "thanos.objstoreConfigSecretName" . }}
+      {{- if not .Values.receive.ingestor.persistence.enabled }}
+        - name: data
+          emptyDir: {}
+      {{- end }}
+      {{- with .Values.receive.ingestor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.receive.ingestor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.receive.ingestor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.receive.ingestor.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  {{- if .Values.receive.ingestor.persistence.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          {{- include "thanos.receiveIngestor.selectorLabels" . | nindent 10 }}
+        {{- with .Values.receive.ingestor.persistence.annotations }}
+        annotations:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+      spec:
+      {{- with .Values.receive.ingestor.persistence.storageClass }}
+      {{- if (eq "-" .) }}
+        storageClassName: ""
+      {{- else }}
+        storageClassName: {{ . }}
+      {{- end }}
+      {{- end }}
+        accessModes:
+          - {{ .Values.receive.ingestor.persistence.accessMode }}
+        resources:
+          requests:
+            storage: {{ .Values.receive.ingestor.persistence.size }}
+  {{- end }}
+{{- end -}}
