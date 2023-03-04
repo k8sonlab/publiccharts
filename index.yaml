@@ -1245,6 +1245,32 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.2.3/librephotos-0.2.3.tgz
     version: 0.2.3
+  thanos:
+  - apiVersion: v2
+    appVersion: 0.30.2
+    created: "2023-03-04T07:14:32.276453987Z"
+    description: Helm chart for Thanos.
+    digest: 2355f7bf6d23cb2e7a9e8ff22947c8f65c42a8dad62e4ea4eba58a3212e952ad
+    home: https://thanos.io/
+    icon: https://cncf-branding.netlify.app/img/projects/thanos/icon/color/thanos-icon-color.png
+    keywords:
+    - kubernetes
+    - thanos
+    - monitoring
+    - alerting
+    - metrics
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: thanos
+    sources:
+    - https://github.com/thanos-io/thanos
+    - https://github.com/thanos-io/kube-thanos
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.0.0/thanos-1.0.0.tgz
+    version: 1.0.0
   unifi:
   - apiVersion: v2
     appVersion: v7.3.83
@@ -1585,4 +1611,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-04T04:34:44.405589471Z"
+generated: "2023-03-04T07:14:32.276575187Z"
