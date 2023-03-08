@@ -41,7 +41,7 @@ jobs:
           #FOUNDVER=$( curl -H "Authorization: Bearer $NOOP" ${registryIndex}/v2/${containerRepo}/tags/list\?last\="$LAST" |\
           # jq -r '.tags[] | select(test("^[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
           FOUNDVER=$(curl https://hub.docker.com/v2/repositories/zwavejs/zwave-js-ui/tags/\?page_size\=20\&page\=1\&ordering\=last_updated |\
-           jq '.results[].name | select(test("^[0-9]+[.][0-9]+[.][0-9]+$")) ' | head -1)
+           jq -r '.results[].name | select(test("^[0-9]+[.][0-9]+[.][0-9]+$")) ' | head -1)
           echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
           echo "Current version is ${LAST} and found '${FOUNDVER}'"
   patch-helm:
@@ -65,8 +65,7 @@ jobs:
           helm plugin install https://github.com/sstarcher/helm-release
       - name: compare found version to current
         run: |
-          echo ./yq -i '{{.versionKey}} = {{ shell-quote .NEWVERSION }}' ${chartPath}/Chart.yaml
-          ./yq -i '{{.versionKey}} = {{ shell-quote .NEWVERSION }}' ${chartPath}/Chart.yaml
+          ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
       - name: Run helm-docs
         run: |
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
