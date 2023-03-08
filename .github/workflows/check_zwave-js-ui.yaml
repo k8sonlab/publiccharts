@@ -4,7 +4,7 @@ on:
     - cron:  '20 5 * * *'
   push:
     paths:
-      - '.github.workflows/check_zwave-js-ui.yaml'
+      - '.github/workflows/check_zwave-js-ui.yaml'
 env:
   imagePath: 'zwavejs/zwave-js-ui'
   containerRepo: 'zwavejs/zwave-js-ui'
