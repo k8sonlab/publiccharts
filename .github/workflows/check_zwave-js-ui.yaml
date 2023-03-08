@@ -1,7 +1,7 @@
 name: Check Latest ZWAVE-JS-UI
 on:
   schedule:
-    - cron:  '8 5 * * *'
+    - cron:  '11 5 * * *'
 env:
   imagePath: 'zwavejs/zwave-js-ui'
   containerRepo: 'zwavejs/zwave-js-ui'
