@@ -65,7 +65,8 @@ jobs:
           helm plugin install https://github.com/sstarcher/helm-release
       - name: compare found version to current
         run: |
-          ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
+          echo ./yq -i '{{.versionKey}} = {{ shell-quote .NEWVERSION }}' ${chartPath}/Chart.yaml
+          ./yq -i '{{.versionKey}} = {{ shell-quote .NEWVERSION }}' ${chartPath}/Chart.yaml
       - name: Run helm-docs
         run: |
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
