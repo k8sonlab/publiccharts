@@ -39,7 +39,7 @@ jobs:
           LAST=$(./yq eval "${versionKey}" ${chartPath}/Chart.yaml)
           # register latest found
           #FOUNDVER=$( curl -H "Authorization: Bearer $NOOP" ${registryIndex}/v2/${containerRepo}/tags/list\?last\="$LAST" |\
-           jq -r '.tags[] | select(test("^[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
+          # jq -r '.tags[] | select(test("^[0-9]+[.][0-9]+[.][0-9]+$"))' |tail -1)
           FOUNDVER=$(curl https://hub.docker.com/v2/repositories/zwavejs/zwave-js-ui/tags/\?page_size\=20\&page\=1\&ordering\=last_updated |\
            jq '.results[].name | select(test("^[0-9]+[.][0-9]+[.][0-9]+$")) ' | head -1)
           echo "newversion=$FOUNDVER" >> $GITHUB_OUTPUT
