@@ -1248,6 +1248,31 @@ entries:
   thanos:
   - apiVersion: v2
     appVersion: 0.30.2
+    created: "2023-03-09T05:36:00.798573341Z"
+    description: Helm chart for Thanos.
+    digest: 36828462e41482f3525cc691294e92ce52ddf1cd5a8c1ca6c1b12ca11e20ed3c
+    home: https://thanos.io/
+    icon: https://cncf-branding.netlify.app/img/projects/thanos/icon/color/thanos-icon-color.png
+    keywords:
+    - kubernetes
+    - thanos
+    - monitoring
+    - alerting
+    - metrics
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: thanos
+    sources:
+    - https://github.com/thanos-io/thanos
+    - https://github.com/thanos-io/kube-thanos
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.0.1/thanos-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 0.30.2
     created: "2023-03-04T07:14:32.276453987Z"
     description: Helm chart for Thanos.
     digest: 2355f7bf6d23cb2e7a9e8ff22947c8f65c42a8dad62e4ea4eba58a3212e952ad
@@ -1378,6 +1403,23 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.0/unifi-0.1.0.tgz
     version: 0.1.0
   zwave-js-ui:
+  - apiVersion: v2
+    appVersion: 8.10.0
+    created: "2023-03-09T05:36:00.942155561Z"
+    description: Helmchart for zwave-js-ui
+    digest: 99dbf6e10bceba10ea202942ade72b32e14514d570984f4a1d12a886a9cd0ae5
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+    icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
+    maintainers:
+    - name: varet80
+    name: zwave-js-ui
+    sources:
+    - https://github.com/zwave-js/zwave-js-ui
+    - https://github.com/zwave-js/node-zwave-js
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.2.6/zwave-js-ui-0.2.6.tgz
+    version: 0.2.6
   - apiVersion: v2
     appVersion: 8.9.0
     created: "2023-03-04T04:34:44.405287564Z"
@@ -1611,4 +1653,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-04T07:14:32.276575187Z"
+generated: "2023-03-09T05:36:00.94235816Z"
