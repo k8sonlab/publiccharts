@@ -69,15 +69,15 @@ jobs:
       - name: compare found version to current
         run: |
           ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
+      - name: bump chart version
+        id: bump-chart
+        run: |
+          helm release --bump=${releaseType} --source helm -s $chartPath
       - name: Run helm-docs
         run: |
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
           ./helm-docs --sort-values-order file -c ${chartPath}
           rm helm-docs
-      - name: bump chart version
-        id: bump-chart
-        run: |
-          helm release --bump=${releaseType} --source helm -s $chartPath
       - name: Commit latest release version
         run: |
           git config --global user.name 'Workflow-V'
