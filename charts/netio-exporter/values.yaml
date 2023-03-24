@@ -70,3 +70,5 @@ serviceMonitor:
   interval: 30s
   # -- namespace selector
   namespaceSelector: {}
+  # -- endpoint additions - add endpoint modifications
+  endpointAdditions: {} 

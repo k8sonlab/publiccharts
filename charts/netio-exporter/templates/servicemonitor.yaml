@@ -12,6 +12,9 @@ spec:
   endpoints:
   - interval: {{ .Values.serviceMonitor.interval }}
     port: http
+    {{- with .Values.serviceMonitor.endpointAdditions }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   {{- with .Values.serviceMonitor.namespaceSelector }}
   namespaceSelector:
   {{- toYaml . | nindent 4 }}

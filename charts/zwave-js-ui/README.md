@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.2.12](https://img.shields.io/badge/Version-0.2.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.11.0](https://img.shields.io/badge/AppVersion-8.11.0-informational?style=flat-square)
+![Version: 0.2.13](https://img.shields.io/badge/Version-0.2.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.11.0](https://img.shields.io/badge/AppVersion-8.11.0-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -52,8 +52,9 @@ Helmchart for zwave-js-ui
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
-| serviceMonitor | object | `{"enabled":false,"interval":"30s","labels":{},"namespaceSelector":{}}` | Support Prometheus ServiceMonitor |
+| serviceMonitor | object | `{"enabled":false,"endpointAdditions":{},"interval":"30s","labels":{},"namespaceSelector":{}}` | Support Prometheus ServiceMonitor |
 | serviceMonitor.enabled | bool | `false` | enable Service Monitor |
+| serviceMonitor.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
 | serviceMonitor.interval | string | `"30s"` | interval |
 | serviceMonitor.labels | object | `{}` | add Custom labels, for prometheus Service Monitor |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
