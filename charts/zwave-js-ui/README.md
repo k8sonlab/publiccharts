@@ -21,42 +21,44 @@ Helmchart for zwave-js-ui
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| replicaCount | int | `1` |  |
-| image.repository | string | `"zwavejs/zwave-js-ui"` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `""` |  |
-| imagePullSecrets | list | `[]` |  |
-| nameOverride | string | `""` |  |
-| fullnameOverride | string | `""` |  |
-| health | object | `{"livenessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":15,"path":"/health","periodSeconds":30},"readinessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30},"startupProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30}}` | configure Probes |
-| ports | object | `{"ui":{"containerPort":8091,"name":"http-ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http-websocket","protocol":"TCP","servicePort":3000}}` | ui and websocet ports |
-| service.type | string | `"ClusterIP"` |  |
-| service.port | int | `8091` |  |
-| strategy | object | `{"type":"Recreate"}` | Setting default strategy, to avoid running 2 containers with one stick |
-| serviceAccount.create | bool | `true` |  |
-| serviceAccount.annotations | object | `{}` |  |
-| serviceAccount.name | string | `""` |  |
+| affinity | object | `{}` |  |
 | env | list | `[{"name":"ZWAVE_JS_EXTERNAL_CONFIG","value":"/usr/src/app/store/.config-db"}]` | add your env variables here, following standard syntax |
 | envFrom | list | `[]` | you can add secrets and configmaps. this way you support external secrets for secure variables |
-| podAnnotations | object | `{}` |  |
-| podSecurityContext | object | `{}` |  |
-| securityContext | object | `{}` |  |
-| persistence.enabled | bool | `false` | enable persistent volume, otherwise use empty dir |
-| persistence.mountPath | string | `"/usr/src/app/store"` | change the path of store. Just in case you use different env variable. |
-| ingress.enabled | bool | `false` |  |
-| ingress.className | string | `""` |  |
+| fullnameOverride | string | `""` |  |
+| health | object | `{"livenessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":15,"path":"/health","periodSeconds":30},"readinessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30},"startupProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30}}` | configure Probes |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.repository | string | `"zwavejs/zwave-js-ui"` |  |
+| image.tag | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
+| ingress.className | string | `""` |  |
+| ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"chart-example.local"` |  |
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
-| resources | object | `{"limits":{"cpu":"300m","memory":"256Mi"},"requests":{"cpu":"200m","memory":"192Mi"}}` | Initial resources, based on a 40node network |
+| nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
-| tolerations | list | `[]` |  |
-| affinity | object | `{}` |  |
+| persistence.enabled | bool | `false` | enable persistent volume, otherwise use empty dir |
+| persistence.mountPath | string | `"/usr/src/app/store"` | change the path of store. Just in case you use different env variable. |
+| podAnnotations | object | `{}` |  |
+| podSecurityContext | object | `{}` |  |
+| ports | object | `{"ui":{"containerPort":8091,"name":"http-ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http-websocket","protocol":"TCP","servicePort":3000}}` | ui and websocet ports |
+| replicaCount | int | `1` |  |
+| resources | object | `{"limits":{"cpu":"300m","memory":"256Mi"},"requests":{"cpu":"200m","memory":"192Mi"}}` | Initial resources, based on a 40node network |
+| securityContext | object | `{}` |  |
+| service.port | int | `8091` |  |
+| service.type | string | `"ClusterIP"` |  |
+| serviceAccount.annotations | object | `{}` |  |
+| serviceAccount.create | bool | `true` |  |
+| serviceAccount.name | string | `""` |  |
 | serviceMonitor | object | `{"enabled":false,"interval":"30s","labels":{},"namespaceSelector":{}}` | Support Prometheus ServiceMonitor |
 | serviceMonitor.enabled | bool | `false` | enable Service Monitor |
-| serviceMonitor.labels | object | `{}` | add Custom labels, for prometheus Service Monitor |
 | serviceMonitor.interval | string | `"30s"` | interval |
+| serviceMonitor.labels | object | `{}` | add Custom labels, for prometheus Service Monitor |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
+| strategy | object | `{"type":"Recreate"}` | Setting default strategy, to avoid running 2 containers with one stick |
+| tolerations | list | `[]` |  |
 
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
