@@ -1247,6 +1247,16 @@ entries:
     version: 0.2.3
   netio-exporter:
   - apiVersion: v2
+    appVersion: 0.0.3
+    created: "2023-04-04T14:07:42.257113035Z"
+    description: A Helm chart for Kubernetes
+    digest: 4b28decee6e1ba71cd4efdb18a0351733799602dbd7fa9e1d4b97ab66a31cd1b
+    name: netio-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/netio-exporter-0.1.2/netio-exporter-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.0.2
     created: "2023-03-24T15:13:44.715806057Z"
     description: A Helm chart for Kubernetes
@@ -1414,6 +1424,23 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.0/unifi-0.1.0.tgz
     version: 0.1.0
   zwave-js-ui:
+  - apiVersion: v2
+    appVersion: 8.12.0
+    created: "2023-04-04T14:07:42.437095Z"
+    description: Helmchart for zwave-js-ui
+    digest: dba21b932569bd59b03b5bca2e506e708d3f3382e2f76aaa903240cbf259162c
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+    icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
+    maintainers:
+    - name: varet80
+    name: zwave-js-ui
+    sources:
+    - https://github.com/zwave-js/zwave-js-ui
+    - https://github.com/zwave-js/node-zwave-js
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.2.15/zwave-js-ui-0.2.15.tgz
+    version: 0.2.15
   - apiVersion: v2
     appVersion: 8.11.0
     created: "2023-03-24T15:13:44.812843346Z"
@@ -1766,4 +1793,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-24T15:13:44.813121653Z"
+generated: "2023-04-04T14:07:42.437493602Z"
