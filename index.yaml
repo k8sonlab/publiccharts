@@ -1245,6 +1245,17 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-0.2.3/librephotos-0.2.3.tgz
     version: 0.2.3
+  mosquitto:
+  - apiVersion: v2
+    appVersion: 2.0.15
+    created: "2023-04-26T13:43:01.312342421Z"
+    description: Eclipse Mosquitto is an open source message broker which implements
+      MQTT version 5, 3.1.1 and 3.1
+    digest: 9879ce51f15b42bc998039d9f173d772072b91733949bccb7a5203815e4fecef
+    name: mosquitto
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/mosquitto-2.4.1/mosquitto-2.4.1.tgz
+    version: 2.4.1
   netio-exporter:
   - apiVersion: v2
     appVersion: 0.0.3
@@ -1861,4 +1872,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-20T05:28:16.946926617Z"
+generated: "2023-04-26T13:43:01.312538826Z"
