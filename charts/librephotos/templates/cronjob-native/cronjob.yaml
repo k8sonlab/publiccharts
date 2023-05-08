@@ -1,0 +1,43 @@
+{{- if eq .Values.cronjob.type "native" }}
+{{ $localTree := .Values.cronjob.native }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "names.name" . }}-scan-cron
+  labels:
+    app.kubernetes.io/app: scan-cron
+    {{- include "labels" . | nindent 4 }}
+  annotations:
+    {{ toYaml $localTree.annotations | indent 4 }}
+spec:
+  schedule: "{{ $localTree.schedule }}"
+  concurrencyPolicy: {{ $localTree.concurrencyPolicy }}
+  failedJobsHistoryLimit: {{ $localTree.failedJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ $localTree.successfulJobsHistoryLimit }}
+  jobTemplate:
+    metadata:
+      labels:
+        app.kubernetes.io/app: scan-cron
+        {{- include "labels.selectorLabels" . | nindent 8 }}
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/app: scan-cron
+            {{- include "labels.selectorLabels" . | nindent 12 }}
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: {{ .Chart.Name }}
+              image: alpine/k8s:{{ $localTree.image.kubernetesVersion }}
+              imagePullPolicy: {{ $localTree.image.pullPolicy }}
+              volumeMounts:
+              - name: backend-cj-script
+                mountPath: /opt
+              command:  [ "/bin/sh", "/opt/cronjob.sh"]
+          serviceAccountName: {{ .Release.Name }}-scan-cron
+          volumes:
+          - name: backend-cj-script
+            configMap:
+              name: {{ .Release.Name }}-scan-cron
+{{- end }}

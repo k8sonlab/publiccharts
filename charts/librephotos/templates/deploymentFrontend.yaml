@@ -1,0 +1,57 @@
+{{ $resourceName := .Release.Name }}
+{{ $localTree := .Values.frontend }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $resourceName }}-frontend
+  labels:
+    {{- include "labels" .| nindent 4 }}
+  annotations:
+    {{- toYaml $localTree.annotations | nindent 4 }}
+spec:
+  revisionHistoryLimit: 3
+  replicas: {{ $localTree.replicaCount }}
+  strategy:
+    type: {{ $localTree.updateStrategyType }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: frontend
+      {{- include "labels.selectorLabels" .| nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- toYaml $localTree.annotations | nindent 8 }}
+      labels:
+        app.kubernetes.io/app: frontend
+        {{- include "labels.selectorLabels" .| nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 30
+      {{ if $localTree.podAffinity.enabled }}
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: "app.kubernetes.io/instance"
+                operator: In
+                values:
+                - {{ .Release.Name }}
+            topologyKey: "kubernetes.io/hostname"
+      {{ end }}
+      containers:
+        - name: frontend
+          image: "{{ $localTree.image.repository }}:{{ default .Chart.AppVersion $localTree.image.tag }}"
+          imagePullPolicy: {{ default "IfNotPresent" $localTree.image.pullPolicy }}
+          tty: false
+          stdin: false
+          {{- toYaml $localTree.healthchecks | nindent 10 }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: frontend
+              containerPort: 3000
+              protocol: TCP
+          {{- if $localTree.resources }}
+          resources:
+            {{- toYaml $localTree.resources | nindent 12 }}
+          {{- end }}

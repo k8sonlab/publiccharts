@@ -1,0 +1,171 @@
+{{- $resourceName := .Release.Name }}
+{{- $selectorLabels := include "labels.selectorLabels" . }}
+{{ $localTree := .Values.backend }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $resourceName }}-backend
+  labels:
+    app.kubernetes.io/app: backend
+    {{- include "labels" .| nindent 4 }}
+  annotations:
+    {{- toYaml $localTree.annotations | nindent 4 }}
+spec:
+  revisionHistoryLimit: 3
+  replicas: {{ $localTree.replicaCount }}
+  strategy:
+    type: {{ $localTree.updateStrategyType }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: backend
+      {{-  $selectorLabels | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- toYaml $localTree.annotations | nindent 8 }}
+      labels:
+        app.kubernetes.io/app: backend
+        {{-  $selectorLabels | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 30
+      {{- if .Values.postgresql.enabled }}
+      initContainers:
+      - name: check-postgres-ready
+        image: postgres:9.6.5
+        command: ['sh', '-c', 
+          'until pg_isready -h {{ $resourceName }}-postgresql -p 5432; 
+          do echo waiting for database; sleep 2; done;']
+      {{- end }}
+      containers:
+        - name: photos-librephotos
+          image: "{{ $localTree.image.repository }}:{{ default .Chart.AppVersion $localTree.image.tag }}"
+          imagePullPolicy: {{ default "IfNotPresent" $localTree.image.pullPolicy }}
+          tty: false
+          stdin: false
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          env:
+            {{- range $k, $v := $localTree.env }}
+            - name: "{{ $k }}"
+              value: "{{ $v }}"
+            {{- end }}
+            {{- if .Values.postgresql.enabled }}
+            - name: "DB_BACKEND"
+              value: {{ tpl $localTree.envTemplates.dbBackend . }}
+            - name: "DB_NAME"
+              value: {{ tpl $localTree.envTemplates.dbName . }}
+            - name: "DB_PORT"
+              value: {{ tpl $localTree.envTemplates.dbPort . | quote }}
+            - name: "DB_USER"
+              value: {{ tpl $localTree.envTemplates.dbUser . }}
+            - name: DB_HOST
+              value: {{ default (printf "%s-postgresql" $resourceName) .Values.pg.override.host }}
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  {{- if .Values.postgresql.auth.existingSecret }}
+                  name: {{ .Values.postgresql.auth.existingSecret }}
+                  key:  {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
+                  {{- else }}
+                  name: {{ $resourceName }}-postgresql
+                  key: "password"
+                  {{- end }}
+            {{- else if .Values.externalDB.enabled }}
+            - name: "DB_BACKEND"
+              value: {{ .Values.externalDB.type }}
+            - name: "DB_NAME"
+              value: {{ .Values.externalDB.name }}
+            - name: "DB_PORT"
+              value: {{ .Values.externalDB.port | quote }}
+            - name: "DB_USER"
+              value: {{ .Values.externalDB.user }}
+            - name: DB_HOST
+              value: {{ .Values.externalDB.host }}
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  {{- if .Values.externalDB.existingSecret }}
+                  name: {{ .Values.externalDB.existingSecret }}
+                  key:  {{ .Values.externalDB.secretKeys.userPasswordKey }}
+                  {{- else }}
+                  name: {{ .Values.externalDB.pass }}
+                  key: "password"
+                  {{- end }}           
+            {{- end }}
+            {{- if .Values.redis.enabled }}
+            - name: "REDIS_PORT"
+              value: {{ tpl $localTree.envTemplates.redisPort . | quote }}
+            - name: "BACKEND_HOST"
+              value: "{{ $resourceName }}-backend"
+            - name: REDIS_HOST
+              value: {{ $resourceName }}-redis-master
+            - name: REDIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  {{- if .Values.redis.auth.existingSecret }}
+                  name: {{ .Values.redis.auth.existingSecret }}
+                  key: {{ .Values.redis.auth.existingSecretPasswordKey }}
+                  {{- else }}
+                  name: {{ $resourceName }}-redis
+                  key: "redis-password"
+                  {{- end }}
+            {{- end }}
+          envFrom:
+            {{- if not .Values.externalSecretKey }}
+            - secretRef:
+                name: "{{ $resourceName }}-secrets"
+            {{- end }}
+            - secretRef:
+               name: {{ if .Values.existingSecret -}} {{ .Values.existingSecret | quote }} {{- else }} "{{ $resourceName }}-creds" {{- end }}
+          {{- range $secretName := $localTree.externalSecrets }}
+            - secretRef:
+                name: {{ $secretName | quote }}
+          {{- end }}
+          {{- range $cmName := $localTree.externalConfigMaps }}
+            - configMapRef:
+                name: {{ $cmName | quote }}
+          {{- end }}
+          ports:
+            - name: backend
+              containerPort: 8001
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /root/.cache
+              name: data
+              subPath: cache
+            - mountPath: /etc/nginx/nginx.conf
+              name: config
+              readOnly: true
+              subPath: nginx-config
+            - mountPath: /logs
+              name: data
+              subPath: logs
+            - mountPath: /data
+              name: data
+              subPath: data
+            - mountPath: /protected_media
+              name: data
+              subPath: protected-media
+            - mountPath: /shared
+              name: data
+              subPath: shared
+            - mountPath: /tmp
+              name: temp
+            - mountPath: /var/logs
+              name: varlogs
+            {{- if .Values.extraVolumeMounts }}{{- toYaml .Values.extraVolumeMounts | nindent 12 }}{{- end }}
+          {{- toYaml $localTree.healthchecks | nindent 10 }}
+          {{- if $localTree.resources }}
+          resources:
+            {{- toYaml $localTree.resources | nindent 12 }}
+          {{- end }}
+      volumes:
+        {{- toYaml .Values.volumes | nindent 8 }}
+        - name: config
+          configMap:
+            defaultMode: 420
+            name: {{ $resourceName }}-nginx-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ $resourceName }}
+        {{- if .Values.extraVolumes }}{{- toYaml .Values.extraVolumes | nindent 8 }}{{- end}}

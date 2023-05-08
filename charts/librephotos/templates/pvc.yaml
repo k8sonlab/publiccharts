@@ -1,0 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{- include "labels" .| nindent 4 }}
+spec:
+  accessModes:
+    {{- toYaml .Values.dataVolume.accessModes | nindent 4 }}
+  {{- with .Values.dataVolume.storageClassName }}
+  storageClassName: {{ . }}
+  {{- end }}
+  resources:
+    requests:
+      storage: "{{ .Values.dataVolume.size }}"

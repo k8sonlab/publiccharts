@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-proxy
+  labels:
+    {{- include "labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.service.proxy.annotations | nindent 4 }}
+spec:
+  type: {{ .Values.service.proxy.type }}
+  ports:
+  {{- toYaml .Values.service.proxy.ports | nindent 4 }}
+  selector:
+    app.kubernetes.io/app: proxy
+    {{- include "labels.selectorLabels" . | nindent 4 }}

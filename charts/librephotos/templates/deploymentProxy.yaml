@@ -1,0 +1,81 @@
+{{ $resourceName := .Release.Name }}
+{{ $localTree := .Values.proxy }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $resourceName }}-proxy
+  labels:
+    {{- include "labels" .| nindent 4 }}
+  annotations:
+    {{- toYaml $localTree.annotations | nindent 4 }}
+spec:
+  revisionHistoryLimit: 3
+  replicas: {{ $localTree.replicaCount }}
+  strategy:
+    type: {{ $localTree.updateStrategyType }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: proxy
+      {{- include "labels.selectorLabels" .| nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- toYaml $localTree.annotations | nindent 8 }}
+      labels:
+        app.kubernetes.io/app: proxy
+        {{- include "labels.selectorLabels" .| nindent 8 }}
+    spec:
+      {{ if $localTree.podAffinity.enabled }}
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: "app.kubernetes.io/instance"
+                operator: In
+                values:
+                - {{ .Release.Name }}
+            topologyKey: "kubernetes.io/hostname"
+      {{ end }}
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: proxy
+          image: "{{ $localTree.image.repository }}:{{ default .Chart.AppVersion $localTree.image.tag }}"
+          imagePullPolicy: {{ default "IfNotPresent" $localTree.image.pullPolicy }}
+          {{- toYaml $localTree.healthchecks | nindent 10 }}
+          tty: false
+          stdin: false
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: main
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /root/.cache
+              name: data
+              subPath: cache
+            - mountPath: /etc/nginx/nginx.conf
+              name: config
+              subPath: nginx-config
+              readOnly: true
+            - mountPath: /data
+              name: data
+              subPath: data
+            - mountPath: /protected_media
+              name: data
+              subPath: protected-media
+            {{- if .Values.extraVolumeMounts }}{{- toYaml .Values.extraVolumeMounts | nindent 12 }}{{- end }}
+          {{- if $localTree.resources }}
+          resources:
+            {{- toYaml $localTree.resources | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ $resourceName }}
+        - name: config
+          configMap:
+            defaultMode: 420
+            name: {{ $resourceName }}-nginx-config
+        {{- if .Values.extraVolumes }}{{- toYaml .Values.extraVolumes | nindent 8 }}{{- end}}

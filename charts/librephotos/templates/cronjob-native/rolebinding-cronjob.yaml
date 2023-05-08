@@ -1,0 +1,13 @@
+{{- if eq .Values.cronjob.type "native" }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "names.name" . }}-scan-cron
+subjects:
+- kind: ServiceAccount
+  name: {{ include "names.name" . }}-scan-cron
+roleRef:
+  kind: Role
+  name:  {{ include "names.name" . }}-scan-cron
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}

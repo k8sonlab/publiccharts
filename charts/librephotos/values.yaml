@@ -1,0 +1,255 @@
+backend:
+  # -- Replica counts
+  replicaCount: 1
+  # -- Annotations
+  annotations: {}
+  # -- Using recreate strategy, as this helps to run only one container at a time
+  updateStrategyType: Recreate
+  image:
+    # -- Repository and image name
+    repository: reallibrephotos/librephotos
+  resources:
+    limits:
+      memory: 8Gi
+    requests:
+      cpu: 10m
+      memory: 50Mi
+  env:
+    DEBUG: "0"
+    HEAVYWEIGHT_PROCESS: "2"
+    SKIP_PATTERNS: ""
+    WEB_CONCURRENCY: "4"
+    ALLOW_UPLOAD: "false"
+  envTemplates:
+    # -- redis port retrieved by parent helm chart
+    redisPort: "{{ .Values.redis.master.containerPorts.redis }}"
+    # -- Postgresql DB Name
+    dbName: "{{ default .Values.postgresql.auth.database .Values.pg.override.database }}"
+    # -- Postgresql DB port
+    dbPort: "{{ default .Values.postgresql.containerPorts.postgresql .Values.pg.override.port }}"
+    # -- Postgresql DB password
+    dbUser: "{{ default .Values.postgresql.auth.database .Values.pg.override.user }}"
+    # -- Database Backend type, supporting postgresql
+    dbBackend: "postgresql"
+  # -- List of external secrets to be used as Environment Variable sources
+  externalSecrets: []
+  # -- List of external secrets to be used as Environment Variable sources
+  externalConfigMaps: []
+  healthchecks:
+    livenessProbe:
+      tcpSocket:
+        port: 8001
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    readinessProbe:
+      tcpSocket:
+        port: 8001
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    startupProbe:
+      tcpSocket:
+        port: 8001
+      initialDelaySeconds: 10
+      failureThreshold: 60
+      timeoutSeconds: 2
+      periodSeconds: 5
+
+frontend:
+  podAffinity:
+    # -- Force pods to deploy on same node as backend
+    enabled: true
+  replicaCount: 1
+  updateStrategyType: RollingUpdate
+  annotations: {}
+  image:
+    repository: reallibrephotos/librephotos-frontend
+  healthchecks:
+    livenessProbe:
+      tcpSocket:
+        port: 3000
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    readinessProbe:
+      tcpSocket:
+        port: 3000
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 120
+    startupProbe:
+      tcpSocket:
+        port: 3000
+      initialDelaySeconds: 10
+      failureThreshold: 60
+      timeoutSeconds: 2
+      periodSeconds: 5
+proxy:
+  podAffinity:
+    # -- Force pods to deploy on same node as backend
+    enabled: true
+  replicaCount: 1
+  updateStrategyType: RollingUpdate
+  annotations: {}
+  image:
+    repository: reallibrephotos/librephotos-proxy
+  healthchecks:
+    livenessProbe:
+      tcpSocket:
+        port: 80 
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 60
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80 
+      initialDelaySeconds: 10
+      failureThreshold: 5
+      timeoutSeconds: 5
+      periodSeconds: 60
+    startupProbe:
+      tcpSocket:
+        port: 80 
+      initialDelaySeconds: 10
+      failureThreshold: 60
+      timeoutSeconds: 2
+      periodSeconds: 5
+
+service:
+  backend:
+    type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: 8001
+        protocol: TCP
+        name: backend
+    annotations: {}
+  frontend:
+    type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: 3000
+        protocol: TCP
+        name: backend
+    annotations: {}
+  proxy:
+    type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: 80
+        protocol: TCP
+        name: backend
+    annotations: {}
+
+secret:
+  ADMIN_EMAIL: "admin@mydomain.com"
+  ADMIN_USERNAME: "admin"
+  ADMIN_PASSWORD: "password"
+  MAPBOX_API_KEY: ""
+
+# -- instead of creating and using the default secret. Name a secret in this variable
+# existingSecret: <secret>
+
+# -- Enable if you want to completely ignore management of external Secret Key secret creation
+externalSecretKey: false
+
+cronjob:
+  # -- Create a native kubernetes cronjob, using roles to access kubernetes exec and execute the python through a third party container. This is an Antipattern! but the only way, till another exists
+  type: native
+  native:
+    # -- Annotations for the cronjog
+    annotations: {}
+    # -- Cronjob schedule
+    schedule: "0 * * * *"
+    # -- concurrency policy, Forbid as default, to avoid running two scans
+    concurrencyPolicy: Forbid
+    # -- keep 10 jobs for log parsing (if they fail
+    failedJobsHistoryLimit: 10
+    # -- keep 5 successful jobs for log parsing.
+    successfulJobHistoryLimit: 5
+    image:
+      imagePullPolicy: IfNotPresent
+      # -- Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags
+      kubernetesVersion: "1.22.6"
+  scan:
+    # -- Enable scanning filesystem (Folder scanning)
+    filesystem: true
+    # -- Support scanning Nextcloud 
+    nextcloud: false
+
+nameOverride: ""
+fullnameOverride: ""
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    add: []
+    drop: []
+  privileged: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+
+ingress:
+  # -- enable ingress 
+  enabled: false
+  annotations: {}
+  # -- currently only hotsname is needed for ingress
+  hostname: ""
+  # -- Configure TLS for the ingress. Both secretName and hosts can process a Helm template.
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+dataVolume:
+  # -- Size of the volume to be created (data)
+  size: 100Gi
+  # -- Access mode of volume
+  accessModes: 
+   - "ReadWriteOnce"
+  # -- Storage class of data volume
+  storageClassName: ""
+# to be refactored
+volumes:
+  # -- Shared volume, as emptyDir
+  - name: shared
+    emptyDir:
+      {}
+  # -- temporary folder in Memory
+  - name: temp
+    emptyDir:
+      medium: Memory
+  # -- logs in emptyDir
+  - name: varlogs
+    emptyDir:
+      {}
+
+# -- You can define extra volumes, in the typical K8s syntax (Only in backend)
+extraVolumes:
+
+# -- You can define extra volume mounts, in the typical K8s syntax (Only in backend)
+extraVolumeMounts:
+
+pg:
+  override: {}
+# Postgresql
+postgresql:
+  # -- install bitnami postgresql
+  enabled: true
+  auth:
+    username: librephotos
+    database: librephotos
+redis:
+  # -- install bitnami redis
+  enabled: true
+  architecture: standalone
+  master:
+    disableCommands:
+      - FLUSHALL
