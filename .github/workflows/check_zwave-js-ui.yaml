@@ -126,5 +126,5 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         env:
-          CR_TOKEN: "${{ secrets.PAT }}"
           CR_SKIP_EXISTING: true
+          CR_TOKEN: "${{ secrets.PAT }}"

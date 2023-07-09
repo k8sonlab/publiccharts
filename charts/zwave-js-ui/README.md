@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.2.29](https://img.shields.io/badge/Version-0.2.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.18.99](https://img.shields.io/badge/AppVersion-8.18.99-informational?style=flat-square)
+![Version: 0.2.30](https://img.shields.io/badge/Version-0.2.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.18.99](https://img.shields.io/badge/AppVersion-8.18.99-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -43,15 +43,7 @@ Helmchart for zwave-js-ui
 | securityContext | object | `{}` |  |
 | persistence.enabled | bool | `false` | enable persistent volume, otherwise use empty dir |
 | persistence.mountPath | string | `"/usr/src/app/store"` | change the path of store. Just in case you use different env variable. |
-| persistence.subPath | string | `""` | Specify a subpath to mount from, useful for shared config volumes |
-| usbDevice | string | `"/dev/ttyUSB0"` | Specify the usb device to mount from the host if its different than ttyUSB0 |
-| ingress.enabled | bool | `false` |  |
-| ingress.className | string | `""` |  |
-| ingress.annotations | object | `{}` |  |
-| ingress.hosts[0].host | string | `"chart-example.local"` |  |
-| ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
-| ingress.tls | list | `[]` |  |
+| ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[{"host":"chart-example.local","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}],"tls":[]}` | Support custom usb device usbDevice: /dev/ttyUSB0 |
 | resources | object | `{"limits":{"cpu":"300m","memory":"256Mi"},"requests":{"cpu":"200m","memory":"192Mi"}}` | Initial resources, based on a 40node network |
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
