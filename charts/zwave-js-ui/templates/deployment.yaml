@@ -82,6 +82,7 @@ spec:
           volumeMounts:
             - name: store
               mountPath: {{ .Values.persistence.mountPath }}
+              subPath: {{ .Values.persistence.subPath }}
       volumes:
         - name: store
         {{- if .Values.persistence.enabled }}
