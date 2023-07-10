@@ -84,6 +84,11 @@ spec:
               mountPath: {{ .Values.persistence.mountPath }}
               subPath: {{ .Values.persistence.subPath }}
       volumes:
+        {{- if .Values.usbDevice }}
+        - name: usb
+          hostPath:
+            path: {{ .Values.usbDevice }}
+        {{- end }}
         - name: store
         {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
