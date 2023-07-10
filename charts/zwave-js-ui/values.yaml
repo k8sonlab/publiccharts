@@ -97,6 +97,8 @@ persistence:
   # -- Optionally specify a subPath
   # subPath: /path/to/config
 
+usbDevice: /dev/ttyUSB0
+
 ingress:
   enabled: false
   className: ""
