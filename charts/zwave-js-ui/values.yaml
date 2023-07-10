@@ -94,6 +94,8 @@ persistence:
   # existingClaim: my-claim
   # -- change the path of store. Just in case you use different env variable.
   mountPath: /usr/src/app/store
+  # -- Optionally specify a subPath
+  # subPath: /path/to/config
 
 ingress:
   enabled: false
