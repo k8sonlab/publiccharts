@@ -80,6 +80,10 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            {{- if .Values.usbDevice }}
+            - name: usb
+              mountPath: /dev/ttyUSB0
+            {{- end }}
             - name: store
               mountPath: {{ .Values.persistence.mountPath }}
               subPath: {{ .Values.persistence.subPath }}
