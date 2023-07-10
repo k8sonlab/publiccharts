@@ -43,6 +43,7 @@ Helmchart for zwave-js-ui
 | securityContext | object | `{}` |  |
 | persistence.enabled | bool | `false` | enable persistent volume, otherwise use empty dir |
 | persistence.mountPath | string | `"/usr/src/app/store"` | change the path of store. Just in case you use different env variable. |
+| persistence.subPath | string | `""` | Specify a subpath to mount from, useful for shared config volumes |
 | ingress.enabled | bool | `false` |  |
 | ingress.className | string | `""` |  |
 | ingress.annotations | object | `{}` |  |
