@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 0.202318.0](https://img.shields.io/badge/Version-0.202318.0-informational?style=flat-square) ![AppVersion: 2023w20](https://img.shields.io/badge/AppVersion-2023w20-informational?style=flat-square)
+![Version: 0.202331.0](https://img.shields.io/badge/Version-0.202331.0-informational?style=flat-square) ![AppVersion: 2023w31](https://img.shields.io/badge/AppVersion-2023w31-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -23,8 +23,8 @@ Kubernetes: `>=1.16.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | => 12.1.2 |
-| https://charts.bitnami.com/bitnami | redis | => 17.10.2 |
+| https://charts.bitnami.com/bitnami | postgresql | => 12.8.2 |
+| https://charts.bitnami.com/bitnami | redis | => 17.15.0 |
 
 ## Values
 
