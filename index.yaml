@@ -1536,6 +1536,23 @@ entries:
     version: 0.1.0
   zwave-js-ui:
   - apiVersion: v2
+    appVersion: 8.23.0
+    created: "2023-08-18T05:27:40.177752838Z"
+    description: Helmchart for zwave-js-ui
+    digest: adb751f24b29e0e0917cd6380b926696e23e74e55da4dd9e68b99236ae587318
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+    icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
+    maintainers:
+    - name: varet80
+    name: zwave-js-ui
+    sources:
+    - https://github.com/zwave-js/zwave-js-ui
+    - https://github.com/zwave-js/node-zwave-js
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.2.39/zwave-js-ui-0.2.39.tgz
+    version: 0.2.39
+  - apiVersion: v2
     appVersion: 8.22.3
     created: "2023-08-09T05:28:17.252437093Z"
     description: Helmchart for zwave-js-ui
@@ -2210,4 +2227,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-17T04:47:13.955999899Z"
+generated: "2023-08-18T05:27:40.178326541Z"
