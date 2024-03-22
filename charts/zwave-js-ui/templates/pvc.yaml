@@ -3,7 +3,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "zwave-js-ui.fullname" . }}-zwave-js-ui
+  name: {{ template "zwave-js-ui.fullname" . }}-store
   labels:
     app.kubernetes.io/name: {{ include "zwave-js-ui.name" . }}
     helm.sh/chart: {{ include "zwave-js-ui.chart" . }}
