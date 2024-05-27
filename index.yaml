@@ -1566,7 +1566,7 @@ entries:
     version: 0.1.9
   zwave-js-ui:
   - apiVersion: v2
-    appVersion: 9.12.1
+    appVersion: 9.12.0
     created: "2024-05-27T08:24:11.695425244Z"
     description: Helmchart for zwave-js-ui
     digest: cdcdbedccfb2dd95f3f78461a85b5c7f45de529fc6e7d5b48f021418d6eefb8a
