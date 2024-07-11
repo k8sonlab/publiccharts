@@ -8,6 +8,10 @@ spec:
   selector:
     matchLabels:
       {{- include "zwave-js-ui.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{ toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,10 +24,6 @@ spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.strategy }}
-      strategy:
-        {{ toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "zwave-js-ui.serviceAccountName" . }}
       securityContext:
