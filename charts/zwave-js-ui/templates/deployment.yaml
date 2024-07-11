@@ -23,7 +23,7 @@ spec:
       {{- end }}
       {{- with .Values.strategy }}
       strategy:
-        {{ toYaml | nindent 8 }}
+        {{ toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "zwave-js-ui.serviceAccountName" . }}
       securityContext:
