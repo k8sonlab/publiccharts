@@ -10,4 +10,4 @@ sources:
 - https://github.com/zwave-js/zwave-js-ui
 - https://github.com/zwave-js/node-zwave-js
 type: application
-version: 0.2.88
+version: 0.2.89
