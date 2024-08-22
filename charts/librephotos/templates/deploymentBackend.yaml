@@ -167,5 +167,5 @@ spec:
             name: {{ $resourceName }}-nginx-config
         - name: data
           persistentVolumeClaim:
-            claimName: {{ $resourceName }}
+            claimName: {{ default $resourceName $localTree.PersistentVolumeClaimName }}
         {{- if .Values.extraVolumes }}{{- toYaml .Values.extraVolumes | nindent 8 }}{{- end}}

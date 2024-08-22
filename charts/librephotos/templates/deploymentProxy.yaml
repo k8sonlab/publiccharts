@@ -73,7 +73,7 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: {{ $resourceName }}
+            claimName: {{ default $resourceName $localTree.PersistentVolumeClaimName }}
         - name: config
           configMap:
             defaultMode: 420
