@@ -10,6 +10,9 @@ spec:
   {{- with .Values.dataVolume.storageClassName }}
   storageClassName: {{ . }}
   {{- end }}
+  {{- with .Values.dataVolume.volumeName }}
+  volumeName: {{ . }}
+  {{- end }}
   resources:
     requests:
       storage: "{{ .Values.dataVolume.size }}"
