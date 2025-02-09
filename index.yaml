@@ -1518,6 +1518,16 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 2.0.20
+    created: "2025-02-09T04:28:49.684088115Z"
+    description: Eclipse Mosquitto is an open source message broker which implements
+      MQTT version 5, 3.1.1 and 3.1
+    digest: f31614c0cabb1f05e81b9e27c9274565e751bd77ba8979f0c9cf4d2f23720958
+    name: mosquitto
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/mosquitto-2.6.0/mosquitto-2.6.0.tgz
+    version: 2.6.0
+  - apiVersion: v2
+    appVersion: 2.0.20
     created: "2025-02-09T04:16:30.376010205Z"
     description: Eclipse Mosquitto is an open source message broker which implements
       MQTT version 5, 3.1.1 and 3.1
@@ -3963,4 +3973,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-09T04:16:30.751012827Z"
+generated: "2025-02-09T04:28:50.355297879Z"
