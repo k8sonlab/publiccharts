@@ -1,6 +1,6 @@
 # mosquitto
 
-![Version: 2.5.2](https://img.shields.io/badge/Version-2.5.2-informational?style=flat-square) ![AppVersion: 2.0.15](https://img.shields.io/badge/AppVersion-2.0.15-informational?style=flat-square)
+![Version: 2.5.3](https://img.shields.io/badge/Version-2.5.3-informational?style=flat-square) ![AppVersion: 2.0.20](https://img.shields.io/badge/AppVersion-2.0.20-informational?style=flat-square)
 
 Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
 
@@ -11,7 +11,7 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | replicaCount | int | `1` |  |
 | strategyType | string | `"Recreate"` |  |
 | image.repository | string | `"eclipse-mosquitto"` |  |
-| image.tag | string | `"2.0.15"` |  |
+| image.tag | string | `"2.0.20"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
