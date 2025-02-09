@@ -3,7 +3,8 @@ strategyType: Recreate
 
 image:
   repository: eclipse-mosquitto
-  tag: 2.0.20
+  # -- Image tag of the container. defaults to chart appVersion
+  tag: 
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -11,18 +12,20 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # --Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: true
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
 
 service:
+  # -- Service type, defaults to ClusterIP
   type: ClusterIP
-  #externalTrafficPolicy: Cluster
+  externalTrafficPolicy: Cluster
+  # -- Ability to choose the Service IP (clusterIP)
+  clusterIp: ""
   annotations: {}
     # metallb.universe.tf/allow-shared-ip: pi-hole
-
 ports:
   mqtt:
     port: 1883

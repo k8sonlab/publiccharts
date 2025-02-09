@@ -1,6 +1,6 @@
 # mosquitto
 
-![Version: 2.5.3](https://img.shields.io/badge/Version-2.5.3-informational?style=flat-square) ![AppVersion: 2.0.20](https://img.shields.io/badge/AppVersion-2.0.20-informational?style=flat-square)
+![Version: 2.6.0](https://img.shields.io/badge/Version-2.6.0-informational?style=flat-square) ![AppVersion: 2.0.20](https://img.shields.io/badge/AppVersion-2.0.20-informational?style=flat-square)
 
 Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
 
@@ -11,14 +11,16 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | replicaCount | int | `1` |  |
 | strategyType | string | `"Recreate"` |  |
 | image.repository | string | `"eclipse-mosquitto"` |  |
-| image.tag | string | `"2.0.20"` |  |
+| image.tag | string | `nil` | Image tag of the container. defaults to chart appVersion |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | fullnameOverride | string | `""` |  |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` |  |
-| service.type | string | `"ClusterIP"` |  |
+| service.type | string | `"ClusterIP"` | Service type, defaults to ClusterIP |
+| service.externalTrafficPolicy | string | `"Cluster"` |  |
+| service.clusterIp | string | `""` | Ability to choose the Service IP (clusterIP) |
 | service.annotations | object | `{}` |  |
 | ports.mqtt.port | int | `1883` |  |
 | ports.mqtt.protocol | string | `"TCP"` |  |
