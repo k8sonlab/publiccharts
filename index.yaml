@@ -1518,6 +1518,16 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 2.0.15
+    created: "2025-02-09T04:14:33.414737886Z"
+    description: Eclipse Mosquitto is an open source message broker which implements
+      MQTT version 5, 3.1.1 and 3.1
+    digest: 64535781be9551dc1daea02d0fcaee62b912cc9091ebe6aed489adbea62326e7
+    name: mosquitto
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/mosquitto-2.5.2/mosquitto-2.5.2.tgz
+    version: 2.5.2
+  - apiVersion: v2
+    appVersion: 2.0.15
     created: "2024-05-27T13:45:11.410077748Z"
     description: Eclipse Mosquitto is an open source message broker which implements
       MQTT version 5, 3.1.1 and 3.1
@@ -1654,6 +1664,21 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.0.0/thanos-1.0.0.tgz
     version: 1.0.0
   unifi:
+  - apiVersion: v2
+    appVersion: v9.0.114
+    created: "2025-02-09T04:14:33.837641866Z"
+    description: Unifi chart for Kubernetes
+    digest: e02abf1fd8f0a0e5a1f1a14ed048c3b3f418c51eef3e0e5a26eec165a0ad8bd7
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
+    icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
+    keywords:
+    - ubiquiti
+    - unifi
+    name: unifi
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.2.12/unifi-0.2.12.tgz
+    version: 0.2.12
   - apiVersion: v2
     appVersion: v9.0.108
     created: "2025-01-17T05:32:07.750684335Z"
@@ -3928,4 +3953,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-29T05:32:31.833473246Z"
+generated: "2025-02-09T04:14:33.91685731Z"
