@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.2.120](https://img.shields.io/badge/Version-0.2.120-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.31.0](https://img.shields.io/badge/AppVersion-9.31.0-informational?style=flat-square)
+![Version: 0.2.121](https://img.shields.io/badge/Version-0.2.121-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.32.0](https://img.shields.io/badge/AppVersion-9.32.0-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
