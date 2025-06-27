@@ -5,4 +5,5 @@ repos:
       - id: helm-docs
         args:
           - --chart-search-root=charts
+          - --skip-version-footer
           - --sort-values-order=file
