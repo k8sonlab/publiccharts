@@ -1,6 +1,6 @@
 # mosquitto
 
-![Version: 2.6.1](https://img.shields.io/badge/Version-2.6.1-informational?style=flat-square) ![AppVersion: 2.0.21](https://img.shields.io/badge/AppVersion-2.0.21-informational?style=flat-square)
+![Version: 2.6.2](https://img.shields.io/badge/Version-2.6.2-informational?style=flat-square) ![AppVersion: 2.0.21](https://img.shields.io/badge/AppVersion-2.0.21-informational?style=flat-square)
 
 Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
 
@@ -50,9 +50,10 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | monitoring.sidecar.enabled | bool | `false` |  |
 | monitoring.sidecar.port | int | `9234` |  |
 | monitoring.sidecar.image.repository | string | `"nolte/mosquitto-exporter"` |  |
-| monitoring.sidecar.image.tag | string | `"v0.6.3"` |  |
+| monitoring.sidecar.image.tag | string | `"2020.10.16"` |  |
 | monitoring.sidecar.image.pullPolicy | string | `"IfNotPresent"` |  |
 | monitoring.sidecar.resources.limits.cpu | string | `"300m"` |  |
 | monitoring.sidecar.resources.limits.memory | string | `"128Mi"` |  |
 | monitoring.sidecar.resources.requests.cpu | string | `"100m"` |  |
 | monitoring.sidecar.resources.requests.memory | string | `"64Mi"` |  |
+
