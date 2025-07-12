@@ -18,7 +18,7 @@ jobs:
       #      echo "Do something with this ${changed_file}."
       #    done
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -41,7 +41,7 @@ jobs:
           ./helm-docs --sort-values-order file
           rm helm-docs
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.5.0
+        uses: helm/chart-releaser-action@v1.7.0
         env:
           CR_TOKEN: "${{ secrets.PAT }}"
           CR_SKIP_EXISTING: true 
