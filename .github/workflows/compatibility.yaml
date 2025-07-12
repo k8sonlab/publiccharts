@@ -15,7 +15,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
       - name: Install Helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
         with:
           version: v3.10.0
       - id: files
@@ -65,7 +65,7 @@ jobs:
             fi
           done
       - name: Commit changes
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@v9
         with:
             message: 'Commited new chart versions'
   update_readme:
@@ -83,7 +83,7 @@ jobs:
           rm helm-docs
 
       - name: Commit bump
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@v9
         with:
             message: 'Regenerate chart README.md'
   helmcheck:
@@ -105,7 +105,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
         with:
           version: v3.11.0
 
