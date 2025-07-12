@@ -10,7 +10,7 @@ jobs:
     name: Check Helm Versions
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
@@ -73,7 +73,7 @@ jobs:
     name: Readme Updater
     needs: check_helm_versions
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: Run helm-docs
@@ -92,7 +92,7 @@ jobs:
     needs: update_readme
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
