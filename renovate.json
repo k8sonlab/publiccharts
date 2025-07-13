@@ -8,6 +8,10 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["nolte/mosquitto-exporter"],
       "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      matchDatasources: ["helm"],
+      "rangeStrategy": "bump"
     }
   ]
 }
