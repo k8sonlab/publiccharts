@@ -10,7 +10,7 @@
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
-      matchDatasources: ["helm"],
+      "matchDatasources": ["helm"],
       "rangeStrategy": "bump"
     }
   ]
