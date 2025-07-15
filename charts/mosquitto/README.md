@@ -8,54 +8,52 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | object | `{}` |  |
-| authentication.passwordEntries | string | `""` |  |
-| authentication.passwordFilePath | string | `"/etc/mosquitto/passwordfile"` |  |
-| authorization.aclfilePath | string | `"/etc/mosquitto/aclfile"` |  |
-| authorization.acls | string | `""` |  |
-| config | string | `"persistence true\npersistence_location /mosquitto/data/\nlog_dest stdout\nlistener 1883\nlistener 9090\nprotocol websockets\n"` |  |
-| existingConfigMap | string | `""` |  |
-| extraVolumeMounts | list | `[]` |  |
-| extraVolumes | list | `[]` |  |
-| fullnameOverride | string | `""` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
+| replicaCount | int | `1` |  |
+| strategyType | string | `"Recreate"` |  |
 | image.repository | string | `"eclipse-mosquitto"` |  |
 | image.tag | string | `nil` | Image tag of the container. defaults to chart appVersion |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
 | imagePullSecrets | list | `[]` |  |
-| monitoring.podMonitor.enabled | bool | `false` |  |
-| monitoring.sidecar.enabled | bool | `false` |  |
-| monitoring.sidecar.image.pullPolicy | string | `"IfNotPresent"` |  |
-| monitoring.sidecar.image.repository | string | `"nolte/mosquitto-exporter"` |  |
-| monitoring.sidecar.image.tag | string | `"v0.6.3"` |  |
-| monitoring.sidecar.port | int | `9234` |  |
-| monitoring.sidecar.resources.limits.cpu | string | `"300m"` |  |
-| monitoring.sidecar.resources.limits.memory | string | `"128Mi"` |  |
-| monitoring.sidecar.resources.requests.cpu | string | `"100m"` |  |
-| monitoring.sidecar.resources.requests.memory | string | `"64Mi"` |  |
 | nameOverride | string | `""` |  |
-| nodeSelector | object | `{}` |  |
-| persistence.accessMode | string | `"ReadWriteOnce"` |  |
-| persistence.enabled | bool | `true` |  |
-| persistence.existingClaim | string | `""` |  |
-| persistence.mountPath | string | `"/mosquitto/data"` |  |
-| persistence.size | string | `"1Gi"` |  |
-| persistence.subPath | string | `""` |  |
-| podSecurityContext | object | `{}` |  |
+| fullnameOverride | string | `""` |  |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `nil` |  |
+| service.type | string | `"ClusterIP"` | Service type, defaults to ClusterIP |
+| service.externalTrafficPolicy | string | `"Cluster"` |  |
+| service.clusterIp | string | `""` | Ability to choose the Service IP (clusterIP) |
+| service.annotations | object | `{}` |  |
 | ports.mqtt.port | int | `1883` |  |
 | ports.mqtt.protocol | string | `"TCP"` |  |
 | ports.websocket.port | int | `9090` |  |
 | ports.websocket.protocol | string | `"TCP"` |  |
-| replicaCount | int | `1` |  |
+| persistence.enabled | bool | `true` |  |
+| persistence.accessMode | string | `"ReadWriteOnce"` |  |
+| persistence.existingClaim | string | `""` |  |
+| persistence.mountPath | string | `"/mosquitto/data"` |  |
+| persistence.subPath | string | `""` |  |
+| persistence.size | string | `"1Gi"` |  |
 | resources | object | `{}` |  |
+| podSecurityContext | object | `{}` |  |
 | securityContext | object | `{}` |  |
-| service.annotations | object | `{}` |  |
-| service.clusterIp | string | `""` | Ability to choose the Service IP (clusterIP) |
-| service.externalTrafficPolicy | string | `"Cluster"` |  |
-| service.type | string | `"ClusterIP"` | Service type, defaults to ClusterIP |
-| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
-| serviceAccount.name | string | `nil` |  |
-| strategyType | string | `"Recreate"` |  |
+| nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
+| affinity | object | `{}` |  |
+| authentication.passwordEntries | string | `""` |  |
+| authentication.passwordFilePath | string | `"/etc/mosquitto/passwordfile"` |  |
+| authorization.acls | string | `""` |  |
+| authorization.aclfilePath | string | `"/etc/mosquitto/aclfile"` |  |
+| existingConfigMap | string | `""` |  |
+| config | string | `"persistence true\npersistence_location /mosquitto/data/\nlog_dest stdout\nlistener 1883\nlistener 9090\nprotocol websockets\n"` |  |
+| extraVolumes | list | `[]` |  |
+| extraVolumeMounts | list | `[]` |  |
+| monitoring.podMonitor.enabled | bool | `false` |  |
+| monitoring.sidecar.enabled | bool | `false` |  |
+| monitoring.sidecar.port | int | `9234` |  |
+| monitoring.sidecar.image.repository | string | `"nolte/mosquitto-exporter"` |  |
+| monitoring.sidecar.image.tag | string | `"v0.6.3"` |  |
+| monitoring.sidecar.image.pullPolicy | string | `"IfNotPresent"` |  |
+| monitoring.sidecar.resources.limits.cpu | string | `"300m"` |  |
+| monitoring.sidecar.resources.limits.memory | string | `"128Mi"` |  |
+| monitoring.sidecar.resources.requests.cpu | string | `"100m"` |  |
+| monitoring.sidecar.resources.requests.memory | string | `"64Mi"` |  |
 
-----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.14.2](https://github.com/norwoodj/helm-docs/releases/v1.14.2)
