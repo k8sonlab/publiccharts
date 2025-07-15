@@ -1,0 +1,39 @@
+annotations:
+  artifacthub.io/changes: |
+    - bump cloudflared version to 2025.5.0
+  artifacthub.io/license: BSD-3-Clause
+  artifacthub.io/category: networking
+  artifacthub.io/links: |
+    - name: Cloudflared
+      url: https://github.com/cloudflare/cloudflared/
+    - name: Chart Repo
+      url: https://github.com/publiccharts/charts/
+
+apiVersion: v2
+name: cloudflared
+description: CloudflareD deployment for use in k8s
+type: application
+
+# renovatebot: datasource=github-releases depName=cloudflare/cloudflared
+appVersion: "2025.5.0"
+
+version: "0.1.0"
+
+icon: https://avatars.githubusercontent.com/u/314135
+
+home: https://github.com/k8sonlab/publiccharts/
+
+keywords:
+  - cloudflare
+  - cloudflared
+  - reverse-tunnel
+  - tunnel
+  - helm-chart
+  - kubernetes
+  - devops
+  - networking
+  - proxy
+
+sources:
+  - https://github.com/k8sonlab/publiccharts
+  - https://github.com/cloudflare/cloudflared/

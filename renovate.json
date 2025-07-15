@@ -1,4 +1,4 @@
-{
+{:wq
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
@@ -12,6 +12,18 @@
     {
       "matchDatasources": ["helm"],
       "rangeStrategy": "bump"
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "(^|/)Chart\\.yaml$"
+      ],
+      "matchStrings": [
+        "# renovatebot: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*?appVersion: \"(?<currentValue>.*?)\""
+      ],
+      "datasourceTemplate": "{{datasource}}",
+      "depNameTemplate": "{{depName}}"
     }
   ]
 }
