@@ -1,5 +1,41 @@
 apiVersion: v1
 entries:
+  cloudflared:
+  - annotations:
+      artifacthub.io/category: networking
+      artifacthub.io/changes: |
+        - bump cloudflared version to 2025.5.0
+      artifacthub.io/license: BSD-3-Clause
+      artifacthub.io/links: |
+        - name: Cloudflared
+          url: https://github.com/cloudflare/cloudflared/
+        - name: Chart Repo
+          url: https://github.com/publiccharts/charts/
+    apiVersion: v2
+    appVersion: 2025.5.0
+    created: "2025-07-15T06:38:35.085183302Z"
+    description: CloudflareD deployment for use in k8s
+    digest: 46396e93f4956a785f4b6d100e416d4eadfbc56fc4e8d3eee0e0c071e8d780a3
+    home: https://github.com/k8sonlab/publiccharts/
+    icon: https://avatars.githubusercontent.com/u/314135
+    keywords:
+    - cloudflare
+    - cloudflared
+    - reverse-tunnel
+    - tunnel
+    - helm-chart
+    - kubernetes
+    - devops
+    - networking
+    - proxy
+    name: cloudflared
+    sources:
+    - https://github.com/k8sonlab/publiccharts
+    - https://github.com/cloudflare/cloudflared/
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/cloudflared-0.1.0/cloudflared-0.1.0.tgz
+    version: 0.1.0
   librephotos:
   - apiVersion: v2
     appVersion: 2025w28
@@ -4560,4 +4596,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-12T03:37:02.688368492Z"
+generated: "2025-07-15T06:38:35.814064791Z"
