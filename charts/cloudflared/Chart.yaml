@@ -15,7 +15,7 @@ description: CloudflareD deployment for use in k8s
 type: application
 
 # renovatebot: datasource=github-releases depName=cloudflare/cloudflared
-appVersion: "2025.5.0"
+appVersion: "2025.7.0"
 
 version: "0.1.0"
 
