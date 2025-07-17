@@ -20,4 +20,4 @@ sources:
 - https://github.com/thanos-io/kube-thanos
 - https://github.com/k8sonlab/publiccharts
 type: application
-version: 1.0.3
+version: 1.0.4
