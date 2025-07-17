@@ -21,6 +21,7 @@
         "helm"
       ],
       "rangeStrategy": "bump"
+      "automerge": true
     }
   ],
   "customManagers": [
