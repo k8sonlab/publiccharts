@@ -20,7 +20,7 @@
       "matchDatasources": [
         "helm"
       ],
-      "rangeStrategy": "bump"
+      "rangeStrategy": "bump",
       "automerge": true
     }
   ],
