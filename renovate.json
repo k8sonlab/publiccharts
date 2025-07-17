@@ -5,19 +5,29 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["nolte/mosquitto-exporter"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "nolte/mosquitto-exporter"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
     },
     {
-      "matchDatasources": ["helm"],
+      "matchDatasources": [
+        "helm"
+      ],
       "rangeStrategy": "bump"
     }
   ],
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": [
-        "(^|/)Chart\\.yaml$"
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)Chart\\.yaml$/"
       ],
       "matchStrings": [
         "# renovatebot: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*?appVersion: \"(?<currentValue>.*?)\""
