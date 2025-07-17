@@ -1,6 +1,4 @@
 apiVersion: v2
-
-# renovatebot: datasource=docker depName=thanosio/thanos
 appVersion: v0.39.1
 description: Helm chart for Thanos.
 home: https://thanos.io/
@@ -21,4 +19,4 @@ sources:
 - https://github.com/thanos-io/kube-thanos
 - https://github.com/k8sonlab/publiccharts
 type: application
-version: 1.0.5
+version: 1.0.6
