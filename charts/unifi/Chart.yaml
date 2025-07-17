@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: v9.2.87
+appVersion: v9.3.43
 description: Unifi chart for Kubernetes
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
 icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
@@ -8,4 +8,4 @@ keywords:
 - unifi
 name: unifi
 type: application
-version: 0.2.15
+version: 0.2.16
