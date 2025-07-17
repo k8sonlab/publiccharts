@@ -68,7 +68,7 @@ Objstore secret name
 The Thanos image to use
 */}}
 {{- define "thanos.image" -}}
-{{- printf "%s:%s" .Values.image.repository (default (printf "v%s" .Chart.AppVersion) .Values.image.tag) }}
+{{- printf "%s:%s" .Values.image.repository (default (printf "%s" .Chart.AppVersion) .Values.image.tag) }}
 {{- end }}
 
 {{/* Get Ingress API Version */}}
