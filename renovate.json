@@ -32,7 +32,7 @@
         "/(^|/)Chart\\.yaml$/"
       ],
       "matchStrings": [
-        "# renovatebot: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*?appVersion: \"(?<currentValue>.*?)\""
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*?appVersion: (?<currentValue>.*?)"
       ],
       "datasourceTemplate": "{{datasource}}",
       "depNameTemplate": "{{depName}}"

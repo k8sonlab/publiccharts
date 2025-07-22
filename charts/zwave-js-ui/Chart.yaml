@@ -1,4 +1,5 @@
 apiVersion: v2
+# renovate: datasource=docker depName=zwavejs/zwave-js-ui
 appVersion: 10.9.0
 description: Helmchart for zwave-js-ui
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
