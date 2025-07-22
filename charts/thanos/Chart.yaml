@@ -1,5 +1,6 @@
 apiVersion: v2
-appVersion: v0.39.1
+# renovatebot: datasource=docker depName=thanosio/thanos
+appVersion: "v0.39.1"
 description: Helm chart for Thanos.
 home: https://thanos.io/
 icon: https://cncf-branding.netlify.app/img/projects/thanos/icon/color/thanos-icon-color.png
