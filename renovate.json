@@ -18,7 +18,8 @@
     },
     {
       "matchDatasources": [
-        "helm"
+        "helmv3",
+        "docker"
       ],
       "rangeStrategy": "bump",
       "automerge": true
