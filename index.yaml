@@ -1780,6 +1780,31 @@ entries:
     version: 0.1.1
   thanos:
   - apiVersion: v2
+    appVersion: v0.39.2
+    created: "2025-07-22T12:24:06.791730147Z"
+    description: Helm chart for Thanos.
+    digest: 9ce4269871518251cc76038365ea01dcb1ef06809f8692cf3f91e92314d1e0ab
+    home: https://thanos.io/
+    icon: https://cncf-branding.netlify.app/img/projects/thanos/icon/color/thanos-icon-color.png
+    keywords:
+    - kubernetes
+    - thanos
+    - monitoring
+    - alerting
+    - metrics
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: thanos
+    sources:
+    - https://github.com/thanos-io/thanos
+    - https://github.com/thanos-io/kube-thanos
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.0.7/thanos-1.0.7.tgz
+    version: 1.0.7
+  - apiVersion: v2
     appVersion: v0.39.1
     created: "2025-07-17T07:50:30.135981238Z"
     description: Helm chart for Thanos.
@@ -4696,4 +4721,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-22T12:22:47.413616839Z"
+generated: "2025-07-22T12:24:06.943952789Z"
