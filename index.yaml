@@ -1931,6 +1931,21 @@ entries:
     version: 1.0.0
   unifi:
   - apiVersion: v2
+    appVersion: v9.4.19
+    created: "2025-09-17T05:33:29.844594512Z"
+    description: Unifi chart for Kubernetes
+    digest: 6b4d77b8255227f64361d46b2171130883c847d35a015f9185c614494f5ade0a
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
+    icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
+    keywords:
+    - ubiquiti
+    - unifi
+    name: unifi
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.2.18/unifi-0.2.18.tgz
+    version: 0.2.18
+  - apiVersion: v2
     appVersion: v9.3.45
     created: "2025-08-28T05:34:44.944034194Z"
     description: Unifi chart for Kubernetes
@@ -2276,6 +2291,23 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.9/unifi-0.1.9.tgz
     version: 0.1.9
   zwave-js-ui:
+  - apiVersion: v2
+    appVersion: 11.3.0
+    created: "2025-09-17T05:33:29.96743119Z"
+    description: Helmchart for zwave-js-ui
+    digest: 2bf227e62da5d04924c1e2028dc261d08a443bc0a7b9cd9b9f6c1256fde1e393
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+    icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
+    maintainers:
+    - name: varet80
+    name: zwave-js-ui
+    sources:
+    - https://github.com/zwave-js/zwave-js-ui
+    - https://github.com/zwave-js/node-zwave-js
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.2.153/zwave-js-ui-0.2.153.tgz
+    version: 0.2.153
   - apiVersion: v2
     appVersion: 11.2.1
     created: "2025-08-28T05:34:45.057791802Z"
@@ -4838,4 +4870,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-28T05:34:45.058865552Z"
+generated: "2025-09-17T05:33:29.968265695Z"
