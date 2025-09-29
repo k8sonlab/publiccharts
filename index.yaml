@@ -2,6 +2,36 @@ apiVersion: v1
 entries:
   librephotos:
   - apiVersion: v2
+    appVersion: 2025w35
+    created: "2025-09-29T05:54:58.318032391Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: => 12.8.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: => 20.0.0
+    description: Helmchart used to install Librephotos in a microservice manner
+    digest: a3c98b38740af9c44f8d6183de515906a4d5484cf297abc29d4bebe9b9df1f10
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
+    keywords:
+    - photolibrary
+    - photos
+    - librephotos
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: librephotos
+    sources:
+    - https://github.com/LibrePhotos/librephotos
+    - https://hub.docker.com/r/reallibrephotos
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-1.0.1/librephotos-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 2025w28
     created: "2025-07-12T03:37:02.602573867Z"
     dependencies:
@@ -4816,4 +4846,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-25T05:34:26.607270865Z"
+generated: "2025-09-29T05:54:58.563858552Z"
