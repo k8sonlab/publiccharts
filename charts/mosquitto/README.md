@@ -56,4 +56,3 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | monitoring.sidecar.resources.limits.memory | string | `"128Mi"` |  |
 | monitoring.sidecar.resources.requests.cpu | string | `"100m"` |  |
 | monitoring.sidecar.resources.requests.memory | string | `"64Mi"` |  |
-
