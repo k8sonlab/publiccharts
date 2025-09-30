@@ -243,11 +243,15 @@ pg:
 postgresql:
   # -- install bitnami postgresql
   enabled: true
+  image:
+    repository: bitnamilegacy/postgresql
   auth:
     username: librephotos
     database: librephotos
 redis:
   # -- install bitnami redis
+  image:
+    repository: bitnamilegacy/redis
   enabled: true
   architecture: standalone
   master:
