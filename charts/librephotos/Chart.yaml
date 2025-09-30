@@ -8,7 +8,7 @@ dependencies:
 - condition: redis.enabled
   name: redis
   repository: https://charts.bitnami.com/bitnami
-  version: => 20.0.0
+  version: => 21.0.0
 description: Helmchart used to install Librephotos in a microservice manner
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
 keywords:
