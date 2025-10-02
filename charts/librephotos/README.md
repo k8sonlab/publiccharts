@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: 2025w35](https://img.shields.io/badge/AppVersion-2025w35-informational?style=flat-square)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![AppVersion: 2025w35](https://img.shields.io/badge/AppVersion-2025w35-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -24,7 +24,7 @@ Kubernetes: `>=1.16.0-0`
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.bitnami.com/bitnami | postgresql | => 12.8.2 |
-| https://charts.bitnami.com/bitnami | redis | => 20.0.0 |
+| https://charts.bitnami.com/bitnami | redis | => 21.0.0 |
 
 ## Values
 
@@ -160,8 +160,10 @@ Kubernetes: `>=1.16.0-0`
 | extraVolumeMounts | string | `nil` | You can define extra volume mounts, in the typical K8s syntax (Only in backend) |
 | pg.override | object | `{}` |  |
 | postgresql.enabled | bool | `true` | install bitnami postgresql |
+| postgresql.image.repository | string | `"bitnamilegacy/postgresql"` |  |
 | postgresql.auth.username | string | `"librephotos"` |  |
 | postgresql.auth.database | string | `"librephotos"` |  |
-| redis.enabled | bool | `true` | install bitnami redis |
+| redis.image | object | `{"repository":"bitnamilegacy/redis"}` | install bitnami redis |
+| redis.enabled | bool | `true` |  |
 | redis.architecture | string | `"standalone"` |  |
 | redis.master.disableCommands[0] | string | `"FLUSHALL"` |  |
