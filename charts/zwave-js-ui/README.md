@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.2.154](https://img.shields.io/badge/Version-0.2.154-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.3.1](https://img.shields.io/badge/AppVersion-11.3.1-informational?style=flat-square)
+![Version: 0.2.154](https://img.shields.io/badge/Version-0.2.154-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.4.0](https://img.shields.io/badge/AppVersion-11.4.0-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -55,3 +55,4 @@ Helmchart for zwave-js-ui
 | serviceMonitor.interval | string | `"30s"` | interval |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
 | serviceMonitor.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
+
