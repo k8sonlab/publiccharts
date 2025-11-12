@@ -55,4 +55,3 @@ Helmchart for zwave-js-ui
 | serviceMonitor.interval | string | `"30s"` | interval |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
 | serviceMonitor.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
-
