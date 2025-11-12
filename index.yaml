@@ -104,6 +104,16 @@ entries:
     version: 2.4.1
   netio-exporter:
   - apiVersion: v2
+    appVersion: 0.0.5
+    created: "2025-11-12T04:17:00.558997061Z"
+    description: A Helm chart for Kubernetes
+    digest: 1ba836be77ef1d83b3a2510303c581cb909fc20042b98692cc31b31577c76bc9
+    name: netio-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/netio-exporter-0.1.4/netio-exporter-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     appVersion: 0.0.3
     created: "2024-05-27T13:45:11.556870536Z"
     description: A Helm chart for Kubernetes
@@ -3359,4 +3369,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-30T05:35:19.533035971Z"
+generated: "2025-11-12T04:17:00.943842284Z"
