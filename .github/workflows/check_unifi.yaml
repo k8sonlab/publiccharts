@@ -18,7 +18,7 @@ jobs:
       discoveredversion: ${{ steps.check-changes.outputs.newversion }}
     steps:
       - name: checkout project
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install Helm
         uses: azure/setup-helm@v4
         with:
@@ -48,7 +48,7 @@ jobs:
     if: needs.version-check.outputs.discoveredversion != ''
     steps:
       - name: checkout project
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         #with:
         #  token: ${{ secrets.READ_TOKEN }}
       - name: prepare yq
