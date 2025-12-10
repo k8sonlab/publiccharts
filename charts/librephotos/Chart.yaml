@@ -1,6 +1,6 @@
 apiVersion: v2
 # renovate: datasource=docker depName=reallibrephotos/librephotos-backend
-appVersion: 2025w35
+appVersion: 2025w44
 dependencies:
 - condition: postgresql.enabled
   name: postgresql
