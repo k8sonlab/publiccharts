@@ -25,4 +25,4 @@ name: librephotos
 sources:
 - https://github.com/LibrePhotos/librephotos
 - https://hub.docker.com/r/reallibrephotos
-version: 1.0.2
+version: 1.0.3
