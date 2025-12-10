@@ -1,5 +1,4 @@
 apiVersion: v2
-# renovate: datasource=docker depName=thanosio/thanos
 appVersion: v0.39.2
 description: Helm chart for Thanos.
 home: https://thanos.io/
@@ -20,4 +19,4 @@ sources:
 - https://github.com/thanos-io/kube-thanos
 - https://github.com/k8sonlab/publiccharts
 type: application
-version: 1.0.7
+version: 1.0.8
