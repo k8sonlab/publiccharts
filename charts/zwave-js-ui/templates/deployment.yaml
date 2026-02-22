@@ -53,6 +53,13 @@ spec:
               containerPort: {{ .containerPort }}
               protocol: {{ .protocol }}
             {{- end }}
+          {{- if .Values.promExporter.enabled }}
+            {{- with .Values.ports.promExporter }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              protocol: {{ .protocol }}
+            {{- end }}
+          {{- end }}
           {{- with .Values.health.livenessProbe }}
           livenessProbe:
             httpGet:
@@ -87,6 +94,19 @@ spec:
             - name: store
               mountPath: {{ .Values.persistence.mountPath }}
               subPath: {{ .Values.persistence.subPath }}
+        {{- if .Values.promExporter.enabled }}
+        - name: prom-exporter
+          image: "{{ .Values.promExporter.image.repository }}:{{ .Values.promExporter.image.tag }}"
+          imagePullPolicy: {{ .Values.promExporter.image.pullPolicy }}
+          ports:
+            {{- with .Values.ports.promExporter }}
+            - name: {{ .name }}
+              containerPort: {{ .containerPort }}
+              protocol: {{ .protocol }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.promExporter.resources | nindent 12 }}
+        {{- end }}
       volumes:
         {{- if .Values.usbDevice }}
         - name: usb

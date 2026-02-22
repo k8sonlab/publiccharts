@@ -39,5 +39,13 @@ spec:
       protocol: {{ .protocol }}
       name: {{ .name }}
    {{- end }}
+    {{- if .Values.promExporter.enabled }}
+    {{- with .Values.ports.promExporter }}
+    - port: {{ .servicePort }}
+      targetPort: {{ .containerPort }}
+      protocol: {{ .protocol }}
+      name: {{ .name }}
+   {{- end }}
+    {{- end }}
   selector:
     {{- include "zwave-js-ui.selectorLabels" . | nindent 4 }}

@@ -1,8 +1,8 @@
-{{ if .Values.serviceMonitor.enabled }}
+{{ if and .Values.serviceMonitor.enabled .Values.promExporter.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  labels: 
+  labels:
     {{- include "zwave-js-ui.labels" . | nindent 4 }}
     {{- with .Values.serviceMonitor.labels }}
     {{ toYaml . | nindent 4 }}
@@ -12,6 +12,11 @@ spec:
   endpoints:
   - interval: {{ .Values.serviceMonitor.interval }}
     port: {{ .Values.ports.ui.name }}
+    {{- with .Values.serviceMonitor.endpointAdditions }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  - interval: {{ .Values.serviceMonitor.interval }}
+    port: {{ .Values.ports.promExporter.name }}
     {{- with .Values.serviceMonitor.endpointAdditions }}
     {{- toYaml . | nindent 4 }}
     {{- end }}

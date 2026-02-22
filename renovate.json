@@ -18,6 +18,18 @@
     },
     {
       "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/k8sonlab/zwave-js-prom-exporter"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "matchDatasources": [
         "helmv3"
       ],
       "rangeStrategy": "bump",

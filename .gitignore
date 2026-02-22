@@ -2,3 +2,5 @@ yq
 **/*.swp
 charts/**/charts
 charts/**/Chart.lock
+.vscode
+.vscode/**

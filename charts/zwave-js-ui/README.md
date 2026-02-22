@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.3.10](https://img.shields.io/badge/Version-0.3.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.12.0](https://img.shields.io/badge/AppVersion-11.12.0-informational?style=flat-square)
+![Version: 0.3.11](https://img.shields.io/badge/Version-0.3.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.13.0](https://img.shields.io/badge/AppVersion-11.13.0-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -29,7 +29,7 @@ Helmchart for zwave-js-ui
 | nameOverride | string | `""` |  |
 | fullnameOverride | string | `""` |  |
 | health | object | `{"livenessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":15,"path":"/health","periodSeconds":30},"readinessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30},"startupProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30}}` | configure Probes |
-| ports | object | `{"ui":{"containerPort":8091,"name":"http-ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http-websocket","protocol":"TCP","servicePort":3000}}` | ui and websocet ports |
+| ports | object | `{"promExporter":{"containerPort":9090,"name":"http-prom-exporter","protocol":"TCP","servicePort":9090},"ui":{"containerPort":8091,"name":"http-ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http-websocket","protocol":"TCP","servicePort":3000}}` | ui and websocet ports |
 | service.type | string | `"ClusterIP"` |  |
 | service.port | int | `8091` |  |
 | service.annotations | object | `{}` |  |
@@ -50,9 +50,12 @@ Helmchart for zwave-js-ui
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
 | serviceMonitor | object | `{"enabled":false,"endpointAdditions":{},"interval":"30s","labels":{},"namespaceSelector":{}}` | Support Prometheus ServiceMonitor |
-| serviceMonitor.enabled | bool | `false` | enable Service Monitor |
+| serviceMonitor.enabled | bool | `false` | enable Service Monitor (only effective when promExporter.enabled is also true) |
 | serviceMonitor.labels | object | `{}` | add Custom labels, for prometheus Service Monitor |
 | serviceMonitor.interval | string | `"30s"` | interval |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
 | serviceMonitor.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
-
+| promExporter | object | `{"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/k8sonlab/zwave-js-prom-exporter","tag":"0.1.2"},"port":9090,"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Prometheus Exporter Sidecar |
+| promExporter.enabled | bool | `false` | enable Prometheus Exporter sidecar |
+| promExporter.port | int | `9090` | port for the exporter |
+| promExporter.resources | object | `{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | resources for the sidecar |
