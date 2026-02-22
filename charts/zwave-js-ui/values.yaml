@@ -50,7 +50,7 @@ ports:
     servicePort: 3000
     protocol: TCP
   promExporter:
-    name: http-prom-exporter
+    name: http-exporter
     containerPort: 9090
     servicePort: 9090
     protocol: TCP
