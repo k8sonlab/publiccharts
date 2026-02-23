@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.4.6](https://img.shields.io/badge/Version-0.4.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.12.0](https://img.shields.io/badge/AppVersion-11.12.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.12.0](https://img.shields.io/badge/AppVersion-11.12.0-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -50,12 +50,14 @@ Helmchart for zwave-js-ui
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
-| serviceMonitor | object | `{"enabled":false,"endpointAdditions":{},"interval":"30s","labels":{},"namespaceSelector":{}}` | Support Prometheus ServiceMonitor |
-| serviceMonitor.enabled | bool | `false` | enable Service Monitor (only effective when promExporter.enabled is also true) |
-| serviceMonitor.labels | object | `{}` | add Custom labels, for prometheus Service Monitor |
-| serviceMonitor.interval | string | `"30s"` | interval |
+| serviceMonitor | object | `{"labels":{},"namespaceSelector":{},"promExporter":{"enabled":true,"endpointAdditions":{},"interval":"30s"},"ui":{"enabled":false,"endpointAdditions":{},"interval":"30s"}}` | Support Prometheus ServiceMonitor |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
-| serviceMonitor.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
+| serviceMonitor.promExporter.enabled | bool | `true` | not required, placeholder for future changes. Currently controled under promExporter.enabled |
+| serviceMonitor.promExporter.interval | string | `"30s"` | interval |
+| serviceMonitor.promExporter.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
+| serviceMonitor.ui.enabled | bool | `false` | Enable Zwave-js-ui metrics endpoint pulling |
+| serviceMonitor.ui.interval | string | `"30s"` | interval |
+| serviceMonitor.ui.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
 | promExporter | object | `{"enabled":false,"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/k8sonlab/zwave-js-prom-exporter","tag":"0.2.3"},"port":9090,"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Prometheus Exporter Sidecar |
 | promExporter.enabled | bool | `false` | enable Prometheus Exporter sidecar |
 | promExporter.port | int | `9090` | port for the exporter |

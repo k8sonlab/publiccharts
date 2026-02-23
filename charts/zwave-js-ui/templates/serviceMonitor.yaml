@@ -1,4 +1,4 @@
-{{ if or .Values.serviceMonitor.enabled .Values.promExporter.enabled }}
+{{ if or .Values.serviceMonitor.ui.enabled .Values.promExporter.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -10,17 +10,17 @@ metadata:
   name: {{ include "zwave-js-ui.fullname" . }}
 spec:
   endpoints:
-  {{- if .Values.serviceMonitor.enabled }}
-  - interval: {{ .Values.serviceMonitor.interval }}
+  {{- if .Values.serviceMonitor.ui.enabled }}
+  - interval: {{ .Values.serviceMonitor.ui.interval }}
     port: {{ .Values.ports.ui.name }}
-    {{- with .Values.serviceMonitor.endpointAdditions }}
+    {{- with .Values.serviceMonitor.ui.endpointAdditions }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
   {{- end }}
   {{- if .Values.promExporter.enabled }}
-  - interval: {{ .Values.serviceMonitor.interval }}
+  - interval: {{ .Values.serviceMonitor.promExporter.interval }}
     port: {{ .Values.ports.promExporter.name }}
-    {{- with .Values.serviceMonitor.endpointAdditions }}
+    {{- with .Values.serviceMonitor.promExporter.endpointAdditions }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
   {{- end }}

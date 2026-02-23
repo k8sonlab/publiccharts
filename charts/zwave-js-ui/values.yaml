@@ -139,16 +139,23 @@ affinity: {}
 
 # -- Support Prometheus ServiceMonitor
 serviceMonitor:
-  # -- enable Service Monitor (only effective when promExporter.enabled is also true)
-  enabled: false
-  # -- add Custom labels, for prometheus Service Monitor
-  labels: {}
-  # -- interval
-  interval: 30s
   # -- namespace selector
   namespaceSelector: {}
-  # -- endpoint additions - add endpoint modifications
-  endpointAdditions: {}
+  labels: {}
+  promExporter:
+    # -- not required, placeholder for future changes. Currently controled under promExporter.enabled
+    enabled: true
+    # -- interval
+    interval: 30s
+    # -- endpoint additions - add endpoint modifications
+    endpointAdditions: {}
+  ui:
+    # -- Enable Zwave-js-ui metrics endpoint pulling
+    enabled: false
+    # -- interval
+    interval: 30s
+    # -- endpoint additions - add endpoint modifications
+    endpointAdditions: {}
 
 # -- Prometheus Exporter Sidecar
 promExporter:
