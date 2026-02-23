@@ -98,6 +98,30 @@ spec:
         - name: prom-exporter
           image: "{{ .Values.promExporter.image.repository }}:{{ .Values.promExporter.image.tag }}"
           imagePullPolicy: {{ .Values.promExporter.image.pullPolicy }}
+          {{- with .Values.promExporter.health.livenessProbe }}
+          livenessProbe:
+            httpGet:
+              path: {{ .path }}
+              port: {{ $.Values.ports.ui.name }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+          {{- end }}
+          {{- with .Values.promExporter.health.readinessProbe }}
+          readinessProbe:
+            httpGet:
+              path: {{ .path }}
+              port: {{ $.Values.ports.ui.name }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+          {{- end }}
+          {{- with .Values.promExporter.health.readinessProbe }}
+          startupProbe:
+            httpGet:
+              path: {{ .path }}
+              port: {{ $.Values.ports.ui.name }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+          {{- end }}
           ports:
             {{- with .Values.ports.promExporter }}
             - name: {{ .name }}

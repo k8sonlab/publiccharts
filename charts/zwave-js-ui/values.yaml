@@ -168,6 +168,20 @@ promExporter:
     pullPolicy: IfNotPresent
   # -- port for the exporter
   port: 9090
+  # -- probes for the sidecar
+  health:
+    livenessProbe:
+      path: /healthz
+      initialDelaySeconds: 15
+      periodSeconds: 30
+    readinessProbe:
+      path: /healthz
+      initialDelaySeconds: 5
+      periodSeconds: 30
+    startupProbe:
+      path: /healthz
+      initialDelaySeconds: 5
+      periodSeconds: 30
   # -- resources for the sidecar
   resources:
     limits:
