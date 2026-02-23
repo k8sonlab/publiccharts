@@ -16,6 +16,7 @@ Helmchart for zwave-js-ui
 
 * <https://github.com/zwave-js/zwave-js-ui>
 * <https://github.com/zwave-js/node-zwave-js>
+* <https://github.com/k8sonlab/zwave-js-prom-exporter>
 
 ## Values
 
