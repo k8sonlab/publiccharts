@@ -408,4 +408,3 @@ Helm chart for Thanos.
 | storeGateway.tolerations | list | `[]` |  |
 | storeGateway.affinity | object | `{}` |  |
 | storeGateway.topologySpreadConstraints | object | `{}` |  |
-

@@ -53,12 +53,6 @@ spec:
               containerPort: {{ .containerPort }}
               protocol: {{ .protocol }}
             {{- end }}
-          {{- if .Values.promExporter.enabled }}
-            {{- with .Values.ports.promExporter }}
-            - name: {{ .name }}
-              containerPort: {{ .containerPort }}
-              protocol: {{ .protocol }}
-            {{- end }}
           {{- end }}
           {{- with .Values.health.livenessProbe }}
           livenessProbe:
