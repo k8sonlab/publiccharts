@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "zwave-js-ui.labels" . | nindent 4 }}
 spec:
-    replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "zwave-js-ui.selectorLabels" . | nindent 6 }}
