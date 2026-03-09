@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.5.7](https://img.shields.io/badge/Version-0.5.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.12.0](https://img.shields.io/badge/AppVersion-11.12.0-informational?style=flat-square)
+![Version: 0.5.9](https://img.shields.io/badge/Version-0.5.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.14.0](https://img.shields.io/badge/AppVersion-11.14.0-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -58,8 +58,9 @@ Helmchart for zwave-js-ui
 | serviceMonitor.ui.enabled | bool | `false` | Enable Zwave-js-ui metrics endpoint pulling |
 | serviceMonitor.ui.interval | string | `"30s"` | interval |
 | serviceMonitor.ui.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
-| promExporter | object | `{"enabled":false,"health":{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}},"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/k8sonlab/zwave-js-prom-exporter","tag":"0.2.5"},"port":9090,"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Prometheus Exporter Sidecar |
+| promExporter | object | `{"enabled":false,"health":{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}},"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/k8sonlab/zwave-js-prom-exporter","tag":"0.2.6"},"port":9090,"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Prometheus Exporter Sidecar |
 | promExporter.enabled | bool | `false` | enable Prometheus Exporter sidecar |
 | promExporter.port | int | `9090` | port for the exporter |
 | promExporter.health | object | `{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}}` | probes for the sidecar |
 | promExporter.resources | object | `{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | resources for the sidecar |
+
