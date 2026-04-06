@@ -53,7 +53,7 @@ spec:
             - name: {{ .name }}
               containerPort: {{ .containerPort }}
               protocol: {{ .protocol }}
-            {{- end }}  
+            {{- end }}
           {{- with .Values.health.livenessProbe }}
           livenessProbe:
             httpGet:
@@ -90,8 +90,15 @@ spec:
               subPath: {{ .Values.persistence.subPath }}
         {{- if .Values.promExporter.enabled }}
         - name: prom-exporter
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.promExporter.image.repository }}:{{ .Values.promExporter.image.tag }}"
           imagePullPolicy: {{ .Values.promExporter.image.pullPolicy }}
+          env:
+            - name: PROM_PORT
+              value: {{ .Values.ports.promExporter.containerPort | quote }}
+            - name: ZWAVE_WS_URL
+              value: 'ws://localhost:3000'
           {{- with .Values.promExporter.health.livenessProbe }}
           livenessProbe:
             httpGet:
