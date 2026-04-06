@@ -32,7 +32,7 @@ Helmchart for zwave-js-ui
 | health | object | `{"livenessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":15,"path":"/health","periodSeconds":30},"readinessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30},"startupProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30}}` | configure Probes |
 | ports | object | `{"promExporter":{"containerPort":9090,"name":"http-exporter","protocol":"TCP","servicePort":9090},"ui":{"containerPort":8091,"name":"http-ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http-websocket","protocol":"TCP","servicePort":3000}}` | ui and websocet ports |
 | service.type | string | `"ClusterIP"` |  |
-| service.port | int | `8091` |  |
+| service.port | int | `80` |  |
 | service.annotations | object | `{}` |  |
 | strategy | object | `{"type":"Recreate"}` | Setting default strategy, to avoid running 2 containers with one stick |
 | serviceAccount.create | bool | `true` |  |
