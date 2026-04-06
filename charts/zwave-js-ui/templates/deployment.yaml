@@ -90,6 +90,8 @@ spec:
               subPath: {{ .Values.persistence.subPath }}
         {{- if .Values.promExporter.enabled }}
         - name: prom-exporter
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.promExporter.image.repository }}:{{ .Values.promExporter.image.tag }}"
           imagePullPolicy: {{ .Values.promExporter.image.pullPolicy }}
           env:
