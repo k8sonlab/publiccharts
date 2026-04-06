@@ -53,7 +53,7 @@ spec:
             - name: {{ .name }}
               containerPort: {{ .containerPort }}
               protocol: {{ .protocol }}
-            {{- end }}  
+            {{- end }}
           {{- with .Values.health.livenessProbe }}
           livenessProbe:
             httpGet:
