@@ -58,8 +58,8 @@ Helmchart for zwave-js-ui
 | serviceMonitor.ui.enabled | bool | `false` | Enable Zwave-js-ui metrics endpoint pulling |
 | serviceMonitor.ui.interval | string | `"30s"` | interval |
 | serviceMonitor.ui.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
-| promExporter | object | `{"enabled":false,"health":{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}},"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/k8sonlab/zwave-js-prom-exporter","tag":"0.3.0"},"port":9090,"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Prometheus Exporter Sidecar |
-| promExporter.enabled | bool | `false` | enable Prometheus Exporter sidecar |
+| promExporter | object | `{"enabled":false,"health":{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}},"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/k8sonlab/zwave-js-prom-exporter","tag":"0.2.6"},"port":9090,"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Prometheus Exporter Sidecar |
+| promExporter.enabled | bool | `false` | enable Prometheus Exporter sidecar, require WebSocket to be enabled |
 | promExporter.port | int | `9090` | port for the exporter |
 | promExporter.health | object | `{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}}` | probes for the sidecar |
 | promExporter.resources | object | `{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | resources for the sidecar |
