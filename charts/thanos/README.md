@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.40.1](https://img.shields.io/badge/AppVersion-v0.40.1-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.41.0](https://img.shields.io/badge/AppVersion-v0.41.0-informational?style=flat-square)
 
 Helm chart for Thanos.
 
@@ -408,4 +408,3 @@ Helm chart for Thanos.
 | storeGateway.tolerations | list | `[]` |  |
 | storeGateway.affinity | object | `{}` |  |
 | storeGateway.topologySpreadConstraints | object | `{}` |  |
-
