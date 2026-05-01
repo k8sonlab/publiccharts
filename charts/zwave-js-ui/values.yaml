@@ -104,7 +104,7 @@ persistence:
   # subPath: /path/to/config
 
 # -- Support custom usb device
-#usbDevice: /dev/ttyUSB0
+# usbDevice: /dev/ttyUSB0
 
 ingress:
   enabled: false
