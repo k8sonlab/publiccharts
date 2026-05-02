@@ -137,8 +137,10 @@ tolerations: []
 
 affinity: {}
 
+# -- Define network policy targeting managed pod
 networkPolicy:
   enabled: false
+  # -- If cilium flavor is defined, fill definition here
   cilium:
     egress:
     - toFQDNs:
@@ -160,7 +162,9 @@ networkPolicy:
     - toPorts:
       - ports:
         - port: http-ui
+  # -- Choose policy flavor in 'kubernetes', 'cilium'
   flavor: kubernetes
+  # -- If kubernetes flavor is defined, fill definition here
   ingress:
   - ports:
     - protocol: TCP
