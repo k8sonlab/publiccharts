@@ -104,7 +104,7 @@ persistence:
   # subPath: /path/to/config
 
 # -- Support custom usb device
-#usbDevice: /dev/ttyUSB0
+# usbDevice: /dev/ttyUSB0
 
 ingress:
   enabled: false
@@ -136,6 +136,40 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# -- Define network policy targeting managed pod
+networkPolicy:
+  enabled: false
+  # -- If cilium flavor is defined, fill definition here
+  cilium:
+    egress:
+    - toFQDNs:
+      - matchName: firmware.zwave-js.io
+    - toEndpoints:
+      - matchLabels:
+          k8s:io.kubernetes.pod.namespace: kube-system
+          k8s:k8s-app: kube-dns
+      toPorts:
+      - ports:
+        - port: "53"
+          protocol: UDP
+        - port: "53"
+          protocol: TCP
+        rules:
+          dns:
+          - matchName: firmware.zwave-js.io
+    ingress:
+    - toPorts:
+      - ports:
+        - port: http-ui
+  # -- Choose policy flavor in 'kubernetes', 'cilium'
+  flavor: kubernetes
+  # -- If kubernetes flavor is defined, fill definition here
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: http-ui
+  egress: {}
 
 # -- Support Prometheus ServiceMonitor
 serviceMonitor:
