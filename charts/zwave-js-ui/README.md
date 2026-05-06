@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.5.16](https://img.shields.io/badge/Version-0.5.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.16.2](https://img.shields.io/badge/AppVersion-11.16.2-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.17.0](https://img.shields.io/badge/AppVersion-11.17.0-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -50,6 +50,10 @@ Helmchart for zwave-js-ui
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
+| networkPolicy | object | `{"cilium":{"egress":[{"toFQDNs":[{"matchName":"firmware.zwave-js.io"}]},{"toEndpoints":[{"matchLabels":{"k8s:io.kubernetes.pod.namespace":"kube-system","k8s:k8s-app":"kube-dns"}}],"toPorts":[{"ports":[{"port":"53","protocol":"UDP"},{"port":"53","protocol":"TCP"}],"rules":{"dns":[{"matchName":"firmware.zwave-js.io"}]}}]}],"ingress":[{"toPorts":[{"ports":[{"port":"http-ui"}]}]}]},"egress":{},"enabled":false,"flavor":"kubernetes","ingress":[{"ports":[{"port":"http-ui","protocol":"TCP"}]}]}` | Define network policy targeting managed pod |
+| networkPolicy.cilium | object | `{"egress":[{"toFQDNs":[{"matchName":"firmware.zwave-js.io"}]},{"toEndpoints":[{"matchLabels":{"k8s:io.kubernetes.pod.namespace":"kube-system","k8s:k8s-app":"kube-dns"}}],"toPorts":[{"ports":[{"port":"53","protocol":"UDP"},{"port":"53","protocol":"TCP"}],"rules":{"dns":[{"matchName":"firmware.zwave-js.io"}]}}]}],"ingress":[{"toPorts":[{"ports":[{"port":"http-ui"}]}]}]}` | If cilium flavor is defined, fill definition here |
+| networkPolicy.flavor | string | `"kubernetes"` | Choose policy flavor in 'kubernetes', 'cilium' |
+| networkPolicy.ingress | list | `[{"ports":[{"port":"http-ui","protocol":"TCP"}]}]` | If kubernetes flavor is defined, fill definition here |
 | serviceMonitor | object | `{"labels":{},"namespaceSelector":{},"promExporter":{"enabled":true,"endpointAdditions":{},"interval":"30s"},"ui":{"enabled":false,"endpointAdditions":{},"interval":"30s"}}` | Support Prometheus ServiceMonitor |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
 | serviceMonitor.promExporter.enabled | bool | `true` | not required, placeholder for future changes. Currently controled under promExporter.enabled |
@@ -59,7 +63,8 @@ Helmchart for zwave-js-ui
 | serviceMonitor.ui.interval | string | `"30s"` | interval |
 | serviceMonitor.ui.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
 | promExporter | object | `{"enabled":false,"health":{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}},"image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/k8sonlab/zwave-js-prom-exporter","tag":"0.3.0"},"port":9090,"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}}` | Prometheus Exporter Sidecar |
-| promExporter.enabled | bool | `false` | enable Prometheus Exporter sidecar, require WebSocket to be enabled |
+| promExporter.enabled | bool | `false` | enable Prometheus Exporter sidecar |
 | promExporter.port | int | `9090` | port for the exporter |
 | promExporter.health | object | `{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}}` | probes for the sidecar |
 | promExporter.resources | object | `{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | resources for the sidecar |
+
