@@ -142,22 +142,23 @@ networkPolicy:
   enabled: false
   # -- If cilium flavor is defined, fill definition here
   cilium:
-    egress:
-    - toFQDNs:
-      - matchName: firmware.zwave-js.io
-    - toEndpoints:
-      - matchLabels:
-          k8s:io.kubernetes.pod.namespace: kube-system
-          k8s:k8s-app: kube-dns
-      toPorts:
-      - ports:
-        - port: "53"
-          protocol: UDP
-        - port: "53"
-          protocol: TCP
-        rules:
-          dns:
-          - matchName: firmware.zwave-js.io
+    egress: []
+    # Exemple with full locked egress
+    # - toFQDNs:
+    #   - matchName: firmware.zwave-js.io
+    # - toEndpoints:
+    #   - matchLabels:
+    #       k8s:io.kubernetes.pod.namespace: kube-system
+    #       k8s:k8s-app: kube-dns
+    #   toPorts:
+    #   - ports:
+    #     - port: "53"
+    #       protocol: UDP
+    #     - port: "53"
+    #       protocol: TCP
+    #     rules:
+    #       dns:
+    #       - matchName: firmware.zwave-js.io
     ingress:
     - toPorts:
       - ports:
@@ -169,7 +170,7 @@ networkPolicy:
   - ports:
     - protocol: TCP
       port: http-ui
-  egress: {}
+  egress: []
 
 # -- Support Prometheus ServiceMonitor
 serviceMonitor:
