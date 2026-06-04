@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.6.2](https://img.shields.io/badge/Version-0.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.19.0](https://img.shields.io/badge/AppVersion-11.19.0-informational?style=flat-square)
+![Version: 0.6.4](https://img.shields.io/badge/Version-0.6.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.19.1](https://img.shields.io/badge/AppVersion-11.19.1-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -50,8 +50,8 @@ Helmchart for zwave-js-ui
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
-| networkPolicy | object | `{"cilium":{"egress":[{"toFQDNs":[{"matchName":"firmware.zwave-js.io"}]},{"toEndpoints":[{"matchLabels":{"k8s:io.kubernetes.pod.namespace":"kube-system","k8s:k8s-app":"kube-dns"}}],"toPorts":[{"ports":[{"port":"53","protocol":"UDP"},{"port":"53","protocol":"TCP"}],"rules":{"dns":[{"matchName":"firmware.zwave-js.io"}]}}]}],"ingress":[{"toPorts":[{"ports":[{"port":"http-ui"}]}]}]},"egress":{},"enabled":false,"flavor":"kubernetes","ingress":[{"ports":[{"port":"http-ui","protocol":"TCP"}]}]}` | Define network policy targeting managed pod |
-| networkPolicy.cilium | object | `{"egress":[{"toFQDNs":[{"matchName":"firmware.zwave-js.io"}]},{"toEndpoints":[{"matchLabels":{"k8s:io.kubernetes.pod.namespace":"kube-system","k8s:k8s-app":"kube-dns"}}],"toPorts":[{"ports":[{"port":"53","protocol":"UDP"},{"port":"53","protocol":"TCP"}],"rules":{"dns":[{"matchName":"firmware.zwave-js.io"}]}}]}],"ingress":[{"toPorts":[{"ports":[{"port":"http-ui"}]}]}]}` | If cilium flavor is defined, fill definition here |
+| networkPolicy | object | `{"cilium":{"egress":[],"ingress":[{"toPorts":[{"ports":[{"port":"http-ui"}]}]}]},"egress":[],"enabled":false,"flavor":"kubernetes","ingress":[{"ports":[{"port":"http-ui","protocol":"TCP"}]}]}` | Define network policy targeting managed pod |
+| networkPolicy.cilium | object | `{"egress":[],"ingress":[{"toPorts":[{"ports":[{"port":"http-ui"}]}]}]}` | If cilium flavor is defined, fill definition here |
 | networkPolicy.flavor | string | `"kubernetes"` | Choose policy flavor in 'kubernetes', 'cilium' |
 | networkPolicy.ingress | list | `[{"ports":[{"port":"http-ui","protocol":"TCP"}]}]` | If kubernetes flavor is defined, fill definition here |
 | serviceMonitor | object | `{"labels":{},"namespaceSelector":{},"promExporter":{"enabled":true,"endpointAdditions":{},"interval":"30s"},"ui":{"enabled":false,"endpointAdditions":{},"interval":"30s"}}` | Support Prometheus ServiceMonitor |
