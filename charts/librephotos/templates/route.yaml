@@ -1,5 +1,4 @@
 {{- if .Values.httpRoute.enabled }}
-{{- $svcPort := .Values.service.port -}}
 apiVersion: {{ .Values.httpRoute.apiVersion }}
 kind: {{ .Values.httpRoute.kind }}
 metadata:
@@ -31,13 +30,12 @@ spec:
     {{- $isRedirect = true }}
     {{- end }}
     {{- end }}
-    -
       {{- if not $isRedirect }}
-      backendRefs:
+    - backendRefs:
         - group: ""
           kind: Service
-          name: {{ .Release.Name }}-proxy
-          port: {{ $svcPort }}
+          name: {{ $.Release.Name }}-proxy
+          port: 80
           weight: 1
       {{- end }}
       {{- with .matches }}
