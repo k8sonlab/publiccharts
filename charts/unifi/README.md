@@ -1,6 +1,6 @@
 # unifi
 
-![Version: 0.2.20](https://img.shields.io/badge/Version-0.2.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v9.5.21](https://img.shields.io/badge/AppVersion-v9.5.21-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v9.5.21](https://img.shields.io/badge/AppVersion-v9.5.21-informational?style=flat-square)
 
 Unifi chart for Kubernetes
 
@@ -27,6 +27,20 @@ Unifi chart for Kubernetes
 | healthchecks | object | `{"livenessProbe":{"failureThreshold":5,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":45,"periodSeconds":15,"successThreshold":1,"timeoutSeconds":2},"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":10,"periodSeconds":15,"successThreshold":1,"timeoutSeconds":2},"startupProbe":{"failureThreshold":20,"httpGet":{"path":"/manage/account/login","port":8443,"scheme":"HTTPS"},"initialDelaySeconds":45,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":2}}` | Setup liveness probes for deployment |
 | service | object | `{"port":8443,"type":"ClusterIP"}` | the main Service (used for ingress) |
 | serviceAP | object | `{"annotations":{},"ports":{"controller":{"number":8080,"protocol":"TCP"},"discovery":{"number":10001,"protocol":"TCP"},"stun":{"number":3478,"protocol":"UDP"}},"type":"LoadBalancer"}` | Requires load balancer, to expose the Unifi stun and discovery |
+| httpRoute.enabled | bool | `false` | Enable an HTTPRoute resource for nextcloud . |
+| httpRoute.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion |
+| httpRoute.kind | string | `"HTTPRoute"` | Set the route kind |
+| httpRoute.annotations | object | `{}` | Route annotations |
+| httpRoute.labels | object | `{}` | Route labels |
+| httpRoute.hostnames | list | `[]` | Route hostnames |
+| httpRoute.parentRefs | list | `[]` | Reference to parent gateways |
+| httpRoute.rules[0].matches[0].path.type | string | `"PathPrefix"` |  |
+| httpRoute.rules[0].matches[0].path.value | string | `"/"` |  |
+| httpRoute.rules[0].tlsBackend | bool | `true` |  |
+| gatewayBackend.enabled | bool | `true` |  |
+| gatewayBackend.apiVersion | string | `"gateway.envoyproxy.io/v1alpha1"` |  |
+| gatewayBackend.kind | string | `"Backend"` |  |
+| gatewayBackend.spec.tls.insecureSkipVerify | bool | `true` |  |
 | ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[],"tls":[]}` | Ingress |
 | resources | object | `{}` | proposed resources set under this config |
 | nodeSelector | object | `{}` |  |

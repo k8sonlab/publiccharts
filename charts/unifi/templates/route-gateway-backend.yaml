@@ -1,0 +1,22 @@
+{{- if .Values.gatewayBackend.enabled }}
+{{- $fullName := include "unifi.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: {{ .Values.gatewayBackend.apiVersion }}
+kind: {{ .Values.gatewayBackend.kind }}
+metadata:
+  name: {{ $fullName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "unifi.labels" . | nindent 4 }}
+    {{- with .Values.gatewayBackend.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.gatewayBackend.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+{{- with .Values.gatewayBackend.spec }}
+{{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end }}

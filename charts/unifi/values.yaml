@@ -88,6 +88,34 @@ serviceAP:
       number: 3478
       protocol: UDP
 
+httpRoute:
+  # -- Enable an HTTPRoute resource for nextcloud .
+  enabled: false
+  # -- Set the route apiVersion
+  apiVersion: gateway.networking.k8s.io/v1
+  # -- Set the route kind
+  kind: HTTPRoute
+  # -- Route annotations
+  annotations: {}
+  # -- Route labels
+  labels: {}
+  # -- Route hostnames
+  hostnames: []
+  # -- Reference to parent gateways
+  parentRefs: []
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/"
+      tlsBackend: true
+gatewayBackend:
+  enabled: true
+  apiVersion: gateway.envoyproxy.io/v1alpha1
+  kind: Backend
+  spec:
+    tls:
+      insecureSkipVerify: true
 # -- Ingress
 ingress:
   enabled: false
