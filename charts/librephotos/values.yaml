@@ -196,6 +196,27 @@ securityContext:
   readOnlyRootFilesystem: false
   runAsNonRoot: false
 
+httpRoute:
+  # -- Enable an HTTPRoute resource for nextcloud .
+  enabled: false
+  # -- Set the route apiVersion
+  apiVersion: gateway.networking.k8s.io/v1
+  # -- Set the route kind
+  kind: HTTPRoute
+  # -- Route annotations
+  annotations: {}
+  # -- Route labels
+  labels: {}
+  # -- Route hostnames
+  hostnames: []
+  # -- Reference to parent gateways
+  parentRefs: []
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/"
+
 ingress:
   # -- enable ingress 
   enabled: false

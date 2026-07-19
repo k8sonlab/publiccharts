@@ -7,7 +7,7 @@ metadata:
     {{- toYaml $values.annotations | nindent 4 }}
   labels:
     {{- include "labels" . | nindent 4 }}
-  name: {{ .Release.Name}}
+  name: {{ .Release.Name }}
 spec:
   {{- if .Values.ingress.ingressClassName }}
   ingressClassName: {{ .Values.ingress.ingressClassName }}
