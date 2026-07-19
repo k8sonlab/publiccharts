@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.6.8](https://img.shields.io/badge/Version-0.6.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.21.1](https://img.shields.io/badge/AppVersion-11.21.1-informational?style=flat-square)
+![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.21.1](https://img.shields.io/badge/AppVersion-11.21.1-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -31,9 +31,8 @@ Helmchart for zwave-js-ui
 | fullnameOverride | string | `""` |  |
 | health | object | `{"livenessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":15,"path":"/health","periodSeconds":30},"readinessProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30},"startupProbe":{"httpHeaders":[{"name":"Accept","value":"text/plain"}],"initialDelaySeconds":5,"path":"/health","periodSeconds":30}}` | configure Probes |
 | ports | object | `{"promExporter":{"containerPort":9090,"name":"http-exporter","protocol":"TCP","servicePort":9090},"ui":{"containerPort":8091,"name":"http-ui","protocol":"TCP","servicePort":80},"websocket":{"containerPort":3000,"name":"http-websocket","protocol":"TCP","servicePort":3000}}` | ui and websocet ports |
-| service.type | string | `"ClusterIP"` |  |
-| service.port | int | `80` |  |
-| service.annotations | object | `{}` |  |
+| service | object | `{"annotations":{},"port":80,"type":"ClusterIP"}` | Define service |
+| service.type | string | `"ClusterIP"` | Use cluster ip as main service option |
 | strategy | object | `{"type":"Recreate"}` | Setting default strategy, to avoid running 2 containers with one stick |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.annotations | object | `{}` |  |
@@ -45,7 +44,21 @@ Helmchart for zwave-js-ui
 | securityContext | object | `{}` |  |
 | persistence.enabled | bool | `false` | enable persistent volume, otherwise use empty dir |
 | persistence.mountPath | string | `"/usr/src/app/store"` | change the path of store. Just in case you use different env variable. |
-| ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[{"host":"chart-example.local","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}],"tls":[]}` | Support custom usb device usbDevice: /dev/ttyUSB0 |
+| httpRoute | object | `{"annotations":{},"apiVersion":"gateway.networking.k8s.io/v1","enabled":false,"hostnames":[],"kind":"HTTPRoute","labels":{},"parentRefs":[],"rules":[{"matches":[{"path":{"type":"PathPrefix","value":"/"}}]}]}` | Support custom usb device usbDevice: /dev/ttyUSB0 |
+| httpRoute.enabled | bool | `false` | Enable an HTTPRoute resource for nextcloud . |
+| httpRoute.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion |
+| httpRoute.kind | string | `"HTTPRoute"` | Set the route kind |
+| httpRoute.annotations | object | `{}` | Route annotations |
+| httpRoute.labels | object | `{}` | Route labels |
+| httpRoute.hostnames | list | `[]` | Route hostnames |
+| httpRoute.parentRefs | list | `[]` | Reference to parent gateways |
+| ingress.enabled | bool | `false` | Enable classic Ingress resource |
+| ingress.className | string | `""` | Choose the ingress class |
+| ingress.annotations | object | `{}` |  |
+| ingress.hosts[0].host | string | `"chart-example.local"` |  |
+| ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.tls | list | `[]` |  |
 | resources | object | `{"limits":{"cpu":"300m","memory":"256Mi"},"requests":{"cpu":"200m","memory":"192Mi"}}` | Initial resources, based on a 40node network |
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |

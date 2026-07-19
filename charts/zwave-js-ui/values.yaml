@@ -55,7 +55,9 @@ ports:
     servicePort: 9090
     protocol: TCP
 
+# -- Define service
 service:
+  # -- Use cluster ip as main service option
   type: ClusterIP
   port: 80
   annotations: {}
@@ -106,8 +108,32 @@ persistence:
 # -- Support custom usb device
 # usbDevice: /dev/ttyUSB0
 
-ingress:
+
+httpRoute:
+  # -- Enable an HTTPRoute resource for nextcloud .
   enabled: false
+  # -- Set the route apiVersion
+  apiVersion: gateway.networking.k8s.io/v1
+  # -- Set the route kind
+  kind: HTTPRoute
+  # -- Route annotations
+  annotations: {}
+  # -- Route labels
+  labels: {}
+  # -- Route hostnames
+  hostnames: []
+  # -- Reference to parent gateways
+  parentRefs: []
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/"
+
+ingress:
+  # -- Enable classic Ingress resource
+  enabled: false
+  # -- Choose the ingress class
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
