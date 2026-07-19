@@ -36,4 +36,3 @@ Unifi chart for Kubernetes
 | configVolume | object | `{"accessModes":["ReadWriteOnce"],"size":"10Gi","storageClassName":""}` | configVolume |
 | configVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode for volumes |
 | configVolume.size | string | `"10Gi"` | Size of volume |
-
