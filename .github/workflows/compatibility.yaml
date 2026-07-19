@@ -24,9 +24,6 @@ jobs:
         run: |
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
-      - name: install helm plugins
-        run: |
-          helm plugin install https://github.com/sstarcher/helm-release
       - name: bumper
         run: |
           case "${{ github.event.pull_request.title }}" in
@@ -59,7 +56,30 @@ jobs:
             then
               echo "Release ${chart}-$(yq '.version' charts/${chart}/Chart.yaml) already exists"
               echo "changing version on $RELEASE_TYPE"
-              helm release --bump=${RELEASE_TYPE} --source helm -s charts/${chart}
+              CURRENT_CHART_VERSION=$(./yq eval '.version' charts/${chart}/Chart.yaml)
+              IFS='.' read -r major minor patch <<EOF
+              ${CURRENT_CHART_VERSION}
+              EOF
+              case "${RELEASE_TYPE}" in
+                major)
+                  major=$((major + 1))
+                  minor=0
+                  patch=0
+                  ;;
+                minor)
+                  minor=$((minor + 1))
+                  patch=0
+                  ;;
+                patch)
+                  patch=$((patch + 1))
+                  ;;
+                *)
+                  echo "Unsupported RELEASE_TYPE: ${RELEASE_TYPE}"
+                  exit 1
+                  ;;
+              esac
+              NEXT_CHART_VERSION="${major}.${minor}.${patch}"
+              ./yq -i ".version = \"${NEXT_CHART_VERSION}\"" charts/${chart}/Chart.yaml
             else
               echo "Unique release number for this chart (${chart}), skipping"
             fi
