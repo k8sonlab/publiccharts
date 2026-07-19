@@ -57,9 +57,7 @@ jobs:
               echo "Release ${chart}-$(yq '.version' charts/${chart}/Chart.yaml) already exists"
               echo "changing version on $RELEASE_TYPE"
               CURRENT_CHART_VERSION=$(./yq eval '.version' charts/${chart}/Chart.yaml)
-              IFS='.' read -r major minor patch <<EOF
-              ${CURRENT_CHART_VERSION}
-              EOF
+              IFS='.' read -r major minor patch <<< "${CURRENT_CHART_VERSION}"
               case "${RELEASE_TYPE}" in
                 major)
                   major=$((major + 1))
