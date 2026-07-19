@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![AppVersion: 2026w10](https://img.shields.io/badge/AppVersion-2026w10-informational?style=flat-square)
+![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -146,6 +146,15 @@ Kubernetes: `>=1.16.0-0`
 | securityContext.privileged | bool | `false` |  |
 | securityContext.readOnlyRootFilesystem | bool | `false` |  |
 | securityContext.runAsNonRoot | bool | `false` |  |
+| httpRoute.enabled | bool | `false` | Enable an HTTPRoute resource for nextcloud . |
+| httpRoute.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion |
+| httpRoute.kind | string | `"HTTPRoute"` | Set the route kind |
+| httpRoute.annotations | object | `{}` | Route annotations |
+| httpRoute.labels | object | `{}` | Route labels |
+| httpRoute.hostnames | list | `[]` | Route hostnames |
+| httpRoute.parentRefs | list | `[]` | Reference to parent gateways |
+| httpRoute.rules[0].matches[0].path.type | string | `"PathPrefix"` |  |
+| httpRoute.rules[0].matches[0].path.value | string | `"/"` |  |
 | ingress.enabled | bool | `false` | enable ingress  |
 | ingress.annotations | object | `{}` |  |
 | ingress.hostname | string | `""` | currently only hotsname is needed for ingress |
@@ -167,3 +176,4 @@ Kubernetes: `>=1.16.0-0`
 | redis.enabled | bool | `true` |  |
 | redis.architecture | string | `"standalone"` |  |
 | redis.master.disableCommands[0] | string | `"FLUSHALL"` |  |
+
