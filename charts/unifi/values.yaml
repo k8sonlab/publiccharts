@@ -108,7 +108,7 @@ httpRoute:
         - path:
             type: PathPrefix
             value: "/"
-      tlsBackend: true
+
 gatewayBackend:
   enabled: true
   apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -116,6 +116,7 @@ gatewayBackend:
   spec:
     tls:
       insecureSkipVerify: true
+
 # -- Ingress
 ingress:
   enabled: false

@@ -1,6 +1,6 @@
 # unifi
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v9.5.21](https://img.shields.io/badge/AppVersion-v9.5.21-informational?style=flat-square)
+![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v9.5.21](https://img.shields.io/badge/AppVersion-v9.5.21-informational?style=flat-square)
 
 Unifi chart for Kubernetes
 
@@ -36,7 +36,6 @@ Unifi chart for Kubernetes
 | httpRoute.parentRefs | list | `[]` | Reference to parent gateways |
 | httpRoute.rules[0].matches[0].path.type | string | `"PathPrefix"` |  |
 | httpRoute.rules[0].matches[0].path.value | string | `"/"` |  |
-| httpRoute.rules[0].tlsBackend | bool | `true` |  |
 | gatewayBackend.enabled | bool | `true` |  |
 | gatewayBackend.apiVersion | string | `"gateway.envoyproxy.io/v1alpha1"` |  |
 | gatewayBackend.kind | string | `"Backend"` |  |

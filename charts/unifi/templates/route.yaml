@@ -26,39 +26,32 @@ spec:
   {{- end }}
   rules:
     {{- range .Values.httpRoute.rules }}
-    {{- $isRedirect := false }}
     {{- range .filters }}
-    {{- if eq (.type | default "") "RequestRedirect" }}
-    {{- $isRedirect = true }}
     {{- end }}
-    {{- end }}
-      {{- if not $isRedirect }}
     - backendRefs:
-        - group: ""
-          kind: Service
-          name: {{ $fullName }}
-          port: {{ $svcPort }}
-          weight: 1
+      {{- if $.Values.gatewayBackend.enabled }}
+      - group: gateway.envoyproxy.io
+        kind: Backend
+        name: {{ $fullName }}
+        weight: 1      
+      {{- else }}
+      - group: ""
+        kind: Service
+        name: {{ $fullName }}
+        port: {{ $svcPort }}
+        weight: 1
       {{- end }}
-      sessionPersistence:
-        sessionPersistenceMode: Cookie
-        cookieConfig:
-          name: UNIFI_SESSION
       {{- with .matches }}
       matches:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if or (.filters) ($.Values.gatewayBackend.enabled) }}
+      sessionPersistence:
+        type: Cookie
+        sessionName: UNIFI_SESSION
+      {{- if .filters }}
       filters:
       {{- with .filters }}
         {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- if $.Values.gatewayBackend.enabled }}
-        - type: ExtensionRef
-          extensionRef:
-            group: gateway.envoyproxy.io
-            kind: Backend
-            name: {{ $fullName }}
       {{- end }}
       {{- end }}
       {{- with .timeouts }}

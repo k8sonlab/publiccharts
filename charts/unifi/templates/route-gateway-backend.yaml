@@ -1,4 +1,4 @@
-{{- if .Values.gatewayBackend.enabled }}
+{{- if and (.Values.gatewayBackend.enabled) (.Values.httpRoute.enabled) }}
 {{- $fullName := include "unifi.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 apiVersion: {{ .Values.gatewayBackend.apiVersion }}
@@ -16,6 +16,10 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  endpoints:
+    - fqdn:
+        hostname: {{ $fullName }}.{{ .Release.Namespace }}.svc
+        port: {{ $svcPort }}
 {{- with .Values.gatewayBackend.spec }}
 {{- toYaml . | nindent 2 }}
 {{- end }}
