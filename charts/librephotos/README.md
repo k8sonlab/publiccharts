@@ -176,3 +176,4 @@ Kubernetes: `>=1.16.0-0`
 | redis.enabled | bool | `true` |  |
 | redis.architecture | string | `"standalone"` |  |
 | redis.master.disableCommands[0] | string | `"FLUSHALL"` |  |
+

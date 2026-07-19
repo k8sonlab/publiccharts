@@ -80,3 +80,4 @@ Helmchart for zwave-js-ui
 | promExporter.port | int | `9090` | port for the exporter |
 | promExporter.health | object | `{"livenessProbe":{"initialDelaySeconds":15,"path":"/healthz","periodSeconds":30},"readinessProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30},"startupProbe":{"initialDelaySeconds":5,"path":"/healthz","periodSeconds":30}}` | probes for the sidecar |
 | promExporter.resources | object | `{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | resources for the sidecar |
+
