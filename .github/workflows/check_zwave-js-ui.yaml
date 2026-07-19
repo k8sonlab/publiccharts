@@ -1,5 +1,6 @@
 name: Check Latest ZWAVE-JS-UI
 on:
+  workflow_dispatch:
   schedule:
     - cron:  '20 5 * * *'
   push:
@@ -63,22 +64,32 @@ jobs:
         run: |
           curl https://github.com/mikefarah/yq/releases/download/`curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'`/yq_linux_amd64 -L -o yq
           chmod 755 yq
-      - name: install helm plugins
-        run: |
-          helm plugin install https://github.com/sstarcher/helm-release
       - name: compare found version to current
         run: |
           ./yq -i "${versionKey} = \"${NEWVERSION}\"" ${chartPath}/Chart.yaml
+      - name: Read current chart version
+        id: current-chart-version
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.version' '${{ env.chartPath }}/Chart.yaml'
+      - name: Calculate next chart version
+        id: bump-chart
+        uses: actions-ecosystem/action-bump-semver@v1
+        with:
+          current_version: ${{ steps.current-chart-version.outputs.result }}
+          level: ${{ env.releaseType }}
+      - name: Update chart version
+        uses: fjogeleit/yaml-update-action@v0.17.0
+        with:
+          valueFile: '${{ env.chartPath }}/Chart.yaml'
+          propertyPath: 'version'
+          value: '${{ steps.bump-chart.outputs.new_version }}'
+          commitChange: false
       - name: Run helm-docs
         run: |
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
           ./helm-docs --sort-values-order file -c ${chartPath}
           rm helm-docs
-
-      - name: bump chart version
-        id: bump-chart
-        run: |
-          helm release --bump=${releaseType} --source helm -s $chartPath
       #- name: Run helm-docs
       #  run: |
       #    GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
