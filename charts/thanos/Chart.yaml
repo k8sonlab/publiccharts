@@ -2,7 +2,7 @@ apiVersion: v2
 appVersion: v0.41.0
 description: Helm chart for Thanos.
 home: https://thanos.io/
-icon: https://cncf-branding.netlify.app/img/projects/thanos/icon/color/thanos-icon-color.png
+icon: https://github.com/thanos-community/helm-charts/raw/master/docs/imgs/thanos_logo_full.svg
 keywords:
   - kubernetes
   - thanos
@@ -19,4 +19,4 @@ sources:
   - https://github.com/thanos-io/kube-thanos
   - https://github.com/k8sonlab/publiccharts
 type: application
-version: 1.1.2
+version: 1.1.3
