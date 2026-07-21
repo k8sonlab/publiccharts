@@ -6,6 +6,12 @@ Unifi chart for Kubernetes
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi>
 
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| varet80 |  |  |
+
 ## Values
 
 | Key | Type | Default | Description |
