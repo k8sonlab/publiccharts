@@ -1,6 +1,6 @@
 # unifi
 
-![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v9.5.21](https://img.shields.io/badge/AppVersion-v9.5.21-informational?style=flat-square)
+![Version: 0.3.2](https://img.shields.io/badge/Version-0.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v9.5.21](https://img.shields.io/badge/AppVersion-v9.5.21-informational?style=flat-square)
 
 Unifi chart for Kubernetes
 
@@ -49,4 +49,3 @@ Unifi chart for Kubernetes
 | configVolume | object | `{"accessModes":["ReadWriteOnce"],"size":"10Gi","storageClassName":""}` | configVolume |
 | configVolume.accessModes | list | `["ReadWriteOnce"]` | Access mode for volumes |
 | configVolume.size | string | `"10Gi"` | Size of volume |
-

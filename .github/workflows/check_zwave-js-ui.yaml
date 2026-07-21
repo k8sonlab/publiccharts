@@ -1,8 +1,8 @@
 name: Check Latest ZWAVE-JS-UI
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '20 5 * * *'
+  #schedule:
+  #  - cron:  '20 5 * * *'
   push:
     paths:
       - '.github/workflows/check_zwave-js-ui.yaml'
