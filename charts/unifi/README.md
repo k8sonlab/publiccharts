@@ -1,10 +1,16 @@
 # unifi
 
-![Version: 0.3.3](https://img.shields.io/badge/Version-0.3.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v9.5.21](https://img.shields.io/badge/AppVersion-v9.5.21-informational?style=flat-square)
+![Version: 0.3.4](https://img.shields.io/badge/Version-0.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v10.0.162](https://img.shields.io/badge/AppVersion-v10.0.162-informational?style=flat-square)
 
 Unifi chart for Kubernetes
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| varet80 |  |  |
 
 ## Values
 

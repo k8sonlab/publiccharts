@@ -78,13 +78,13 @@ serviceAP:
   type: LoadBalancer
   annotations: {}
   ports:
-    controller: 
+    controller:
       number: 8080
       protocol: TCP
-    discovery: 
+    discovery:
       number: 10001
       protocol: TCP
-    stun: 
+    stun:
       number: 3478
       protocol: UDP
 
@@ -125,7 +125,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts: []
-  # - paths: 
+  # - paths:
   #   - path: /
   #     pathType: Prefix
   #   host: chart-example.local
