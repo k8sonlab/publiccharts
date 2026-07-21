@@ -9,7 +9,8 @@
         "docker"
       ],
       "matchPackageNames": [
-        "nolte/mosquitto-exporter"
+        "nolte/mosquitto-exporter",
+        "jacobalberty/unifi"
       ],
       "matchUpdateTypes": [
         "minor",
