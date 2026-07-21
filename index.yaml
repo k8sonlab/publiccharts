@@ -3,6 +3,36 @@ entries:
   librephotos:
   - apiVersion: v2
     appVersion: 1.0.3
+    created: "2026-07-21T05:59:17.15292025Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: => 12.8.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: => 21.0.0
+    description: Helmchart used to install Librephotos in a microservice manner
+    digest: c043d68dea3d5a9c5566db76075b6a1b39217f18557a6900dfd305f51ba370f6
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
+    keywords:
+    - photolibrary
+    - photos
+    - librephotos
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: librephotos
+    sources:
+    - https://github.com/LibrePhotos/librephotos
+    - https://hub.docker.com/r/reallibrephotos
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-1.1.3/librephotos-1.1.3.tgz
+    version: 1.1.3
+  - apiVersion: v2
+    appVersion: 1.0.3
     created: "2026-07-21T00:21:44.999533157Z"
     dependencies:
     - condition: postgresql.enabled
@@ -273,6 +303,16 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 2.0.21
+    created: "2026-07-21T05:59:17.318195351Z"
+    description: Eclipse Mosquitto is an open source message broker which implements
+      MQTT version 5, 3.1.1 and 3.1
+    digest: b5969e31f6e8c7376448590f0e8e04d51a0a3451badec548d81ce1d4e1246f19
+    name: mosquitto
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/mosquitto-2.6.4/mosquitto-2.6.4.tgz
+    version: 2.6.4
+  - apiVersion: v2
+    appVersion: 2.0.21
     created: "2026-07-21T00:21:45.143562806Z"
     description: Eclipse Mosquitto is an open source message broker which implements
       MQTT version 5, 3.1.1 and 3.1
@@ -364,6 +404,16 @@ entries:
   netio-exporter:
   - apiVersion: v2
     appVersion: 0.0.5
+    created: "2026-07-21T05:59:17.473984794Z"
+    description: A Helm chart for Kubernetes
+    digest: eb30857acb12c0a8735120b601695c5596c98a9c37f42b146a68c5893a1cfbed
+    name: netio-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/netio-exporter-0.1.7/netio-exporter-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 0.0.5
     created: "2026-07-21T00:21:45.30954253Z"
     description: A Helm chart for Kubernetes
     digest: 9836e7e3d5a36e5586d0284688589d28a521adfe43a54d7cfe050df3f6f7354b
@@ -423,6 +473,31 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/netio-exporter-0.1.1/netio-exporter-0.1.1.tgz
     version: 0.1.1
   thanos:
+  - apiVersion: v2
+    appVersion: v0.41.0
+    created: "2026-07-21T05:59:17.624747195Z"
+    description: Helm chart for Thanos.
+    digest: 8ed7bda7595fb8ebadbd516974af0838ba682f04829537e62a3f66385388a81f
+    home: https://thanos.io/
+    icon: https://github.com/thanos-community/helm-charts/raw/master/docs/imgs/thanos_logo_full.svg
+    keywords:
+    - kubernetes
+    - thanos
+    - monitoring
+    - alerting
+    - metrics
+    maintainers:
+    - name: Vassilis Aretakis
+      url: https://github.com/varet80
+    name: thanos
+    sources:
+    - https://github.com/thanos-io/thanos
+    - https://github.com/thanos-io/kube-thanos
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.1.4/thanos-1.1.4.tgz
+    version: 1.1.4
   - apiVersion: v2
     appVersion: v0.41.0
     created: "2026-07-21T05:23:15.229504066Z"
@@ -699,6 +774,21 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.0.0/thanos-1.0.0.tgz
     version: 1.0.0
   unifi:
+  - apiVersion: v2
+    appVersion: v9.5.21
+    created: "2026-07-21T05:59:17.771044269Z"
+    description: Unifi chart for Kubernetes
+    digest: a2b2fb4e8e032c64c75181be1bbf03248c4adc7ef62c7efda8f6676ed10c429f
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
+    icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
+    keywords:
+    - ubiquiti
+    - unifi
+    name: unifi
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.3.3/unifi-0.3.3.tgz
+    version: 0.3.3
   - apiVersion: v2
     appVersion: v9.5.21
     created: "2026-07-21T00:21:45.592175165Z"
@@ -1120,6 +1210,24 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.9/unifi-0.1.9.tgz
     version: 0.1.9
   zwave-js-ui:
+  - apiVersion: v2
+    appVersion: 11.21.1
+    created: "2026-07-21T05:59:17.945276802Z"
+    description: Helmchart for zwave-js-ui
+    digest: c37ff42e8ca685c580cd66fa84931c78b81948c6d236abd1ae39be3c43f31c95
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+    icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
+    maintainers:
+    - name: varet80
+    name: zwave-js-ui
+    sources:
+    - https://github.com/zwave-js/zwave-js-ui
+    - https://github.com/zwave-js/node-zwave-js
+    - https://github.com/k8sonlab/zwave-js-prom-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.7.4/zwave-js-ui-0.7.4.tgz
+    version: 0.7.4
   - apiVersion: v2
     appVersion: 11.21.1
     created: "2026-07-21T00:21:45.747764056Z"
@@ -4665,4 +4773,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2026-07-21T05:23:15.528088104Z"
+generated: "2026-07-21T05:59:17.94604144Z"
