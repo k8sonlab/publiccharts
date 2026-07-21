@@ -2,27 +2,27 @@ apiVersion: v2
 # renovate: datasource=docker depName=reallibrephotos/librephotos
 appVersion: 1.0.3
 dependencies:
-- condition: postgresql.enabled
-  name: postgresql
-  repository: https://charts.bitnami.com/bitnami
-  version: => 12.8.2
-- condition: redis.enabled
-  name: redis
-  repository: https://charts.bitnami.com/bitnami
-  version: => 21.0.0
+  - condition: postgresql.enabled
+    name: postgresql
+    repository: https://charts.bitnami.com/bitnami
+    version: => 12.8.2
+  - condition: redis.enabled
+    name: redis
+    repository: https://charts.bitnami.com/bitnami
+    version: => 21.0.0
 description: Helmchart used to install Librephotos in a microservice manner
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
 keywords:
-- photolibrary
-- photos
-- librephotos
+  - photolibrary
+  - photos
+  - librephotos
 kubeVersion: '>=1.16.0-0'
 maintainers:
-- e-mail: v.aretakis@gmail.com
-  name: Vassilis Aretakis
-  url: https://github.com/varet80
+  - e-mail: v.aretakis@gmail.com
+    name: Vassilis Aretakis
+    url: https://github.com/varet80
 name: librephotos
 sources:
-- https://github.com/LibrePhotos/librephotos
-- https://hub.docker.com/r/reallibrephotos
-version: 1.1.1
+  - https://github.com/LibrePhotos/librephotos
+  - https://hub.docker.com/r/reallibrephotos
+version: 1.1.2

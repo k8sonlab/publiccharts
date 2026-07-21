@@ -17,7 +17,7 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v5
         with:
-          version: v4.2.2
+          version: v4.2.3
       - id: files
         uses: jitterbit/get-changed-files@v1
       - name: prepate yq
@@ -125,7 +125,7 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v5
         with:
-          version: v4.2.2
+          version: v4.2.3
 
       - name: Add repos
         run: |
