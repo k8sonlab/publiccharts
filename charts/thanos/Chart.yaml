@@ -4,19 +4,19 @@ description: Helm chart for Thanos.
 home: https://thanos.io/
 icon: https://cncf-branding.netlify.app/img/projects/thanos/icon/color/thanos-icon-color.png
 keywords:
-- kubernetes
-- thanos
-- monitoring
-- alerting
-- metrics
+  - kubernetes
+  - thanos
+  - monitoring
+  - alerting
+  - metrics
 maintainers:
-- e-mail: v.aretakis@gmail.com
-  name: Vassilis Aretakis
-  url: https://github.com/varet80
+  - e-mail: v.aretakis@gmail.com
+    name: Vassilis Aretakis
+    url: https://github.com/varet80
 name: thanos
 sources:
-- https://github.com/thanos-io/thanos
-- https://github.com/thanos-io/kube-thanos
-- https://github.com/k8sonlab/publiccharts
+  - https://github.com/thanos-io/thanos
+  - https://github.com/thanos-io/kube-thanos
+  - https://github.com/k8sonlab/publiccharts
 type: application
-version: 1.1.1
+version: 1.1.2

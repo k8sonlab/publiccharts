@@ -4,11 +4,11 @@ description: Helmchart for zwave-js-ui
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
 icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
 maintainers:
-- name: varet80
+  - name: varet80
 name: zwave-js-ui
 sources:
-- https://github.com/zwave-js/zwave-js-ui
-- https://github.com/zwave-js/node-zwave-js
-- https://github.com/k8sonlab/zwave-js-prom-exporter
+  - https://github.com/zwave-js/zwave-js-ui
+  - https://github.com/zwave-js/node-zwave-js
+  - https://github.com/k8sonlab/zwave-js-prom-exporter
 type: application
-version: 0.7.2
+version: 0.7.3
