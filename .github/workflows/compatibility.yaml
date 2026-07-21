@@ -98,7 +98,7 @@ jobs:
       - name: Run helm-docs
         run: |
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
-          ./helm-docs --sort-values-order file
+          ./helm-docs --sort-values-order file --skip-version-footer
           rm helm-docs
 
       - name: Commit bump
