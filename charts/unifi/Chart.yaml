@@ -1,6 +1,6 @@
 apiVersion: v2
 # renovate: datasource=docker depName=jacobalberty/unifi
-appVersion: v9.5.21
+appVersion: v10.0.162
 description: Unifi chart for Kubernetes
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
 icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
