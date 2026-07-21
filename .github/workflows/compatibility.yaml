@@ -1,6 +1,7 @@
 name: Helm PR Flow
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
