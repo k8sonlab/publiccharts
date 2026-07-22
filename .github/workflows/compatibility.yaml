@@ -52,9 +52,9 @@ jobs:
           done
           echo Changed Charts are: $changed
           for chart in $changed; do
-            if git rev-parse "${chart}-$(yq '.version' charts/${chart}/Chart.yaml)" >/dev/null 2>&1;
+            if git rev-parse "${chart}-$(./yq '.version' charts/${chart}/Chart.yaml)" >/dev/null 2>&1;
             then
-              echo "Release ${chart}-$(yq '.version' charts/${chart}/Chart.yaml) already exists"
+              echo "Release ${chart}-$(./yq '.version' charts/${chart}/Chart.yaml) already exists"
               echo "changing version on $RELEASE_TYPE"
               CURRENT_CHART_VERSION=$(./yq eval '.version' charts/${chart}/Chart.yaml)
               IFS='.' read -r major minor patch <<< "${CURRENT_CHART_VERSION}"
