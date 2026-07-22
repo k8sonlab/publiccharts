@@ -6,14 +6,12 @@
   "packageRules": [
     {
       "matchDatasources": [
-        "docker",
-        "helmv3"
+        "docker"
       ],
       "matchPackageNames": [
         "nolte/mosquitto-exporter",
         "jacobalberty/unifi"
       ],
-      "rangeStrategy": "bump",
       "matchUpdateTypes": [
         "minor",
         "patch"
