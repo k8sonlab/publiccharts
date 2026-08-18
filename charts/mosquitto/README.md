@@ -1,6 +1,6 @@
 # mosquitto
 
-![Version: 2.6.4](https://img.shields.io/badge/Version-2.6.4-informational?style=flat-square) ![AppVersion: 2.1.0-alpine](https://img.shields.io/badge/AppVersion-2.1.0--alpine-informational?style=flat-square)
+![Version: 2.6.5](https://img.shields.io/badge/Version-2.6.5-informational?style=flat-square) ![AppVersion: 2.1.0-alpine](https://img.shields.io/badge/AppVersion-2.1.0--alpine-informational?style=flat-square)
 
 Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
 
