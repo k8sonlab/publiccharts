@@ -41,6 +41,10 @@
         "docker"
       ],
       "automerge": true
+    },
+    {
+      "matchPackageNames": ["eclipse-mosquitto"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>-(?:alpine|slim|debian|ubuntu).*)$"
     }
   ],
   "customManagers": [
