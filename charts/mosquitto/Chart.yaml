@@ -6,4 +6,4 @@ name: mosquitto
 maintainers:
   - name: varet80
     url: https://github.com/varet80
-version: 2.7.1
+version: 2.7.2
