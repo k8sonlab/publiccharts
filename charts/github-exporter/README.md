@@ -41,7 +41,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/github-exporter --ve
 | replicaCount | int | `1` |  |
 | image.repository | string | `"githubexporter/github-exporter"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `nil` |  |
+| image.tag | string | `nil` | Overrides the image tag. Upstream publishes Docker tags as release-<version>. |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | fullnameOverride | string | `""` |  |

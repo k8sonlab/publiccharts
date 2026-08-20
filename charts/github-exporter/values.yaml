@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: githubexporter/github-exporter
   pullPolicy: IfNotPresent
-  # Overrides the image tag. Upstream publishes Docker tags as release-<version>.
+  # -- Overrides the image tag. Upstream publishes Docker tags as release-<version>.
   tag:
 imagePullSecrets: []
 nameOverride: ""
