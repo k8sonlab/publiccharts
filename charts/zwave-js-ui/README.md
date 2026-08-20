@@ -1,17 +1,35 @@
 # zwave-js-ui
 
-![Version: 0.7.8](https://img.shields.io/badge/Version-0.7.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.22.3](https://img.shields.io/badge/AppVersion-11.22.3-informational?style=flat-square)
+![Version: 0.7.9](https://img.shields.io/badge/Version-0.7.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.22.3](https://img.shields.io/badge/AppVersion-11.22.3-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui>
+
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/zwave-js-ui
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/zwave-js-ui --version <chart-version>
+```
 
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
 | varet80 |  |  |
-
 ## Source Code
 
 * <https://github.com/zwave-js/zwave-js-ui>

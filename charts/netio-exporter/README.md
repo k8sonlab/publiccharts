@@ -1,8 +1,33 @@
 # netio-exporter
 
-![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.5](https://img.shields.io/badge/AppVersion-0.0.5-informational?style=flat-square)
+![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.5](https://img.shields.io/badge/AppVersion-0.0.5-informational?style=flat-square)
 
 A Helm chart for Kubernetes
+
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/<netio-exporter>
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<netio-exporter> --version <chart-version>
+```
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Vassilis Aretakis |  |  |
 
 ## Values
 
@@ -25,6 +50,7 @@ A Helm chart for Kubernetes
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `1000` |  |
 | env | object | `{"NETIO_DEBUG":"False","NETIO_PORT":9595,"NETIO_URL":"http://192.168.0.1/netio.json"}` | env values to be set |
+| envSecretName | string | `nil` | external secret to use with creds |
 | service.type | string | `"ClusterIP"` |  |
 | service.port | int | `9595` |  |
 | resources | object | `{}` |  |

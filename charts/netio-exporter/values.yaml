@@ -28,19 +28,19 @@ podSecurityContext: {}
   # fsGroup: 2000
 
 securityContext:
-   capabilities:
-     drop:
-     - ALL
-   readOnlyRootFilesystem: true
-   runAsNonRoot: true
-   runAsUser: 1000
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
 # -- env values to be set
 env:
   NETIO_URL: http://192.168.0.1/netio.json
   NETIO_PORT: 9595
   NETIO_DEBUG: "False"
-#-- external secret to use with creds
-# envSecretName: 
+# -- external secret to use with creds
+envSecretName:
 
 service:
   type: ClusterIP
@@ -71,4 +71,4 @@ serviceMonitor:
   # -- namespace selector
   namespaceSelector: {}
   # -- endpoint additions - add endpoint modifications
-  endpointAdditions: {} 
+  endpointAdditions: {}

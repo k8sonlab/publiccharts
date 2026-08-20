@@ -1,22 +1,39 @@
 # librephotos
 
-![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
+![Version: 1.1.4](https://img.shields.io/badge/Version-1.1.4-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos>
 
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/<librephotos>
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<librephotos> --version <chart-version>
+```
+
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Vassilis Aretakis |  | <https://github.com/varet80> |
-
+| Vassilis Aretakis |  |  |
 ## Source Code
 
 * <https://github.com/LibrePhotos/librephotos>
 * <https://hub.docker.com/r/reallibrephotos>
-
 ## Requirements
 
 Kubernetes: `>=1.16.0-0`
@@ -25,7 +42,6 @@ Kubernetes: `>=1.16.0-0`
 |------------|------|---------|
 | https://charts.bitnami.com/bitnami | postgresql | => 12.8.2 |
 | https://charts.bitnami.com/bitnami | redis | => 21.0.0 |
-
 ## Values
 
 | Key | Type | Default | Description |
@@ -137,7 +153,7 @@ Kubernetes: `>=1.16.0-0`
 | cronjob.native.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | cronjob.native.image.kubernetesVersion | string | `"1.22.6"` | Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags |
 | cronjob.scan.filesystem | bool | `true` | Enable scanning filesystem (Folder scanning) |
-| cronjob.scan.nextcloud | bool | `false` | Support scanning Nextcloud  |
+| cronjob.scan.nextcloud | bool | `false` | Support scanning Nextcloud |
 | nameOverride | string | `""` |  |
 | fullnameOverride | string | `""` |  |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -155,7 +171,7 @@ Kubernetes: `>=1.16.0-0`
 | httpRoute.parentRefs | list | `[]` | Reference to parent gateways |
 | httpRoute.rules[0].matches[0].path.type | string | `"PathPrefix"` |  |
 | httpRoute.rules[0].matches[0].path.value | string | `"/"` |  |
-| ingress.enabled | bool | `false` | enable ingress  |
+| ingress.enabled | bool | `false` | enable ingress |
 | ingress.annotations | object | `{}` |  |
 | ingress.hostname | string | `""` | currently only hotsname is needed for ingress |
 | ingress.tls | list | `[]` | Configure TLS for the ingress. Both secretName and hosts can process a Helm template. |

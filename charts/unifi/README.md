@@ -1,10 +1,29 @@
 # unifi
 
-![Version: 0.3.4](https://img.shields.io/badge/Version-0.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v10.0.162](https://img.shields.io/badge/AppVersion-v10.0.162-informational?style=flat-square)
+![Version: 0.3.5](https://img.shields.io/badge/Version-0.3.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v10.0.162](https://img.shields.io/badge/AppVersion-v10.0.162-informational?style=flat-square)
 
 Unifi chart for Kubernetes
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi>
+
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/<unifi>
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<unifi> --version <chart-version>
+```
 
 ## Maintainers
 

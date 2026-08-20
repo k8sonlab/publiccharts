@@ -3,4 +3,6 @@ appVersion: 0.0.5
 description: A Helm chart for Kubernetes
 name: netio-exporter
 type: application
-version: 0.1.7
+maintainers:
+  - name: Vassilis Aretakis
+version: 0.1.8

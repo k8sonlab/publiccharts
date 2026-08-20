@@ -1,17 +1,35 @@
 # thanos
 
-![Version: 1.1.4](https://img.shields.io/badge/Version-1.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.41.0](https://img.shields.io/badge/AppVersion-v0.41.0-informational?style=flat-square)
+![Version: 1.1.5](https://img.shields.io/badge/Version-1.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.41.0](https://img.shields.io/badge/AppVersion-v0.41.0-informational?style=flat-square)
 
 Helm chart for Thanos.
 
 **Homepage:** <https://thanos.io/>
 
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/<thanos>
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<thanos> --version <chart-version>
+```
+
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Vassilis Aretakis |  | <https://github.com/varet80> |
-
+| Vassilis Aretakis |  |  |
 ## Source Code
 
 * <https://github.com/thanos-io/thanos>

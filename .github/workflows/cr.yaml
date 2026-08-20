@@ -7,6 +7,10 @@ on:
     paths:
      - 'charts/**/Chart.yaml'
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -45,3 +49,22 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.PAT }}"
           CR_SKIP_EXISTING: true 
+
+      - name: Login to GHCR
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Push released charts to OCI
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          packages=(.cr-release-packages/*.tgz)
+          if [ ${#packages[@]} -eq 0 ]; then
+            echo "No chart packages were generated. Skipping OCI push."
+            exit 0
+          fi
+
+          for package in "${packages[@]}"; do
+            echo "Pushing ${package} to oci://ghcr.io/${{ github.repository_owner }}/publiccharts"
+            helm push "${package}" "oci://ghcr.io/${{ github.repository_owner }}/publiccharts"
+          done
