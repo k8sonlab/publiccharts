@@ -56,6 +56,10 @@ spec:
               protocol: {{ default "TCP" $value.protocol }}
           {{- end }}
         {{- end }}
+          {{- with .Values.env }}
+          env:
+            {{ toYaml . | indent 12| trim }}
+          {{- end }}
           livenessProbe:
             tcpSocket:
               port: websocket
