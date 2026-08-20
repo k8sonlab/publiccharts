@@ -1,8 +1,14 @@
 # mosquitto
 
-![Version: 2.6.6](https://img.shields.io/badge/Version-2.6.6-informational?style=flat-square) ![AppVersion: 2.1.2-alpine](https://img.shields.io/badge/AppVersion-2.1.2--alpine-informational?style=flat-square)
+![Version: 2.6.7](https://img.shields.io/badge/Version-2.6.7-informational?style=flat-square) ![AppVersion: 2.1.2-alpine](https://img.shields.io/badge/AppVersion-2.1.2--alpine-informational?style=flat-square)
 
 Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| varet80 |  |  |
 
 ## Values
 
@@ -13,6 +19,7 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | image.repository | string | `"eclipse-mosquitto"` |  |
 | image.tag | string | `nil` | Image tag of the container. defaults to chart appVersion |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
+| env | object | `{}` | Environment variables for main container |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | fullnameOverride | string | `""` |  |

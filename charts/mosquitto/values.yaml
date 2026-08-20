@@ -1,11 +1,17 @@
 replicaCount: 1
 strategyType: Recreate
-
 image:
   repository: eclipse-mosquitto
   # -- Image tag of the container. defaults to chart appVersion
-  tag: 
+  tag:
   pullPolicy: IfNotPresent
+
+
+# -- Environment variables for main container
+env: {}
+# env:
+#   - name: MOSQUITTO_UNSAFE_ALLOW_SYMLINKS
+#     value: "1"
 
 imagePullSecrets: []
 nameOverride: ""
