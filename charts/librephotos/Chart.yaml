@@ -18,8 +18,7 @@ keywords:
   - librephotos
 kubeVersion: '>=1.16.0-0'
 maintainers:
-  - e-mail: v.aretakis@gmail.com
-    name: Vassilis Aretakis
+  - name: Vassilis Aretakis
     url: https://github.com/varet80
 name: librephotos
 sources:

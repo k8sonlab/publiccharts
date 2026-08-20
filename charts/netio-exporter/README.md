@@ -44,6 +44,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<netio-exporter> --v
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `1000` |  |
 | env | object | `{"NETIO_DEBUG":"False","NETIO_PORT":9595,"NETIO_URL":"http://192.168.0.1/netio.json"}` | env values to be set |
+| envSecretName | string | `nil` | external secret to use with creds |
 | service.type | string | `"ClusterIP"` |  |
 | service.port | int | `9595` |  |
 | resources | object | `{}` |  |

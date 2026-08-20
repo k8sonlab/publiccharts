@@ -26,9 +26,9 @@ objstoreConfig:
   name: ""
   key: "config"
   value: |-
-    type: FILESYSTEM
-    config:
-      directory: /var/thanos/store/s3
+         type: FILESYSTEM
+         config:
+           directory: /var/thanos/store/s3
 
 logLevel: info
 logFormat: logfmt
@@ -38,7 +38,6 @@ additionalReplicaLabels: []
 
 compact:
   enabled: false
-
   serviceAccount:
     create: true
     labels: {}
