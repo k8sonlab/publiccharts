@@ -9,6 +9,7 @@ image:
   pullPolicy: IfNotPresent
   # -- Overrides the image tag. Upstream publishes Docker tags as release-<version>.
   tag:
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
