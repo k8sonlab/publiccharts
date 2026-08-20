@@ -29,7 +29,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<unifi> --version <c
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| varet80 |  |  |
+| varet80 |  | <https://github.com/varet80> |
 
 ## Values
 

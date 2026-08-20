@@ -6,6 +6,7 @@ home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
 icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
 maintainers:
   - name: varet80
+    url: https://github.com/varet80
 name: zwave-js-ui
 sources:
   - https://github.com/zwave-js/zwave-js-ui

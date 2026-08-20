@@ -6,6 +6,7 @@ home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
 icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
 maintainers:
   - name: varet80
+    url: https://github.com/varet80
 keywords:
   - ubiquiti
   - unifi

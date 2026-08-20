@@ -5,4 +5,5 @@ description: Eclipse Mosquitto is an open source message broker which implements
 name: mosquitto
 maintainers:
   - name: varet80
+    url: https://github.com/varet80
 version: 2.7.1

@@ -29,7 +29,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/zwave-js-ui --versio
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| varet80 |  |  |
+| varet80 |  | <https://github.com/varet80> |
 ## Source Code
 
 * <https://github.com/zwave-js/zwave-js-ui>

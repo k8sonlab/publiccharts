@@ -27,7 +27,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<mosquitto> --versio
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| varet80 |  |  |
+| varet80 |  | <https://github.com/varet80> |
 
 ## Values
 
