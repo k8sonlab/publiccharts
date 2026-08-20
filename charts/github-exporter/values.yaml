@@ -8,8 +8,7 @@ image:
   repository: githubexporter/github-exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag. Upstream publishes Docker tags as release-<version>.
-  tag: release-v2.3.1
-
+  tag:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
