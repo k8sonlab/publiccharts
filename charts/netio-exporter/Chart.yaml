@@ -3,4 +3,6 @@ appVersion: 0.0.5
 description: A Helm chart for Kubernetes
 name: netio-exporter
 type: application
+maintainers:
+  - url: https://github.com/varet80
 version: 0.1.8

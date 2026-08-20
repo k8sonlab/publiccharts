@@ -23,6 +23,12 @@ helm registry login ghcr.io
 helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<netio-exporter> --version <chart-version>
 ```
 
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+|  |  | <https://github.com/varet80> |
+
 ## Values
 
 | Key | Type | Default | Description |
