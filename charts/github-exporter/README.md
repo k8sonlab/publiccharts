@@ -38,42 +38,42 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/github-exporter --ve
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | object | `{}` |  |
-| env | object | `{"FETCH_REPO_RELEASES_ENABLED":"true","GITHUB_RATE_LIMIT_ENABLED":"true","GITHUB_RESULTS_PER_PAGE":"100","LISTEN_PORT":"9171","LOG_LEVEL":"info","METRICS_PATH":"/metrics"}` | Environment variables for github-exporter. Set ORGS, REPOS, or USERS to choose what to monitor. |
-| envSecretName | string | `""` | Existing secret loaded as environment variables, for example GITHUB_TOKEN or GitHub App credentials. |
-| extraVolumeMounts | list | `[]` |  |
-| extraVolumes | list | `[]` |  |
-| fullnameOverride | string | `""` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
+| replicaCount | int | `1` |  |
 | image.repository | string | `"githubexporter/github-exporter"` |  |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.tag | string | `nil` | Overrides the image tag. Upstream publishes Docker tags as release-<version>. |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
-| nodeSelector | object | `{}` |  |
+| fullnameOverride | string | `""` |  |
+| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
-| probes.liveness.enabled | bool | `true` |  |
-| probes.liveness.path | string | `"/metrics"` |  |
-| probes.readiness.enabled | bool | `true` |  |
-| probes.readiness.path | string | `"/metrics"` |  |
-| replicaCount | int | `1` |  |
-| resources | object | `{}` |  |
-| secret.create | bool | `false` | Create a secret from secret.data and load it as environment variables. |
-| secret.data | object | `{}` | Secret values exposed as environment variables, such as GITHUB_TOKEN. |
-| secret.name | string | `""` | Secret name. Defaults to the chart fullname when create is true. |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `1000` |  |
-| service.port | int | `9171` |  |
+| env | object | `{"FETCH_REPO_RELEASES_ENABLED":"true","GITHUB_RATE_LIMIT_ENABLED":"true","GITHUB_RESULTS_PER_PAGE":"100","LISTEN_PORT":"9171","LOG_LEVEL":"info","METRICS_PATH":"/metrics"}` | Environment variables for github-exporter. Set ORGS, REPOS, or USERS to choose what to monitor. |
+| envSecretName | string | `""` | Existing secret loaded as environment variables, for example GITHUB_TOKEN or GitHub App credentials. |
+| secret.create | bool | `false` | Create a secret from secret.data and load it as environment variables. |
+| secret.name | string | `""` | Secret name. Defaults to the chart fullname when create is true. |
+| secret.data | object | `{}` | Secret values exposed as environment variables, such as GITHUB_TOKEN. |
 | service.type | string | `"ClusterIP"` |  |
-| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
-| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
-| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| service.port | int | `9171` |  |
+| probes.liveness.enabled | bool | `true` |  |
+| probes.liveness.path | string | `"/metrics"` |  |
+| probes.readiness.enabled | bool | `true` |  |
+| probes.readiness.path | string | `"/metrics"` |  |
+| resources | object | `{}` |  |
+| nodeSelector | object | `{}` |  |
+| tolerations | list | `[]` |  |
+| affinity | object | `{}` |  |
+| extraVolumes | list | `[]` |  |
+| extraVolumeMounts | list | `[]` |  |
 | serviceMonitor | object | `{"enabled":false,"endpointAdditions":{},"interval":"30s","labels":{},"namespaceSelector":{}}` | Support Prometheus ServiceMonitor |
 | serviceMonitor.enabled | bool | `false` | enable Service Monitor |
-| serviceMonitor.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
-| serviceMonitor.interval | string | `"30s"` | interval |
 | serviceMonitor.labels | object | `{}` | add Custom labels, for prometheus Service Monitor |
+| serviceMonitor.interval | string | `"30s"` | interval |
 | serviceMonitor.namespaceSelector | object | `{}` | namespace selector |
-| tolerations | list | `[]` |  |
+| serviceMonitor.endpointAdditions | object | `{}` | endpoint additions - add endpoint modifications |
