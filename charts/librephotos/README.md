@@ -6,17 +6,34 @@ Helmchart used to install Librephotos in a microservice manner
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos>
 
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/<librephotos>
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<librephotos> --version <chart-version>
+```
+
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
 | Vassilis Aretakis |  | <https://github.com/varet80> |
-
 ## Source Code
 
 * <https://github.com/LibrePhotos/librephotos>
 * <https://hub.docker.com/r/reallibrephotos>
-
 ## Requirements
 
 Kubernetes: `>=1.16.0-0`
@@ -25,7 +42,6 @@ Kubernetes: `>=1.16.0-0`
 |------------|------|---------|
 | https://charts.bitnami.com/bitnami | postgresql | => 12.8.2 |
 | https://charts.bitnami.com/bitnami | redis | => 21.0.0 |
-
 ## Values
 
 | Key | Type | Default | Description |

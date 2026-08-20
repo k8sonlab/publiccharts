@@ -6,6 +6,25 @@ Unifi chart for Kubernetes
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi>
 
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/<unifi>
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<unifi> --version <chart-version>
+```
+
 ## Maintainers
 
 | Name | Email | Url |

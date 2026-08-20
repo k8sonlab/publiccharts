@@ -6,12 +6,30 @@ Helmchart for zwave-js-ui
 
 **Homepage:** <https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui>
 
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/zwave-js-ui
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/zwave-js-ui --version <chart-version>
+```
+
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
 | varet80 |  |  |
-
 ## Source Code
 
 * <https://github.com/zwave-js/zwave-js-ui>

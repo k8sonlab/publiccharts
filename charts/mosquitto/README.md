@@ -4,6 +4,25 @@
 
 Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
 
+## Install
+
+You can install this chart from the classic Helm repository or from OCI in GHCR.
+
+### Helm repository
+
+```bash
+helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo update
+helm install my-release publiccharts/<mosquitto>
+```
+
+### OCI registry (GHCR)
+
+```bash
+helm registry login ghcr.io
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<mosquitto> --version <chart-version>
+```
+
 ## Maintainers
 
 | Name | Email | Url |
