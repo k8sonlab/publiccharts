@@ -153,7 +153,7 @@ Kubernetes: `>=1.16.0-0`
 | cronjob.native.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | cronjob.native.image.kubernetesVersion | string | `"1.22.6"` | Check alpine image for the latest available https://hub.docker.com/r/alpine/k8s/tags |
 | cronjob.scan.filesystem | bool | `true` | Enable scanning filesystem (Folder scanning) |
-| cronjob.scan.nextcloud | bool | `false` | Support scanning Nextcloud  |
+| cronjob.scan.nextcloud | bool | `false` | Support scanning Nextcloud |
 | nameOverride | string | `""` |  |
 | fullnameOverride | string | `""` |  |
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -171,7 +171,7 @@ Kubernetes: `>=1.16.0-0`
 | httpRoute.parentRefs | list | `[]` | Reference to parent gateways |
 | httpRoute.rules[0].matches[0].path.type | string | `"PathPrefix"` |  |
 | httpRoute.rules[0].matches[0].path.value | string | `"/"` |  |
-| ingress.enabled | bool | `false` | enable ingress  |
+| ingress.enabled | bool | `false` | enable ingress |
 | ingress.annotations | object | `{}` |  |
 | ingress.hostname | string | `""` | currently only hotsname is needed for ingress |
 | ingress.tls | list | `[]` | Configure TLS for the ingress. Both secretName and hosts can process a Helm template. |

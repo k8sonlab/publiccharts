@@ -101,7 +101,7 @@ proxy:
   healthchecks:
     livenessProbe:
       tcpSocket:
-        port: 80 
+        port: 80
       initialDelaySeconds: 10
       failureThreshold: 5
       timeoutSeconds: 5
@@ -109,14 +109,14 @@ proxy:
     readinessProbe:
       httpGet:
         path: /
-        port: 80 
+        port: 80
       initialDelaySeconds: 10
       failureThreshold: 5
       timeoutSeconds: 5
       periodSeconds: 60
     startupProbe:
       tcpSocket:
-        port: 80 
+        port: 80
       initialDelaySeconds: 10
       failureThreshold: 60
       timeoutSeconds: 2
@@ -181,7 +181,7 @@ cronjob:
   scan:
     # -- Enable scanning filesystem (Folder scanning)
     filesystem: true
-    # -- Support scanning Nextcloud 
+    # -- Support scanning Nextcloud
     nextcloud: false
 
 nameOverride: ""
@@ -218,7 +218,7 @@ httpRoute:
             value: "/"
 
 ingress:
-  # -- enable ingress 
+  # -- enable ingress
   enabled: false
   annotations: {}
   # -- currently only hotsname is needed for ingress
@@ -233,8 +233,8 @@ dataVolume:
   # -- Size of the volume to be created (data)
   size: 100Gi
   # -- Access mode of volume
-  accessModes: 
-   - "ReadWriteOnce"
+  accessModes:
+    - "ReadWriteOnce"
   # -- Storage class of data volume
   storageClassName: ""
 # to be refactored
