@@ -13,7 +13,7 @@ You can install this chart from the classic Helm repository or from OCI in GHCR.
 ### Helm repository
 
 ```bash
-helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo add publiccharts https://charts.ar80.eu
 helm repo update
 helm install my-release publiccharts/zwave-js-ui
 ```

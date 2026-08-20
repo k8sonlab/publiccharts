@@ -11,16 +11,16 @@ You can install this chart from the classic Helm repository or from OCI in GHCR.
 ### Helm repository
 
 ```bash
-helm repo add publiccharts https://k8sonlab.github.io/publiccharts
+helm repo add publiccharts https://charts.ar80.eu
 helm repo update
-helm install my-release publiccharts/<netio-exporter>
+helm install my-release publiccharts/netio-exporter
 ```
 
 ### OCI registry (GHCR)
 
 ```bash
 helm registry login ghcr.io
-helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<netio-exporter> --version <chart-version>
+helm install my-release oci://ghcr.io/k8sonlab/publiccharts/netio-exporter --version <chart-version>
 ```
 
 ## Maintainers
