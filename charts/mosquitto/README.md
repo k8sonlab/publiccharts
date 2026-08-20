@@ -1,6 +1,6 @@
 # mosquitto
 
-![Version: 2.6.7](https://img.shields.io/badge/Version-2.6.7-informational?style=flat-square) ![AppVersion: 2.1.2-alpine](https://img.shields.io/badge/AppVersion-2.1.2--alpine-informational?style=flat-square)
+![Version: 2.7.0](https://img.shields.io/badge/Version-2.7.0-informational?style=flat-square) ![AppVersion: 2.1.2-alpine](https://img.shields.io/badge/AppVersion-2.1.2--alpine-informational?style=flat-square)
 
 Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
 
@@ -28,6 +28,7 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | service.type | string | `"ClusterIP"` | Service type, defaults to ClusterIP |
 | service.externalTrafficPolicy | string | `"Cluster"` |  |
 | service.clusterIp | string | `""` | Ability to choose the Service IP (clusterIP) |
+| service.loadBalancerIP | string | `""` |  |
 | service.annotations | object | `{}` |  |
 | ports.mqtt.port | int | `1883` |  |
 | ports.mqtt.protocol | string | `"TCP"` |  |
@@ -42,6 +43,20 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | resources | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | securityContext | object | `{}` |  |
+| probes.liveness.enabled | bool | `true` |  |
+| probes.liveness.tcpSocketPort | string | `"mqtt"` |  |
+| probes.liveness.initialDelaySeconds | int | `5` |  |
+| probes.liveness.periodSeconds | int | `10` |  |
+| probes.liveness.timeoutSeconds | int | `1` |  |
+| probes.liveness.failureThreshold | int | `6` |  |
+| probes.readiness.enabled | bool | `true` |  |
+| probes.readiness.tcpSocketPort | string | `"mqtt"` |  |
+| probes.readiness.initialDelaySeconds | int | `3` |  |
+| probes.readiness.periodSeconds | int | `10` |  |
+| probes.readiness.timeoutSeconds | int | `1` |  |
+| probes.readiness.failureThreshold | int | `3` |  |
+| podAnnotations | object | `{}` |  |
+| configMountPath | string | `"/mosquitto/config/mosquitto.conf"` |  |
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
 | affinity | object | `{}` |  |
@@ -54,8 +69,16 @@ Eclipse Mosquitto is an open source message broker which implements MQTT version
 | extraVolumes | list | `[]` |  |
 | extraVolumeMounts | list | `[]` |  |
 | monitoring.podMonitor.enabled | bool | `false` |  |
+| monitoring.podMonitor.namespace | string | `""` |  |
+| monitoring.podMonitor.labels | object | `{}` |  |
+| monitoring.podMonitor.interval | string | `"15s"` |  |
+| monitoring.podMonitor.path | string | `"/metrics"` |  |
+| monitoring.podMonitor.bearerTokenFile | string | `""` |  |
+| monitoring.podMonitor.bearerTokenSecret | object | `{}` |  |
 | monitoring.sidecar.enabled | bool | `false` |  |
 | monitoring.sidecar.port | int | `9234` |  |
+| monitoring.sidecar.args | list | `[]` |  |
+| monitoring.sidecar.envs | list | `[]` |  |
 | monitoring.sidecar.image.repository | string | `"nolte/mosquitto-exporter"` |  |
 | monitoring.sidecar.image.tag | string | `"v0.6.3"` |  |
 | monitoring.sidecar.image.pullPolicy | string | `"IfNotPresent"` |  |
