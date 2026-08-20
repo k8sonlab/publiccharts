@@ -29,7 +29,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<librephotos> --vers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Vassilis Aretakis |  | <https://github.com/varet80> |
+| Vassilis Aretakis |  |  |
 ## Source Code
 
 * <https://github.com/LibrePhotos/librephotos>

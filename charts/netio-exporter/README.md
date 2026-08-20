@@ -27,7 +27,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<netio-exporter> --v
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-|  |  | <https://github.com/varet80> |
+| Vassilis Aretakis |  |  |
 
 ## Values
 

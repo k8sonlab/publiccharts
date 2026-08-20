@@ -19,7 +19,6 @@ keywords:
 kubeVersion: '>=1.16.0-0'
 maintainers:
   - name: Vassilis Aretakis
-    url: https://github.com/varet80
 name: librephotos
 sources:
   - https://github.com/LibrePhotos/librephotos

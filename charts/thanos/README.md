@@ -29,7 +29,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<thanos> --version <
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-|  |  | <https://github.com/varet80> |
+| Vassilis Aretakis |  |  |
 ## Source Code
 
 * <https://github.com/thanos-io/thanos>

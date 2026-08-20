@@ -10,7 +10,7 @@ keywords:
   - alerting
   - metrics
 maintainers:
-  - url: https://github.com/varet80
+  - name: Vassilis Aretakis
 name: thanos
 sources:
   - https://github.com/thanos-io/thanos
