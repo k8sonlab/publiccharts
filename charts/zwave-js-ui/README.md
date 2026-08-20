@@ -1,6 +1,6 @@
 # zwave-js-ui
 
-![Version: 0.7.9](https://img.shields.io/badge/Version-0.7.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.22.3](https://img.shields.io/badge/AppVersion-11.22.3-informational?style=flat-square)
+![Version: 0.7.10](https://img.shields.io/badge/Version-0.7.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.22.3](https://img.shields.io/badge/AppVersion-11.22.3-informational?style=flat-square)
 
 Helmchart for zwave-js-ui
 
@@ -29,7 +29,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/zwave-js-ui --versio
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| varet80 |  |  |
+| varet80 |  | <https://github.com/varet80> |
 ## Source Code
 
 * <https://github.com/zwave-js/zwave-js-ui>

@@ -4,5 +4,6 @@ description: A Helm chart for Kubernetes
 name: netio-exporter
 type: application
 maintainers:
-  - name: Vassilis Aretakis
-version: 0.1.8
+  - name: varet80
+    url: https://github.com/varet80
+version: 0.1.9

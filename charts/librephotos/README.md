@@ -1,6 +1,6 @@
 # librephotos
 
-![Version: 1.1.4](https://img.shields.io/badge/Version-1.1.4-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
+![Version: 1.1.5](https://img.shields.io/badge/Version-1.1.5-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
 
 Helmchart used to install Librephotos in a microservice manner
 
@@ -29,7 +29,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<librephotos> --vers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Vassilis Aretakis |  |  |
+| varet80 |  | <https://github.com/varet80> |
 ## Source Code
 
 * <https://github.com/LibrePhotos/librephotos>

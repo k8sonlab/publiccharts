@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 1.1.5](https://img.shields.io/badge/Version-1.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.41.0](https://img.shields.io/badge/AppVersion-v0.41.0-informational?style=flat-square)
+![Version: 1.1.6](https://img.shields.io/badge/Version-1.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.41.0](https://img.shields.io/badge/AppVersion-v0.41.0-informational?style=flat-square)
 
 Helm chart for Thanos.
 
@@ -29,7 +29,7 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/<thanos> --version <
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Vassilis Aretakis |  |  |
+| varet80 |  | <https://github.com/varet80> |
 ## Source Code
 
 * <https://github.com/thanos-io/thanos>

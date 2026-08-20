@@ -10,11 +10,12 @@ keywords:
   - alerting
   - metrics
 maintainers:
-  - name: Vassilis Aretakis
+  - name: varet80
+    url: https://github.com/varet80
 name: thanos
 sources:
   - https://github.com/thanos-io/thanos
   - https://github.com/thanos-io/kube-thanos
   - https://github.com/k8sonlab/publiccharts
 type: application
-version: 1.1.5
+version: 1.1.6
