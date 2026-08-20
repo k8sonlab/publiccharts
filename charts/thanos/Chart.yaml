@@ -11,6 +11,7 @@ keywords:
   - metrics
 maintainers:
   - name: Vassilis Aretakis
+    url: https://github.com/varet80
 name: thanos
 sources:
   - https://github.com/thanos-io/thanos
