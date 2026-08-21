@@ -1,4 +1,6 @@
 apiVersion: v2
+annotations:
+  artifactHub.io/license: Apache-2.0
 # renovate: datasource=docker depName=jacobalberty/unifi
 appVersion: v10.0.162
 description: Unifi chart for Kubernetes
