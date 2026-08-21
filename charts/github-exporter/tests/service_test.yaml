@@ -1,0 +1,31 @@
+suite: github-exporter service
+templates:
+  - service.yaml
+
+tests:
+  - it: exposes the exporter service by default
+    asserts:
+      - equal:
+          path: spec.type
+          value: ClusterIP
+      - equal:
+          path: spec.ports[0].port
+          value: 9171
+      - equal:
+          path: spec.ports[0].targetPort
+          value: http
+      - equal:
+          path: spec.ports[0].name
+          value: http
+
+  - it: supports a custom service type and port
+    set:
+      service.type: LoadBalancer
+      service.port: 8080
+    asserts:
+      - equal:
+          path: spec.type
+          value: LoadBalancer
+      - equal:
+          path: spec.ports[0].port
+          value: 8080

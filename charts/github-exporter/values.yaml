@@ -62,10 +62,25 @@ service:
 probes:
   liveness:
     enabled: true
-    path: /metrics
+    path: /
+    initialDelaySeconds: 10
+    failureThreshold: 5
+    timeoutSeconds: 5
+    periodSeconds: 10
   readiness:
     enabled: true
     path: /metrics
+    initialDelaySeconds: 10
+    failureThreshold: 5
+    timeoutSeconds: 5
+    periodSeconds: 20
+  startup:
+    enabled: true
+    path: /
+    initialDelaySeconds: 10
+    failureThreshold: 60
+    timeoutSeconds: 2
+    periodSeconds: 5
 
 resources: {}
   # limits:

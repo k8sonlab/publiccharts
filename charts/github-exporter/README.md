@@ -1,6 +1,6 @@
 # github-exporter
 
-![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.3.1](https://img.shields.io/badge/AppVersion-v2.3.1-informational?style=flat-square)
+![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.3.1](https://img.shields.io/badge/AppVersion-v2.3.1-informational?style=flat-square)
 
 A Helm chart for github-exporter
 
@@ -62,9 +62,23 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/github-exporter --ve
 | service.type | string | `"ClusterIP"` |  |
 | service.port | int | `9171` |  |
 | probes.liveness.enabled | bool | `true` |  |
-| probes.liveness.path | string | `"/metrics"` |  |
+| probes.liveness.path | string | `"/"` |  |
+| probes.liveness.initialDelaySeconds | int | `10` |  |
+| probes.liveness.failureThreshold | int | `5` |  |
+| probes.liveness.timeoutSeconds | int | `5` |  |
+| probes.liveness.periodSeconds | int | `10` |  |
 | probes.readiness.enabled | bool | `true` |  |
 | probes.readiness.path | string | `"/metrics"` |  |
+| probes.readiness.initialDelaySeconds | int | `10` |  |
+| probes.readiness.failureThreshold | int | `5` |  |
+| probes.readiness.timeoutSeconds | int | `5` |  |
+| probes.readiness.periodSeconds | int | `20` |  |
+| probes.startup.enabled | bool | `true` |  |
+| probes.startup.path | string | `"/"` |  |
+| probes.startup.initialDelaySeconds | int | `10` |  |
+| probes.startup.failureThreshold | int | `60` |  |
+| probes.startup.timeoutSeconds | int | `2` |  |
+| probes.startup.periodSeconds | int | `5` |  |
 | resources | object | `{}` |  |
 | nodeSelector | object | `{}` |  |
 | tolerations | list | `[]` |  |
