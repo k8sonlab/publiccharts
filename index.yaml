@@ -3,6 +3,22 @@ entries:
   github-exporter:
   - apiVersion: v2
     appVersion: v2.3.1
+    created: "2026-08-21T02:43:48.519699346Z"
+    description: A Helm chart for github-exporter
+    digest: e3ae90570b1aaa9e0f70a85fece891e44b7a59853b65d96fd785be1f586c970b
+    home: https://github.com/githubexporter/github-exporter
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/github-exporter-0.0.3/github-exporter-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: v2.3.1
     created: "2026-08-20T18:02:18.377975238Z"
     description: A Helm chart for github-exporter
     digest: 9995c92c41b3a31fc18f31f465ae9f5a1a09d815db1c292d1fe8f62584c7d4bc
@@ -5153,4 +5169,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2026-08-20T18:02:18.378396645Z"
+generated: "2026-08-21T02:43:48.520093638Z"
