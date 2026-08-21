@@ -1,6 +1,7 @@
 # librephotos
 
 ![Version: 1.1.6](https://img.shields.io/badge/Version-1.1.6-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue)](https://opensource.org)
 
 Helmchart used to install Librephotos in a microservice manner
 

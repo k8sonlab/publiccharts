@@ -1,6 +1,7 @@
 # unifi
 
 ![Version: 0.3.7](https://img.shields.io/badge/Version-0.3.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v10.0.162](https://img.shields.io/badge/AppVersion-v10.0.162-informational?style=flat-square)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue)](https://opensource.org)
 
 Unifi chart for Kubernetes
 
