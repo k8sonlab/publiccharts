@@ -1,6 +1,24 @@
 apiVersion: v1
 entries:
   github-exporter:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v2.3.1
+    created: "2026-08-21T02:59:30.706641091Z"
+    description: A Helm chart for github-exporter
+    digest: 5ff6405c56c34996fbe1ca43b8fb28dde9553c487822b1f02783d5b4ab34b24e
+    home: https://github.com/githubexporter/github-exporter
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: github-exporter
+    sources:
+    - https://github.com/githubexporter/github-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/github-exporter-0.0.4/github-exporter-0.0.4.tgz
+    version: 0.0.4
   - apiVersion: v2
     appVersion: v2.3.1
     created: "2026-08-21T02:43:48.519699346Z"
@@ -34,6 +52,38 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/github-exporter-0.0.2/github-exporter-0.0.2.tgz
     version: 0.0.2
   librephotos:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.0.3
+    created: "2026-08-21T02:59:30.845271667Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: => 12.8.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: => 21.0.0
+    description: Helmchart used to install Librephotos in a microservice manner
+    digest: ad4513e46e8edb0a650583884f4843f2c74b034d437d56da1764fb632c918a60
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/librephotos
+    keywords:
+    - photolibrary
+    - photos
+    - librephotos
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: librephotos
+    sources:
+    - https://github.com/LibrePhotos/librephotos
+    - https://hub.docker.com/r/reallibrephotos
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-1.1.6/librephotos-1.1.6.tgz
+    version: 1.1.6
   - apiVersion: v2
     appVersion: 1.0.3
     created: "2026-08-20T11:43:27.15466054Z"
@@ -393,6 +443,21 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/librephotos-1.0.2/librephotos-1.0.2.tgz
     version: 1.0.2
   mosquitto:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.1.2-alpine
+    created: "2026-08-21T02:59:30.96096133Z"
+    description: Eclipse Mosquitto is an open source message broker which implements
+      MQTT version 5, 3.1.1 and 3.1
+    digest: 302a1be94b1f01a7c7073bf00b1346b02d9a2af164a30a0ed4c22f932e541a55
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: mosquitto
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/mosquitto-2.7.3/mosquitto-2.7.3.tgz
+    version: 2.7.3
   - apiVersion: v2
     appVersion: 2.1.2-alpine
     created: "2026-08-20T11:43:27.273085981Z"
@@ -563,6 +628,21 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/mosquitto-2.4.1/mosquitto-2.4.1.tgz
     version: 2.4.1
   netio-exporter:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.0.5
+    created: "2026-08-21T02:59:31.086128122Z"
+    description: A Helm chart for Kubernetes
+    digest: 6804051e526ea891a070d4dd2a9b4cd4db9c1d1ddcc482b721bca2f6dc5b3c25
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: netio-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/netio-exporter-0.1.10/netio-exporter-0.1.10.tgz
+    version: 0.1.10
   - apiVersion: v2
     appVersion: 0.0.5
     created: "2026-08-20T11:43:27.420258502Z"
@@ -659,6 +739,33 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/netio-exporter-0.1.1/netio-exporter-0.1.1.tgz
     version: 0.1.1
   thanos:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v0.41.0
+    created: "2026-08-21T02:59:31.195805763Z"
+    description: Helm chart for Thanos.
+    digest: cf9e48f6bda5dddca1c912d55ac40da9fdf62b6f1edfffa6d6e8454d0fbc411a
+    home: https://thanos.io/
+    icon: https://github.com/thanos-community/helm-charts/raw/master/docs/imgs/thanos_logo_full.svg
+    keywords:
+    - kubernetes
+    - thanos
+    - monitoring
+    - alerting
+    - metrics
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: thanos
+    sources:
+    - https://github.com/thanos-io/thanos
+    - https://github.com/thanos-io/kube-thanos
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.1.7/thanos-1.1.7.tgz
+    version: 1.1.7
   - apiVersion: v2
     appVersion: v0.41.0
     created: "2026-08-20T11:43:27.551731882Z"
@@ -1009,6 +1116,26 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/thanos-1.0.0/thanos-1.0.0.tgz
     version: 1.0.0
   unifi:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v10.0.162
+    created: "2026-08-21T02:59:31.320870842Z"
+    description: Unifi chart for Kubernetes
+    digest: 3f82d48e25a108e92719abf8a8d1ce99130dc88d886ff09af52494e7e8aa840e
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/unifi
+    icon: https://prd-www-cdn.ubnt.com/static/favicon-152.png
+    keywords:
+    - ubiquiti
+    - unifi
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: unifi
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.3.7/unifi-0.3.7.tgz
+    version: 0.3.7
   - apiVersion: v2
     appVersion: v10.0.162
     created: "2026-08-20T11:43:27.696610361Z"
@@ -1497,6 +1624,27 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.9/unifi-0.1.9.tgz
     version: 0.1.9
   zwave-js-ui:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 11.22.3
+    created: "2026-08-21T02:59:31.44307629Z"
+    description: Helmchart for zwave-js-ui
+    digest: 24f10681621f8ccba03a828ca09c9d7e4cd5218c1d9960e2356a4d65a1fb6085
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+    icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: zwave-js-ui
+    sources:
+    - https://github.com/zwave-js/zwave-js-ui
+    - https://github.com/zwave-js/node-zwave-js
+    - https://github.com/k8sonlab/zwave-js-prom-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.7.11/zwave-js-ui-0.7.11.tgz
+    version: 0.7.11
   - apiVersion: v2
     appVersion: 11.22.3
     created: "2026-08-20T11:43:27.869627267Z"
@@ -5169,4 +5317,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2026-08-21T02:43:48.520093638Z"
+generated: "2026-08-21T02:59:31.443881994Z"
