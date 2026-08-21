@@ -51,7 +51,8 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/(^|/)Chart\\.yaml$/"
+        "/(^|/)Chart\\.yaml$/",
+        "/(^|/)values\\.yaml$/"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)\\s+appVersion:\\s+[\"']?(?<currentValue>[^\"'\\s]+)[\"']?",
