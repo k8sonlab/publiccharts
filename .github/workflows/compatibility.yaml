@@ -82,6 +82,15 @@ jobs:
               echo "Unique release number for this chart (${chart}), skipping"
             fi
           done
+      - name: Configure Git
+        run: |
+          if [[ "${{ github.actor }}" == "renovate[bot]" ]]; then
+            git config user.name "renovate[bot]"
+            git config user.email "renovate[bot]@renovatebot.com"
+          else
+            git config user.name "$GITHUB_ACTOR"
+            git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          fi
       - name: Commit changes
         uses: EndBug/add-and-commit@v11
         with:
@@ -99,7 +108,15 @@ jobs:
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
           ./helm-docs --sort-values-order file --skip-version-footer
           rm helm-docs
-
+      - name: Configure Git
+        run: |
+          if [[ "${{ github.actor }}" == "renovate[bot]" ]]; then
+            git config user.name "renovate[bot]"
+            git config user.email "renovate[bot]@renovatebot.com"
+          else
+            git config user.name "$GITHUB_ACTOR"
+            git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          fi
       - name: Commit bump
         uses: EndBug/add-and-commit@v11
         with:
