@@ -2,7 +2,7 @@ apiVersion: v2
 annotations:
   artifactHub.io/license: Apache-2.0
 # renovate: datasource=docker depName=zwavejs/zwave-js-ui
-appVersion: 11.24.2
+appVersion: 11.24.3
 description: Helmchart for zwave-js-ui
 home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
 icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
