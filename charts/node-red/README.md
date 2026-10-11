@@ -1,6 +1,6 @@
 # node-red
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.1.12](https://img.shields.io/badge/AppVersion-4.1.12-informational?style=flat-square)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.1.12](https://img.shields.io/badge/AppVersion-4.1.12-informational?style=flat-square)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue)](https://opensource.org)
 
 Node-Red helmchart, based on nodered image. A nice web ui flow tool
@@ -129,6 +129,6 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/node-red --version <
 | sidecar.readinessProbe | object | `{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":10}` | Readiness probe for the sidecar. Reports ready after the initial sync completes. |
 | sidecar.image.registry | string | `"quay.io"` | Registry for the sidecar image. |
 | sidecar.image.repository | string | `"kiwigrid/k8s-sidecar"` | Repository for the sidecar image. |
-| sidecar.image.tag | string | `"2.5.0"` | Image tag to pull. Defaults to `2.5.0`. |
+| sidecar.image.tag | string | `"2.14.1"` | Image tag to pull. Defaults to `2.5.0`. |
 | sidecar.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. Defaults to `IfNotPresent`. |
 | sidecar.volumeMounts | list | `[]` | Extra volume mounts for the sidecar. |
