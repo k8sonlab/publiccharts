@@ -772,6 +772,27 @@ entries:
     version: 0.1.1
   node-red:
   - apiVersion: v2
+    appVersion: 5.0.8
+    created: "2026-10-11T11:02:55.631083088Z"
+    description: Node-Red helmchart, based on nodered image. A nice web ui flow tool
+    digest: 167d7f8b21be36a15eb1888feb6c103914c78de8049b71ad9fc76579890ebcd4
+    home: https://nodered.org/
+    icon: https://nodered.org/about/resources/media/node-red-icon-2.png
+    keywords:
+    - home
+    - node-red
+    - automation
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: node-red
+    sources:
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/node-red-1.2.0/node-red-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 4.1.12
     created: "2026-10-11T10:55:15.703227117Z"
     description: Node-Red helmchart, based on nodered image. A nice web ui flow tool
@@ -5497,4 +5518,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-11T10:55:15.703662704Z"
+generated: "2026-10-11T11:02:55.63167333Z"
