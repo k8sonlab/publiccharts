@@ -1,0 +1,17 @@
+apiVersion: v2
+name: node-red
+type: application
+description: Node-Red helmchart, based on nodered image. A nice web ui flow tool
+home: https://nodered.org/
+version: 1.0.0
+appVersion: 4.1.2
+icon: https://nodered.org/about/resources/media/node-red-icon-2.png
+sources:
+  - https://github.com/k8sonlab/publiccharts
+maintainers:
+  - name: varet80
+    url: https://github.com/varet80
+keywords:
+  - home
+  - node-red
+  - automation

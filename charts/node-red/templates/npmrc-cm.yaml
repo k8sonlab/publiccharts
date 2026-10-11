@@ -1,0 +1,15 @@
+{{- if and .Values.npmrc.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "node-red.configMapName" . }}
+  namespace: {{ .Release.Namespace | quote }}
+data:
+  npmrc: |
+{{- if .Values.npmrc.registry }}
+    registry={{ .Values.npmrc.registry }}
+{{- end }}
+{{- if .Values.npmrc.content }}
+    {{- .Values.npmrc.content | nindent 4 }}
+{{- end }}
+{{- end -}}

@@ -1,0 +1,235 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  {{- with .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: {{ include "node-red.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "node-red.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount | default 1}}
+  {{- if .Values.deploymentStrategy }}
+  strategy:
+    type: {{ .Values.deploymentStrategy }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "node-red.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "node-red.selectorLabels" . | nindent 8 }}
+{{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+{{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "node-red.serviceAccountName" . }}
+      {{- if .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- end }}
+      {{- if .Values.initContainers  }}
+      initContainers:
+      {{- with .Values.initContainers }}
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- end }}
+      containers:
+        {{- if .Values.extraSidecars }}
+        {{- toYaml .Values.extraSidecars  | nindent  8 }}
+        {{- end}}
+        {{- if .Values.sidecar.enabled }}
+        - env:
+          {{- if .Values.sidecar.extraEnv }}
+          {{- toYaml .Values.sidecar.extraEnv  | nindent 10 }}
+          {{- end }}
+          - name: METHOD
+            value: {{ .Values.sidecar.env.method }}
+          - name: SLEEP_TIME_SIDECAR
+            value: {{ .Values.sidecar.env.sleep_time_sidecar }}
+          - name: LABEL
+            value: {{ .Values.sidecar.env.label }}
+          - name: LABEL_VALUE
+            value: {{ .Values.sidecar.env.label_value | quote}}
+          - name: FOLDER
+            value: /data
+          {{- if .Values.sidecar.env.script }}
+          - name: SCRIPT
+            value: /app/{{ .Values.sidecar.env.script }}
+          {{- end }}
+          - name: URL
+            value: {{ .Values.sidecar.env.url | default (printf "http://%s.%s.svc.cluster.local:%d" (include "node-red.fullname" .) .Release.Namespace (.Values.service.port | int)) | quote }}
+          {{ if .Values.sidecar.env.username }}
+          - name: USERNAME
+            value: {{ .Values.sidecar.env.username }}
+          {{- end }}
+          {{- if or .Values.sidecar.env.password .Values.sidecar.env.passwordFromExistingSecret }}
+          - name: PASSWORD
+          {{- if .Values.sidecar.env.password }}
+            value: {{ .Values.sidecar.env.password | quote }}
+          {{- else if .Values.sidecar.env.passwordFromExistingSecret }}
+            valueFrom:
+              secretKeyRef:
+                key: {{ .Values.sidecar.env.passwordFromExistingSecret.key }}
+                name: {{ .Values.sidecar.env.passwordFromExistingSecret.name }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.sidecar.env.skip_init }}
+          - name: SKIP_INIT
+            value: "true"
+          {{- end }}
+          image: "{{ .Values.sidecar.image.registry }}/{{ .Values.sidecar.image.repository }}:{{ .Values.sidecar.image.tag }}"
+          imagePullPolicy: {{ .Values.sidecar.image.pullPolicy }}
+          name: node-red-sidecar
+          {{- if .Values.sidecar.livenessProbe }}
+          livenessProbe:
+            {{- toYaml .Values.sidecar.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.sidecar.readinessProbe }}
+          readinessProbe:
+            {{- toYaml .Values.sidecar.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.sidecar.resources }}
+          resources:
+            {{- toYaml .Values.sidecar.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.sidecar.securityContext }}
+          securityContext:
+            {{- toYaml .Values.sidecar.securityContext | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - name: flow-refresh-script
+              mountPath: /app/{{ .Values.sidecar.env.script }}
+              subPath: {{ .Values.sidecar.env.script }}
+          {{- if .Values.sidecar.volumeMounts }}
+          {{- with .Values.sidecar.volumeMounts }}
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- end }}
+        {{- end }}
+        - name: {{ .Chart.Name }}
+          {{- if .Values.securityContext }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if or .Values.metrics.enabled .Values.projectMode.enabled .Values.env }}
+          env:
+          {{- if .Values.metrics.enabled}}
+          - name: PROMETHEUS_COLLECT_DEFAULT_METRICS
+            value: "true"
+          - name: PROMETHEUS_METRICS_PATH
+            value: {{ .Values.metrics.path | default "/metrics" }}
+          {{- end }}
+          {{- if .Values.projectMode.enabled }}
+          - name: NODE_RED_ENABLE_PROJECTS
+            value: "true"
+          {{- end }}
+          {{- with .Values.env }}
+          {{- tpl (toYaml .) $ | nindent 10 }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.envFrom }}
+          envFrom:
+          {{- with .Values.envFrom }}
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 1880
+              protocol: TCP
+          {{- with .Values.startupProbe }}
+          startupProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- if and .Values.npmrc.enabled }}
+            - name: npmrc-volume
+              mountPath: /usr/src/node-red/.npmrc
+              subPath: npmrc
+            {{- end }}
+            {{- if .Values.settings }}
+            - name: {{ .Values.settings.name }}
+              mountPath: /data/settings.js
+              subPath: settings.js
+            {{- end }}
+            {{- with .Values.extraVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            - name: data
+              mountPath: /data
+              {{- if .Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
+              {{- end }}
+          {{- if .Values.resources }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+      volumes:
+        {{- if and .Values.sidecar.enabled }}
+        - name: flow-refresh-script
+          configMap:
+            name: {{ include "node-red.sidecarConfigMapName" . }}
+            defaultMode: 0777
+        {{- end }}
+        {{- with .Values.extraVolumes }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- if and .Values.npmrc.enabled }}
+        - name: npmrc-volume
+          configMap:
+            name: {{ include "node-red.configMapName" . }}
+        {{- end }}
+        {{- if .Values.settings }}
+        - name: {{ .Values.settings.name }}
+          configMap:
+            name: {{ .Values.settings.configMapName }}
+        {{- end }}
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "node-red.fullname" . }}{{- end }}
+          {{- else }}
+          emptyDir: { }
+          {{ end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      {{- end }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
