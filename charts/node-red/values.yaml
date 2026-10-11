@@ -1,40 +1,39 @@
-# -- Specifies the strategy used to replace old Pods by new ones, default: `RollingUpdate`
+# -- Deployment strategy used to replace old Pods with new ones. Defaults to `RollingUpdate`.
 deploymentStrategy: ""
 image:
-  # -- The image registry to pull from
+  # -- Registry for the container image.
   registry: docker.io
-  # -- The image repository to pull from
+  # -- Repository for the container image.
   repository: nodered/node-red
-  # -- The image pull policy
+  # -- Image pull policy.
   pullPolicy: IfNotPresent
-  # -- The image tag to pull, default: `Chart.appVersion`
+  # -- Image tag to pull. Defaults to `Chart.appVersion`.
   tag: ""
 
 rbac:
-  # If enabled, roles will be created and bound to the service account. default: true
+  # If enabled, roles are created and bound to the service account. Defaults to true.
   enabled: true
-  # -- Create a ClusterRole resource for the node-red pod. default: false
+  # -- Create a ClusterRole for the Node-RED pod. Defaults to false.
   createClusterRole: false
 
-
-# -- The image pull secrets
+# -- Additional image pull secrets.
 imagePullSecrets: ""
 
-# -- Provide a name in place of node-red
+# -- Override the release name for the chart.
 nameOverride: ""
-# -- String to fully override "node-red.fullname"
+# -- Fully override the generated name.
 fullnameOverride: ""
 
 npmrc:
-  # -- Enable custom npmrc config
+  # -- Enable custom npmrc configuration.
   enabled: false
-  # -- Configuration to use any compatible registry
+  # -- Registry to use for npm packages.
   registry: "https://registry.npmjs.org"
-  # -- Configuration to add custom npmrc config
+  # -- Custom npmrc content to add.
   content: |
     # Custom npmrc config
 
-# -- node-red env, see more environment variables in the [node-red documentation](https://nodered.org/docs/getting-started/docker)
+# -- Additional environment variables for Node-RED. See the Node-RED documentation for supported values.
 env: []
   # Possible Values:
   # TZ:
@@ -47,9 +46,9 @@ env: []
   # - name: "NODE_RED_ENABLE_SAFE_MODE"
   #   value: ""
 
-# -- Enable Node-RED project mode for Git integration and project management
-# Note: Project mode requires write access to the /data directory and may need
-# additional security context adjustments depending on your cluster's security policies
+# -- Enable Node-RED project mode for Git integration and project management.
+# Note: Project mode requires write access to the /data directory and may require
+# additional security context adjustments depending on your cluster's policies.
 projectMode:
   enabled: false
 
@@ -59,38 +58,38 @@ envFrom: []
   #     name: node-red-env
 
 serviceAccount:
-  # Specifies whether a service account should be created
-  # -- Create service account
+  # Specifies whether a service account should be created.
+  # -- Create a service account for the workload.
   create: true
-  # Annotations to add to the service account
-  # -- Additional ServiceAccount annotations
+  # Annotations to add to the service account.
+  # -- Additional annotations for the service account.
   annotations: {}
   # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  # -- Service account name to use, when empty will be set to created account if
+  # If not set and create is true, a name is generated from the fullname template.
+  # -- Name of the service account to use.
   name: ""
 
-# -- Pod annotations
+# -- Additional annotations for the pod.
 podAnnotations: {}
 
-# -- Deployment annotations
+# -- Additional annotations for the deployment.
 deploymentAnnotations: {}
 
-# -- Pod Security Context see [values.yaml](values.yaml)
+# -- Pod security context for the workload. See [values.yaml](values.yaml).
 podSecurityContext:
-  # -- node-red group is 1000
+  # -- File system group for the pod. Defaults to 1000.
   fsGroup: 1000
-  # -- node-red user is 1000
+  # -- User ID for the pod. Defaults to 1000.
   runAsUser: 1000
 
-# -- Security Context see [values.yaml](values.yaml)
+# -- Security context for the container. See [values.yaml](values.yaml).
 securityContext:
   privileged: false
   runAsNonRoot: true
   allowPrivilegeEscalation: false
-  readOnlyRootFilesystem: false  # Node-RED needs write access for project mode and normal operation
-  runAsGroup: 1000               # Match Node-RED's expected group
-  runAsUser: 1000                # Match Node-RED's expected user
+  readOnlyRootFilesystem: false  # Node-RED needs write access for project mode and normal operation.
+  runAsGroup: 1000               # Match Node-RED's expected group.
+  runAsUser: 1000                # Match Node-RED's expected user.
   seccompProfile:
     type: RuntimeDefault
   capabilities:
@@ -98,112 +97,110 @@ securityContext:
       - ALL
 
 service:
-  # -- Kubernetes service type
+  # -- Kubernetes service type.
   type: ClusterIP
-  # -- Kubernetes port where service is exposed
+  # -- Port exposed by the service.
   port: 1880
-  # -- Annotations for the service
+  # -- Annotations for the service.
   annotations: {}
 
-#  Enable Service-Monitor for node-red
+# Enable ServiceMonitor for Node-RED.
 metrics:
-  # -- Deploy metrics service
+  # -- Enable the metrics service.
   enabled: false
   path: /metrics
   serviceMonitor:
-    # -- Enable a prometheus ServiceMonitor
+    # -- Enable a Prometheus ServiceMonitor.
     enabled: false
-    # -- Prometheus basicAuth configuration for ServiceMonitor endpoint
+    # -- Basic auth configuration for the ServiceMonitor endpoint.
     basicAuth: {}
-    # -- Prometheus ServiceMonitor interval
+    # -- Interval between Prometheus scrapes.
     interval: 30s
-    # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+    # -- Relabeling rules to apply to scraped samples before they are ingested.
     relabelings: []
-    # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+    # -- Metric relabeling rules to apply before ingestion.
     metricRelabelings: []
-    # -- Prometheus ServiceMonitor selector
+    # -- Selector used by the ServiceMonitor.
     selector: {}
     # prometheus: kube-prometheus
 
-    # -- Prometheus ServiceMonitor namespace
+    # -- Namespace for the ServiceMonitor.
     namespace: ""  # "monitoring"
-    # -- Prometheus ServiceMonitor labels
+    # -- Additional labels for the ServiceMonitor.
     additionalLabels: {}
 
 persistence:
-  # -- Use persistent volume to store data
+  # -- Enable persistent storage for Node-RED data.
   enabled: false
-  ## node-red data Persistent Volume Storage Class
+  ## Persistent Volume Storage Class for Node-RED data.
   ## If defined, storageClassName: <storageClass>
-  ## If set to "-", storageClassName: "", which disables dynamic provisioning
-  ## If undefined (the default) or set to null, no storageClassName spec is
-  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
-  ##   GKE, AWS & OpenStack)
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning.
+  ## If undefined (the default) or set to null, no storageClassName is set,
+  ## choosing the default provisioner. (gp2 on AWS, standard on GKE, AWS, and OpenStack)
   ##
-  # -- Type of persistent volume claim
+  # -- Type of persistent volume claim to create.
   # storageClass: "-"
   ##
-  ## If you want to reuse an existing claim, you can pass the name of the PVC using
-  ## the existingClaim variable
-  # -- Use an existing PVC to persist data
+  ## If you want to reuse an existing claim, pass the PVC name using the existingClaim variable.
+  # -- Use an existing PVC instead of creating a new one.
   # existingClaim: your-claim
-  # -- Persistence access mode
+  # -- Access mode for the persistent volume claim.
   accessMode: ReadWriteOnce
-  # -- Size of persistent volume claim
+  # -- Size of the persistent volume claim.
   size: 5Gi
-  # -- ## Keep a created Persistent volume claim when uninstalling the helm chart (default: false)
+  # -- Retain the created PVC when uninstalling the chart. Defaults to false.
   keepPVC: false
 
-# -- containers which are run before the app containers are started
+# -- Init containers to run before the application container starts.
 initContainers: []
 
 ingress:
-  # -- Enable an ingress resource for the server
+  # -- Enable the ingress resource.
   enabled: false
-  # -- Defines which ingress controller will implement the resource
+  # -- Ingress controller class to use.
   className: ""
-  # -- Additional ingress annotations
+  # -- Additional ingress annotations.
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    #  Ingress accepted hostnames
+    # Accepted hostnames for the ingress.
     - host: chart-example.local
       paths:
-          # -- The base path
+          # -- Base path for the ingress rule.
         - path: /
-          # --  Ingress type of path
+          # -- Path type for the ingress rule.
           pathType: ImplementationSpecific
-  # --  Ingress TLS configuration
+  # -- TLS configuration for the ingress.
   tls: []
-    # -- Secret name for the certificate
+    # -- Secret name for the certificate.
     # - secretName: chart-example-tls
-    # -- Hostnames for the Ingress
+    # -- Hostnames covered by the certificate.
     # hosts:
     #  - chart-example.local
-    # -- Certificate used by the Cert-Manager
+    # -- Certificate configuration used by cert-manager.
     # certificate:
-    # -- Enable certificate
+    # -- Enable certificate generation.
     #   enabled: true
-    # -- Name of the certificate default: `$fullname-cert-$index`
+    # -- Name of the certificate. Defaults to `$fullname-cert-$index`.
     #   name: ""
-    # -- Reference of ClusterIssuers or Issuer
+    # -- Reference to a ClusterIssuer or Issuer.
     #   issuerRef:
-    # -- Kind of the Issuer
+    # -- Kind of the referenced issuer.
     #     kind: ClusterIssuer
-    # -- Name of the Issuer
+    # -- Name of the issuer.
     #     name: "test"
 
 httpRoute:
-  # -- Enable an HTTPRoute resource for the server
+  # -- Enable an HTTPRoute resource for the server.
   enabled: false
-  # -- Additional HTTPRoute annotations
+  # -- Additional annotations for the HTTPRoute.
   annotations: {}
-  # -- Parent references for Gateway API attachment
+  # -- Parent references for Gateway API attachment.
   parentRefs: []
-  # -- Hostnames exposed by the HTTPRoute
+  # -- Hostnames exposed by the HTTPRoute.
   hostnames: []
-  # -- HTTPRoute rules. If backendRefs is empty, traffic is forwarded to this chart's service.
+  # -- Rules for forwarding traffic. If backendRefs is empty, traffic is sent to this chart's service.
   rules:
     - matches:
         - path:
@@ -211,28 +208,28 @@ httpRoute:
             value: /
       backendRefs: []
 
-# -- Startup probe for the Deployment
+# -- Startup probe for the deployment.
 startupProbe:
   httpGet:
     path: /
     port: http
 
-# -- Liveness probe for the Deployment
+# -- Liveness probe for the deployment.
 livenessProbe:
   httpGet:
     path: /
     port: http
 
-# -- Readiness probe for the Deployment
+# -- Readiness probe for the deployment.
 readinessProbe:
   httpGet:
     path: /
     port: http
 
-# -- CPU/Memory resource requests/limits
+# -- CPU and memory requests and limits for the pod.
 resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
+  # choice for the user. This also increases the chances that the chart runs in environments with limited
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
@@ -241,21 +238,21 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-# -- Node selector
+# -- Node selector labels for pod assignment.
 nodeSelector: {}
 
-# -- Toleration labels for pod assignment
+# -- Tolerations for pod assignment.
 tolerations: []
 
-# -- The terminationGracePeriodSeconds for the pod
-# here we explicitly set the default value defined in kubernetes
+# -- Grace period before terminating the pod.
+# This value is explicitly set to the Kubernetes default.
 # https://github.com/kubernetes/api/blob/d4b94f478bb2e6467873657dd7b4e1b0ac8351be/core/v1/types.go#L3114-L3118
 terminationGracePeriodSeconds: 30
 
-# -- The affinity constraint
+# -- Affinity rules for pod scheduling.
 affinity: {}
 
-# -- Extra Volumes for the pod
+# -- Additional volumes to mount into the pod.
 extraVolumes:
 # - name: pv-claim
 #   persistentVolumeClaim:
@@ -264,100 +261,99 @@ extraVolumes:
 #   configMap:
 #     name: example
 
-# -- Extra Volume Mounts for the node-red pod
+# -- Additional volume mounts for the Node-RED pod.
 extraVolumeMounts:
 # - name: test
 #   mountPath: /test
 
-# -- You can configure node-red using a settings file. default: {}
+# -- Configuration for the Node-RED settings file. Defaults to {}.
 settings: {}
-# Details about the content of the settings.js, you can lookup under
+# Details about the content of settings.js. You can find more information in the
 # https://nodered.org/docs/user-guide/runtime/settings-file
-# The ConfigMap should already exist and the key must be named `settings.js`
+# The ConfigMap must already exist and the key must be named `settings.js`.
 #  name: settings-config
 #  configMapName: settings-config
 
-# -- Labels to add to the node-red pod. default: {}
+# -- Additional labels to add to the pod. Defaults to {}.
 podLabels: {}
 
-# -- Priority class name for the node-red pod. default: ""
+# -- Priority class name for the pod. Defaults to empty.
 priorityClassName: ""
 
-# -- You can configure extra sidecars containers to run alongside the node-red pod. default: []
+# -- Additional sidecars to run alongside the Node-RED container. Defaults to [].
 extraSidecars: []
 #  - name: sidecar-example
 #    image: busybox
 #    command: ["/bin/sh", "-c", "echo hello from sidecar"]
 
-
-## -- Enable this and set the rules: to whatever custom rules you want for the Cluster Role resource.
+## -- Enable custom rules for the ClusterRole resource.
 clusterRoleRules:
-  # -- Enable custom rules for the application controller's ClusterRole resource default: false
+  # -- Enable custom rules for the application controller's ClusterRole resource. Defaults to false.
   enabled: false
-  # -- List of custom rules for the application controller's ClusterRole resource default: []
+  # -- List of custom rules for the application controller's ClusterRole resource. Defaults to [].
   rules: []
 
-# Sidecar that collect the configmaps with specified label and stores the included files into the given folder
+# Sidecar that collects ConfigMaps with the specified label and writes the included files into the target directory.
 sidecar:
-  # -- Enable the sidecar
+  # -- Enable the sidecar.
   enabled: false
-  # Env variables to pass to the sidecar
+  # Environment variables to pass to the sidecar.
   env:
-    # -- Set the sleep time for refresh script
+    # -- Sleep interval for the refresh script.
     sleep_time_sidecar: 5s
-    # -- If METHOD is set to LIST, the sidecar will just list config-maps/secrets and exit. With SLEEP it will list all config-maps/secrets, then sleep for SLEEP_TIME seconds. Anything else will continuously watch for changes (see https://kubernetes.io/docs/reference/using-api/api-concepts/#efficient-detection-of-changes).
+    # -- If METHOD is set to LIST, the sidecar lists ConfigMaps and Secrets and exits. With SLEEP, it lists all ConfigMaps and Secrets, waits for the configured duration, and then repeats. Any other value keeps watching for changes.
     method: watch
-    # -- Label that should be used for filtering
+    # -- Label used to filter watched resources.
     label: node-red-settings
-    # -- The value for the label you want to filter your resources on. Don't set a value to filter by any value
+    # -- Label value used to filter watched resources. Leave empty to match any value.
     label_value: "1"
-    # -- Absolute path to shell script to execute after a configmap got reloaded.
+    # -- Absolute path to the shell script to execute after a ConfigMap is reloaded.
     script: flow_refresh.py
-    # The username for the API Call, check node-red documentation for more information
+    # The username for the API call. See the Node-RED documentation for more information.
     username: ""
-    # -- Password as key value pair
+    # -- Password as a key/value pair.
     password: ""
-    # -- Password from existing secret
+    # -- Password from an existing secret.
     passwordFromExistingSecret: {}
-    # -- Name of the secret that contains the password
+    # -- Name of the secret that contains the password.
     #  name: node-red-api-admin-password
-    # -- Key of the secret that contains the password
+    # -- Key of the secret that contains the password.
     #  key: password
-    # -- Skip the initial request to REQ_URL when using watch mode (v2.1.0+)
+    # -- Skip the initial request to REQ_URL when using watch mode (v2.1.0+).
     skip_init: false
-    # -- Optional: Custom target URL for the sidecar. If left empty, the internal service cluster URL is used automatically.
+    # -- Optional custom target URL for the sidecar. If empty, the in-cluster service URL is used automatically.
     url: ""
-  # -- Extra Node-Modules that will be installed  from the sidecar script
+  # -- Extra Node modules to install from the sidecar script.
   extraNodeModules: []
-  # -- Extra Environments for the sidecar
+  # -- Extra environment variables for the sidecar.
   extraEnv: []
-  # -- Resources for the sidecar
+  # -- Resources for the sidecar.
   resources: {}
-  # -- Security context for the sidecar
+  # -- Security context for the sidecar.
   securityContext: {}
-  # -- Liveness probe for the sidecar (k8s-sidecar v2+ exposes /healthz on port 8080)
+  # -- Liveness probe for the sidecar. k8s-sidecar v2+ exposes /healthz on port 8080.
   livenessProbe:
     httpGet:
       path: /healthz
       port: 8080
     initialDelaySeconds: 5
     periodSeconds: 10
-  # -- Readiness probe for the sidecar (reports ready after initial sync completes)
+  # -- Readiness probe for the sidecar. Reports ready after the initial sync completes.
   readinessProbe:
     httpGet:
       path: /healthz
       port: 8080
     initialDelaySeconds: 5
     periodSeconds: 10
-  #  Image for the sidecar
+  # Image for the sidecar.
   image:
-    # -- The image registry to pull the sidecar from
+    # -- Registry for the sidecar image.
     registry: quay.io
-    # -- The image repository to pull from
+    # -- Repository for the sidecar image.
     repository: kiwigrid/k8s-sidecar
-    # -- The image tag to pull, default: `2.5.0`
+    # -- Image tag to pull. Defaults to `2.5.0`.
     tag: 2.5.0
-    # -- The image pull policy, default: `IfNotPresent`
+    # -- Image pull policy. Defaults to `IfNotPresent`.
     pullPolicy: IfNotPresent
-  # -- The extra volume mounts for the sidecar
+  # -- Extra volume mounts for the sidecar.
   volumeMounts: []
