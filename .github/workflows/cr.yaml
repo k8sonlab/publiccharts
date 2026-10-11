@@ -44,6 +44,38 @@ jobs:
           GOBIN=$PWD GO111MODULE=on go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
           ./helm-docs --sort-values-order file --skip-version-footer
           rm helm-docs
+      - name: Push README-only updates back to main
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+
+          changed_files=$(git status --porcelain | awk '{print $2}')
+          if [ -z "$changed_files" ]; then
+            echo "No changes after helm-docs."
+            exit 0
+          fi
+
+          readme_files=$(printf '%s\n' "$changed_files" | grep -E '(^|/)README\.md$' || true)
+          if [ -z "$readme_files" ]; then
+            echo "No README.md changes detected; skipping auto-push."
+            exit 0
+          fi
+
+          other_files=$(printf '%s\n' "$changed_files" | grep -vE '(^|/)README\.md$' || true)
+          if [ -n "$other_files" ]; then
+            echo "Detected non-README changes; skipping auto-push."
+            printf '%s\n' "$other_files"
+            exit 0
+          fi
+
+          git add --all -- $(printf '%s\n' "$readme_files")
+          if git diff --cached --quiet; then
+            echo "README.md files already match generated output."
+            exit 0
+          fi
+
+          git commit -m "docs: update generated README files"
+          git push origin HEAD:main
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
         env:
