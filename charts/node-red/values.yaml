@@ -352,7 +352,7 @@ sidecar:
     # -- Repository for the sidecar image.
     repository: kiwigrid/k8s-sidecar
     # -- Image tag to pull. Defaults to `2.5.0`.
-    tag: 2.5.0
+    tag: 2.14.1
     # -- Image pull policy. Defaults to `IfNotPresent`.
     pullPolicy: IfNotPresent
   # -- Extra volume mounts for the sidecar.
