@@ -129,6 +129,6 @@ helm install my-release oci://ghcr.io/k8sonlab/publiccharts/node-red --version <
 | sidecar.readinessProbe | object | `{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":10}` | Readiness probe for the sidecar (reports ready after initial sync completes) |
 | sidecar.image.registry | string | `"quay.io"` | The image registry to pull the sidecar from |
 | sidecar.image.repository | string | `"kiwigrid/k8s-sidecar"` | The image repository to pull from |
-| sidecar.image.tag | string | `"2.5.0"` | The image tag to pull, default: `2.5.0` |
+| sidecar.image.tag | string | `"2.14.1"` | The image tag to pull, default: `2.5.0` |
 | sidecar.image.pullPolicy | string | `"IfNotPresent"` | The image pull policy, default: `IfNotPresent` |
 | sidecar.volumeMounts | list | `[]` | The extra volume mounts for the sidecar |
