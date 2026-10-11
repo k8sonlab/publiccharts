@@ -770,6 +770,28 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/netio-exporter-0.1.1/netio-exporter-0.1.1.tgz
     version: 0.1.1
+  node-red:
+  - apiVersion: v2
+    appVersion: 4.1.2
+    created: "2026-10-11T10:36:17.353499188Z"
+    description: Node-Red helmchart, based on nodered image. A nice web ui flow tool
+    digest: a44fbbd410b1d2814366ddc119bffa0876525edb307aec42939f27f468f75180
+    home: https://nodered.org/
+    icon: https://nodered.org/about/resources/media/node-red-icon-2.png
+    keywords:
+    - home
+    - node-red
+    - automation
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: node-red
+    sources:
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/node-red-1.0.0/node-red-1.0.0.tgz
+    version: 1.0.0
   thanos:
   - annotations:
       artifactHub.io/license: Apache-2.0
@@ -5412,4 +5434,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-04T04:36:33.746980946Z"
+generated: "2026-10-11T10:36:17.807420904Z"
