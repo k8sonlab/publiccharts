@@ -225,7 +225,7 @@ promExporter:
   image:
     repository: ghcr.io/k8sonlab/zwave-js-prom-exporter
     # renovate: datasource=docker depName=ghcr.io/k8sonlab/zwave-js-prom-exporter
-    tag: "0.3.0"
+    tag: "0.5.0"
     pullPolicy: IfNotPresent
   # -- port for the exporter
   port: 9090
