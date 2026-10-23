@@ -2,7 +2,7 @@
 annotations:
   artifactHub.io/license: Apache-2.0
 # renovate: datasource=docker depName=reallibrephotos/librephotos
-appVersion: 1.2.1
+appVersion: 1.4.0
 dependencies:
   - condition: postgresql.enabled
     name: postgresql
