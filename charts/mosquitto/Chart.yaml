@@ -8,4 +8,4 @@ name: mosquitto
 maintainers:
   - name: varet80
     url: https://github.com/varet80
-version: 2.7.3  # renovate: auto-bump-chart-version
+version: 2.7.3

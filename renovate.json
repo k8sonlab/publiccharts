@@ -47,6 +47,13 @@
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>-(?:alpine|slim|debian|ubuntu).*)$"
     }
   ],
+  "bumpVersions": [
+    {
+      "filePatterns": ["{{packageFileDir}}/Chart.{yaml,yml}"],
+      "matchStrings": ["version:\\s(?<version>[^\\s]+)"],
+      "bumpType": "{{#if isMajor}}major{{else if isMinor}}minor{{else}}patch{{/if}}"
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
@@ -71,19 +78,6 @@
       ],
       "datasourceTemplate": "{{datasource}}",
       "depNameTemplate": "{{depName}}"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/(^|/)Chart\\.yaml$/"
-      ],
-      "matchStrings": [
-        "version: (?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*# renovate: auto-bump-chart-version"
-      ],
-      "datasourceTemplate": "npm",
-      "depNameTemplate": "helm-chart",
-      "versioning": "semver",
-      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+\\.\\d+)$"
     },
     {
       "customType": "regex",
