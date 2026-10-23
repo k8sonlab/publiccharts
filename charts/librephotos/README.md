@@ -41,8 +41,8 @@ Kubernetes: `>=1.16.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | => 12.8.2 |
-| https://charts.bitnami.com/bitnami | redis | => 21.0.0 |
+| https://charts.bitnami.com/bitnami | postgresql | >= 12.8.2 |
+| https://charts.bitnami.com/bitnami | redis | >= 21.0.0 |
 ## Values
 
 | Key | Type | Default | Description |
