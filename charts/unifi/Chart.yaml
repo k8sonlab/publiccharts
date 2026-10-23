@@ -1,4 +1,4 @@
-apiVersion: v2
+﻿apiVersion: v2
 annotations:
   artifactHub.io/license: Apache-2.0
 # renovate: datasource=docker depName=jacobalberty/unifi
@@ -14,4 +14,4 @@ keywords:
   - unifi
 name: unifi
 type: application
-version: 0.3.7
+version: 0.3.7  # renovate: auto-bump-chart-version

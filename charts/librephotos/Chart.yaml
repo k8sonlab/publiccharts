@@ -1,4 +1,4 @@
-apiVersion: v2
+﻿apiVersion: v2
 annotations:
   artifactHub.io/license: Apache-2.0
 # renovate: datasource=docker depName=reallibrephotos/librephotos
@@ -26,4 +26,4 @@ name: librephotos
 sources:
   - https://github.com/LibrePhotos/librephotos
   - https://hub.docker.com/r/reallibrephotos
-version: 1.1.7
+version: 1.1.7  # renovate: auto-bump-chart-version

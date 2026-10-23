@@ -1,4 +1,4 @@
-apiVersion: v2
+﻿apiVersion: v2
 annotations:
   artifactHub.io/license: Apache-2.0
 # renovate: datasource=docker depName=eclipse-mosquitto
@@ -8,4 +8,4 @@ name: mosquitto
 maintainers:
   - name: varet80
     url: https://github.com/varet80
-version: 2.7.3
+version: 2.7.3  # renovate: auto-bump-chart-version

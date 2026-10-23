@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
@@ -51,7 +51,43 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/(^|/)Chart\\.yaml$/",
+        "/(^|/)Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>[^\\s]+)\\s+appVersion:\\s+[\"']?(?<currentValue>[^\"'\\s]+)[\"']?"
+      ],
+      "datasourceTemplate": "{{datasource}}",
+      "depNameTemplate": "{{depName}}"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\sappVersion: (?<currentValue>.*?)",
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s.*?appVersion: (?<currentValue>.*?)",
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s.*?tag: (?<currentValue>.*?)"
+      ],
+      "datasourceTemplate": "{{datasource}}",
+      "depNameTemplate": "{{depName}}"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "version: (?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*# renovate: auto-bump-chart-version"
+      ],
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "helm-chart",
+      "versioning": "semver",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+\\.\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "/(^|/)values\\.yaml$/"
       ],
       "matchStrings": [

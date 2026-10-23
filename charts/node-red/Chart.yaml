@@ -1,9 +1,9 @@
-apiVersion: v2
+﻿apiVersion: v2
 name: node-red
 type: application
 description: Node-Red helmchart, based on nodered image. A nice web ui flow tool
 home: https://nodered.org/
-version: 1.2.0
+version: 1.2.0  # renovate: auto-bump-chart-version
 # renovate: datasource=docker depName=nodered/node-red
 appVersion: 5.0.8
 icon: https://nodered.org/about/resources/media/node-red-icon-2.png

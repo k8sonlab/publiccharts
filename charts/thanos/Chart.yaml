@@ -1,4 +1,4 @@
-apiVersion: v2
+﻿apiVersion: v2
 annotations:
   artifactHub.io/license: Apache-2.0
 appVersion: v0.41.0
@@ -20,4 +20,4 @@ sources:
   - https://github.com/thanos-io/kube-thanos
   - https://github.com/k8sonlab/publiccharts
 type: application
-version: 1.1.7
+version: 1.1.7  # renovate: auto-bump-chart-version
