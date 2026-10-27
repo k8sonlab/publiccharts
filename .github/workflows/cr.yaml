@@ -77,7 +77,7 @@ jobs:
           git commit -m "docs: update generated README files"
           git push origin HEAD:main
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.7.0
+        uses: helm/chart-releaser-action@v1.8.0
         env:
           CR_TOKEN: "${{ secrets.PAT }}"
           CR_SKIP_EXISTING: true 
