@@ -1,6 +1,6 @@
 # node-red
 
-![Version: 1.2.2](https://img.shields.io/badge/Version-1.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.0.9](https://img.shields.io/badge/AppVersion-5.0.9-informational?style=flat-square)
+![Version: 1.2.3](https://img.shields.io/badge/Version-1.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 5.0.10](https://img.shields.io/badge/AppVersion-5.0.10-informational?style=flat-square)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue)](https://opensource.org)
 
 Node-Red helmchart, based on nodered image. A nice web ui flow tool
