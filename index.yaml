@@ -900,6 +900,27 @@ entries:
     version: 0.1.1
   node-red:
   - apiVersion: v2
+    appVersion: 5.0.10
+    created: "2026-11-17T20:58:00.70314164Z"
+    description: Node-Red helmchart, based on nodered image. A nice web ui flow tool
+    digest: e82b773b2d03e690f2a9ca3712f8d1381da6edf50b9849983c4ab33703643dff
+    home: https://nodered.org/
+    icon: https://nodered.org/about/resources/media/node-red-icon-2.png
+    keywords:
+    - home
+    - node-red
+    - automation
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: node-red
+    sources:
+    - https://github.com/k8sonlab/publiccharts
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/node-red-1.2.3/node-red-1.2.3.tgz
+    version: 1.2.3
+  - apiVersion: v2
     appVersion: 5.0.9
     created: "2026-11-02T21:36:08.41256399Z"
     description: Node-Red helmchart, based on nodered image. A nice web ui flow tool
@@ -1911,6 +1932,27 @@ entries:
     - https://github.com/k8sonlab/publiccharts/releases/download/unifi-0.1.9/unifi-0.1.9.tgz
     version: 0.1.9
   zwave-js-ui:
+  - annotations:
+      artifactHub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 11.27.0
+    created: "2026-11-17T20:58:00.851946436Z"
+    description: Helmchart for zwave-js-ui
+    digest: 67cc061f5923caa2387be8b1931cc2b1d3d1b4b08a1dfadc66a76e9cd7b2027f
+    home: https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+    icon: https://github.com/zwave-js/zwave-js-ui/raw/master/docs/_images/app_logo.svg
+    maintainers:
+    - name: varet80
+      url: https://github.com/varet80
+    name: zwave-js-ui
+    sources:
+    - https://github.com/zwave-js/zwave-js-ui
+    - https://github.com/zwave-js/node-zwave-js
+    - https://github.com/k8sonlab/zwave-js-prom-exporter
+    type: application
+    urls:
+    - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.10.0/zwave-js-ui-0.10.0.tgz
+    version: 0.10.0
   - annotations:
       artifactHub.io/license: Apache-2.0
     apiVersion: v2
@@ -5772,4 +5814,4 @@ entries:
     urls:
     - https://github.com/k8sonlab/publiccharts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2026-11-11T01:50:03.369379717Z"
+generated: "2026-11-17T20:58:00.852742175Z"
