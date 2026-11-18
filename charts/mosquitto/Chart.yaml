@@ -2,10 +2,10 @@
 annotations:
   artifactHub.io/license: Apache-2.0
 # renovate: datasource=docker depName=eclipse-mosquitto
-appVersion: 2.1.2-alpine
+appVersion: 2.1.4-alpine
 description: Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1
 name: mosquitto
 maintainers:
   - name: varet80
     url: https://github.com/varet80
-version: 2.7.3
+version: 2.7.4
